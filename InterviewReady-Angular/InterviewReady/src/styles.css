@@ -1,0 +1,86 @@
+/* ─────────────────────────────────────────────────── */
+/*  InterviewReady — Global Design Tokens & Reset     */
+/* ─────────────────────────────────────────────────── */
+
+:root {
+  /* ── Colors ── */
+  --ir-bg-primary:     #000000;
+  --ir-bg-secondary:   #1e293b;
+  --ir-bg-card:        rgba(30, 41, 59, 0.7);
+  --ir-bg-input:       rgba(15, 23, 42, 0.6);
+  --ir-border:         rgba(148, 163, 184, 0.12);
+  --ir-border-hover:   rgba(148, 163, 184, 0.25);
+
+  --ir-text-primary:   #e2e8f0;
+  --ir-text-secondary: #94a3b8;
+  --ir-text-muted:     #475569;
+
+  --ir-accent-blue:    #38bdf8;
+  --ir-accent-indigo:  #818cf8;
+  --ir-accent-green:   #4ade80;
+  --ir-accent-red:     #f87171;
+  --ir-accent-amber:   #fbbf24;
+
+  --ir-gradient:       linear-gradient(135deg, var(--ir-accent-blue), var(--ir-accent-indigo));
+
+  /* ── Typography ── */
+  --ir-font:           'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* ── Spacing ── */
+  --ir-radius-sm:      8px;
+  --ir-radius-md:      12px;
+  --ir-radius-lg:      20px;
+
+  /* ── Shadows ── */
+  --ir-shadow-card:    0 25px 60px rgba(0, 0, 0, 0.4);
+  --ir-shadow-subtle:  0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--ir-font);
+  background: var(--ir-bg-primary);
+  color: var(--ir-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--ir-accent-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ir-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ir-text-muted);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ir-text-secondary);
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(56, 189, 248, 0.3);
+  color: #fff;
+}
