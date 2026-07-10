@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>InterviewReady — Verify Email</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif; min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: #e2e8f0; padding: 2rem;
+        }
+        .container {
+            width: 100%; max-width: 420px;
+            background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 20px; padding: 2.5rem;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4); text-align: center;
+        }
+        .logo h1 {
+            font-size: 1.75rem; font-weight: 700;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .logo p { color: #94a3b8; font-size: 0.875rem; margin-bottom: 1.5rem; }
+        .icon-circle {
+            width: 72px; height: 72px; margin: 0 auto 1.25rem;
+            background: rgba(56, 189, 248, 0.1); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .icon-circle svg { width: 32px; height: 32px; color: #38bdf8; }
+        .email-display {
+            color: #38bdf8; font-weight: 600; font-size: 0.95rem; margin-bottom: 1.5rem;
+        }
+        .form-group { margin-bottom: 1.25rem; text-align: left; }
+        .form-group label {
+            display: block; font-size: 0.8rem; font-weight: 500;
+            color: #94a3b8; margin-bottom: 0.35rem;
+        }
+        .code-input {
+            width: 100%; padding: 0.9rem 1rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            border-radius: 10px; color: #e2e8f0;
+            font-size: 1.75rem; font-family: 'Inter', sans-serif;
+            text-align: center; letter-spacing: 0.6em;
+            transition: border-color 0.2s;
+        }
+        .code-input:focus {
+            outline: none; border-color: #38bdf8;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+        }
+        .btn-primary {
+            width: 100%; padding: 0.8rem;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            border: none; border-radius: 10px; color: #fff;
+            font-size: 0.95rem; font-weight: 600;
+            font-family: 'Inter', sans-serif; cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.9; }
+        .msg-success {
+            background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #4ade80; padding: 0.6rem; border-radius: 8px;
+            font-size: 0.85rem; margin-bottom: 1rem;
+        }
+        .msg-error {
+            background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171; padding: 0.6rem; border-radius: 8px;
+            font-size: 0.85rem; margin-bottom: 1rem;
+        }
+        .back-link {
+            margin-top: 1.5rem; font-size: 0.85rem; color: #94a3b8;
+        }
+        .back-link a { color: #38bdf8; text-decoration: none; font-weight: 500; }
+        .back-link a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo">
+        <h1>InterviewReady</h1>
+        <p>Check your inbox</p>
+    </div>
+
+    <div class="icon-circle">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+    </div>
+
+    <div class="email-display" th:text="${email}">your@email.com</div>
+
+    <div th:if="${success}" class="msg-success" th:text="${success}"></div>
+    <div th:if="${error}" class="msg-error" th:text="${error}"></div>
+
+    <form th:action="@{/verify-page}" method="post">
+        <input type="hidden" name="email" th:value="${email}"/>
+        <div class="form-group">
+            <label for="code">Enter your 6-digit code</label>
+            <input type="text" id="code" name="code" class="code-input"
+                   required maxlength="6" pattern="[0-9]{6}" placeholder="------"
+                   autocomplete="one-time-code" inputmode="numeric"/>
+        </div>
+        <button type="submit" class="btn-primary">Verify Email</button>
+    </form>
+
+    <div class="back-link">
+        Didn't receive it? <a href="/signup">Go back &amp; resend</a>
+    </div>
+</div>
+</body>
+</html>
