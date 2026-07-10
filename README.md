@@ -116,7 +116,7 @@ Upon completing an assessment, the system generates a comprehensive intelligence
 | Component | Details |
 |-----------|---------|
 | **LLM Engine** | Llama 3.1 8B Instruct · 4-bit NF4 quantization · QLoRA (Rank 16, Alpha 32, rsLoRA) |
-| **Training** | 2,700-sample custom dataset · 150 LeetCode problems · 6 variation archetypes · 3 languages |
+| **Training** | 3,000-sample custom dataset · 150 LeetCode problems · 6 variation archetypes · 3 languages |
 | **Evaluation** | 0.90 Cosine Similarity · 0.89 BERTScore F1 against expert human evaluations |
 | **Database Indexing** | B-Tree on primary keys · Composite B-Tree on dashboard lookups · GIN on JSONB report columns |
 | **Rate Limiting** | Redis sliding-window: 5 login attempts / 60s, 3 registration attempts / 60s |
