@@ -8,6 +8,14 @@
 [![TensorFlow.js](https://img.shields.io/badge/TensorFlow.js-FF6F00?style=flat-square&logo=tensorflow&logoColor=white)](https://www.tensorflow.org/js)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-316192?style=flat-square&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Redis](https://img.shields.io/badge/Redis-7.x-DC382D?style=flat-square&logo=redis&logoColor=white)](https://redis.io/)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
+[![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/)
+[![OAuth2](https://img.shields.io/badge/OAuth_2.0-3C78A9?style=flat-square&logo=google&logoColor=white)](https://oauth.net/2/)
+[![JWT](https://img.shields.io/badge/JWT-000000?style=flat-square&logo=json-web-tokens&logoColor=white)](https://jwt.io/)
+[![Hugging Face](https://img.shields.io/badge/Hugging_Face-FFD21E?style=flat-square&logo=huggingface&logoColor=black)](https://huggingface.co/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![Llama 3.1](https://img.shields.io/badge/Llama_3.1-046A38?style=flat-square&logo=meta&logoColor=white)](https://llama.meta.com/)
+[![Quantization: QLoRA](https://img.shields.io/badge/Quantization-QLoRA-7928CA?style=flat-square)](https://github.com/artidoro/qlora)
 
 *The enterprise standard for automated, privacy-first technical screening and comprehensive candidate evaluation.*
 
@@ -25,23 +33,15 @@ Traditional technical hiring platforms rely on static question banks that candid
 
 ## 2. Production Tools & Tech Stack
 
-<div align="center">
+The system is built using a modern, scalable stack designed for high throughput and security:
 
-| Core Technology | Badge / Ecosystem | Purpose in Platform |
-| :--- | :--- | :--- |
-| **Hugging Face** | ![Hugging Face](https://img.shields.io/badge/Hugging_Face-FFD21E?style=flat-square&logo=huggingface&logoColor=black) | Model hub hosting base weights & tokenizer assets |
-| **Transformers (PyTorch)** | ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white) | Executing parameter-efficient fine-tuning pipelines |
-| **Docker** | ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white) | Multi-stage build containers for ECS environments |
-| **Amazon Web Services (AWS)** | ![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazon-aws&logoColor=white) | Cloud hosting infrastructure (ECS, RDS, S3, ElastiCache) |
-| **Google OAuth 2.0** | ![OAuth2](https://img.shields.io/badge/OAuth_2.0-3C78A9?style=flat-square&logo=google&logoColor=white) | Identity validation & passwordless authorization |
-| **JSON Web Tokens (JWT)** | ![JWT](https://img.shields.io/badge/JWT-000000?style=flat-square&logo=json-web-tokens&logoColor=white) | Secure stateless session filters |
-| **Spring Boot 3** | ![Spring Boot 3](https://img.shields.io/badge/Spring_Boot_3-6DB33F?style=flat-square&logo=spring-boot&logoColor=white) | Multi-threaded CompletableFuture service scheduler |
-| **Angular 17** | ![Angular 17](https://img.shields.io/badge/Angular_17-DD0031?style=flat-square&logo=angular&logoColor=white) | NgRx reactive dashboard workspace UI |
-| **TensorFlow.js** | ![TensorFlow.js](https://img.shields.io/badge/TensorFlow.js-FF6F00?style=flat-square&logo=tensorflow&logoColor=white) | Local edge browser computer vision proctoring |
-| **PostgreSQL** | ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat-square&logo=postgresql&logoColor=white) | Persistent relational data & GIN-indexed JSONB charts |
-| **Redis** | ![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white) | JWT blacklist cache & sliding rate limit registry |
-
-</div>
+* **Frontend Framework**: Angular 17 SPA with Standalone Components and Lazy Loading.
+* **State Management**: NgRx Store (Redux pattern) for reactive state caching and session recovery.
+* **Local Machine Learning**: TensorFlow.js running custom face landmark detection and attention models on the client's GPU.
+* **Backend Framework**: Spring Boot 3 Core Engine with Spring Security web filters.
+* **Caching & Session Cache**: Redis Cache for JWT blacklists, sliding-window rate limiting, and performance metric caches.
+* **Relational Storage**: PostgreSQL with hybrid structured schemas, optimized indexes, and GIN indices on JSONB reports.
+* **AI Evaluation Engine**: Sovereign Llama 3.1 8B Instruct model fine-tuned using QLoRA.
 
 ---
 
