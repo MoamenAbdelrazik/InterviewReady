@@ -1,0 +1,19 @@
+<svg viewBox="15 30 170 170" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <radialGradient id="lens" cx="38%" cy="35%">
+            <stop offset="0%" stop-color="#f1f5f9"/>
+            <stop offset="50%" stop-color="#94a3b8"/>
+            <stop offset="100%" stop-color="#334155"/>
+        </radialGradient>
+    </defs>
+    <path fill="#fff"
+        d="M 70 45 H 135 C 175 45, 175 105, 135 105 L 165 165 H 130 L 100 105 H 95 V 140 H 70 V 45 Z M 95 70 V 85 H 135 C 150 85, 150 70, 135 70 Z" />
+    <path fill="#fff" opacity="0.5"
+        d="M 30 70 V 135 C 30 185, 95 185, 115 140 C 125 120, 130 105, 140 105 A 5 5 0 0 1 140 95 C 120 95, 110 110, 95 135 C 80 160, 55 155, 55 135 V 70 Z" />
+    <g>
+        <circle cx="42" cy="50" r="12" fill="#1e293b" stroke="#cbd5e1" stroke-width="2"/>
+        <circle cx="42" cy="50" r="7" fill="url(#lens)"/>
+        <circle cx="42" cy="50" r="3" fill="#1e293b"/>
+        <circle cx="40" cy="48" r="2" fill="#fff" opacity="0.4"/>
+    </g>
+</svg>
