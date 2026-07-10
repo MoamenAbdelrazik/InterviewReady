@@ -1,0 +1,2901 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InterviewReady | The New Standard in Technical Interviews</title>
+    <!-- Import Inter + Outfit fonts for typographic contrast -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&f[]=general-sans@200,300,400,500,600,700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        trueBlack: '#000000',
+                        trueDark: '#050505',
+                        cardDark: '#0a0a0a',
+                        borderDark: '#1a1a24',
+                        brandBlue: '#3b82f6',
+                        brandGreen: '#10b981',
+                        brandPurple: '#8b5cf6',
+                        brandAmber: '#d4a574'
+                    },
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'Inter', '-apple-system', 'system-ui', 'sans-serif'],
+                        display: ['Outfit', 'Space Grotesk', '-apple-system', 'system-ui', 'sans-serif'],
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'monospace'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 8s linear infinite',
+                        'spin-reverse': 'spin 6s linear infinite reverse',
+                        'marquee': 'marquee 40s linear infinite',
+                        'fade-up': 'fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'scan': 'scan 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'blink': 'blink 1s step-end infinite',
+                        'float-gentle': 'floatGentle 6s ease-in-out infinite',
+                        'mesh-1': 'meshBlob1 15s ease-in-out infinite alternate',
+                        'mesh-2': 'meshBlob2 20s ease-in-out infinite alternate',
+                        'mesh-3': 'meshBlob3 18s ease-in-out infinite alternate',
+                        'text-rotate': 'textRotate 8s ease-in-out infinite',
+                        'logo-slide': 'logoSlide 20s linear infinite',
+                        'shimmer': 'shimmer 2.5s ease-in-out infinite',
+                        'float-particle': 'floatParticle 12s ease-in-out infinite',
+                        'count-up': 'countUp 0.4s ease-out forwards',
+                        'hero-bg-drift': 'heroBgDrift 30s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' }
+                        },
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)', filter: 'blur(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)', filter: 'blur(0)' }
+                        },
+                        scan: {
+                            '0%': { transform: 'translateY(-100%)', opacity: '0' },
+                            '10%': { opacity: '1' },
+                            '90%': { opacity: '1' },
+                            '100%': { transform: 'translateY(200%)', opacity: '0' }
+                        },
+                        blink: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0' }
+                        },
+                        floatGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' }
+                        },
+                        meshBlob1: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '100%': { transform: 'translate(100px, 50px) scale(1.2)' }
+                        },
+                        meshBlob2: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '100%': { transform: 'translate(-100px, -50px) scale(1.1)' }
+                        },
+                        meshBlob3: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '100%': { transform: 'translate(50px, -100px) scale(1.3)' }
+                        },
+                        textRotate: {
+                            '0%, 18%': { transform: 'translateY(0%)' },
+                            '20%, 38%': { transform: 'translateY(-100%)' },
+                            '40%, 58%': { transform: 'translateY(-200%)' },
+                            '60%, 78%': { transform: 'translateY(-300%)' },
+                            '80%, 100%': { transform: 'translateY(-400%)' }
+                        },
+                        logoSlide: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' }
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' }
+                        },
+                        floatParticle: {
+                            '0%, 100%': { transform: 'translateY(0) translateX(0)', opacity: '0' },
+                            '10%': { opacity: '1' },
+                            '50%': { transform: 'translateY(-120px) translateX(40px)', opacity: '0.6' },
+                            '90%': { opacity: '0' },
+                        },
+                        countUp: {
+                            '0%': { opacity: '0', transform: 'translateY(12px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        heroBgDrift: {
+                            '0%': { transform: 'scale(1.05) translate(0, 0)' },
+                            '50%': { transform: 'scale(1.12) translate(-1.5%, -1%)' },
+                            '100%': { transform: 'scale(1.08) translate(1%, 0.5%)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #000000;
+        }
+
+        /* FAANG logo carousel */
+        .logo-track {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+            width: max-content;
+            animation: logoSlide 20s linear infinite;
+        }
+
+        .logo-track:hover {
+            animation-play-state: paused;
+        }
+
+        .logo-track svg,
+        .logo-track img {
+            height: 28px;
+            opacity: 0.7;
+            transition: opacity 0.4s ease;
+        }
+
+        .logo-track svg:hover,
+        .logo-track img:hover {
+            opacity: 1;
+        }
+
+        @keyframes logoSlide {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Text Gradient Animation */
+        .animate-gradient-text {
+            background: linear-gradient(to right, #ffffff, #3b82f6, #8b5cf6, #10b981, #ffffff);
+            background-size: 300% 100%;
+            animation: gradientMove 8s ease infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* IDE 3D Perspective Reveal — CSS transition based */
+        .reveal-float {
+            opacity: 0;
+            transform: perspective(1400px) rotateX(12deg) translateY(40px) scale(0.96);
+            transform-origin: center bottom;
+            will-change: transform, opacity;
+            transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal-float.active {
+            opacity: 1;
+            transform: perspective(1400px) rotateX(0deg) translateY(0) scale(1);
+        }
+
+        /* Scroll Reveal for regular elements */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            filter: blur(4px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Glass panels */
+        .glass-card {
+            background: rgba(10, 10, 10, 0.4);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-panel {
+            background: linear-gradient(145deg, rgba(25, 25, 25, 0.9) 0%, rgba(5, 5, 5, 0.95) 100%);
+            box-shadow: 0 40px 100px -15px rgba(0, 0, 0, 1), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        /* Code Syntax Highlighting */
+        .keyword {
+            color: #ff7b72;
+        }
+
+        .function {
+            color: #82aaff;
+        }
+
+        .string {
+            color: #c3e88d;
+        }
+
+        .comment {
+            color: #7a88cf;
+            font-style: italic;
+        }
+
+        .code-line {
+            opacity: 0;
+            transform: translateY(5px);
+            transition: opacity 0.1s ease, transform 0.1s ease;
+        }
+
+        .code-line.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Pro tier border box */
+        .border-beam-wrapper {
+            position: relative;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            padding: 1.5px;
+        }
+
+        .border-beam-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent 0%, transparent 50%, #3b82f6 65%, #8b5cf6 78%, #10b981 90%, transparent 100%);
+            animation: borderSpin 3s linear infinite;
+            z-index: 0;
+        }
+
+        .border-beam-content {
+            background: #050505;
+            position: relative;
+            z-index: 1;
+            border-radius: calc(1.5rem - 1.5px);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes borderSpin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .faq-answer {
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+        }
+
+        /* Gradient Section Divider */
+        .gradient-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(59, 130, 246, 0.3) 20%, rgba(139, 92, 246, 0.4) 50%, rgba(16, 185, 129, 0.3) 80%, transparent 100%);
+            border: none;
+        }
+
+        /* Testimonial Cards */
+        .testimonial-card {
+            background: linear-gradient(145deg, rgba(15, 15, 15, 0.8) 0%, rgba(5, 5, 5, 0.9) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            min-width: 380px;
+            flex-shrink: 0;
+        }
+
+        .testimonial-quote::before {
+            content: '\201C';
+            position: absolute;
+            top: -8px;
+            left: -4px;
+            font-size: 5rem;
+            line-height: 1;
+            font-family: 'Georgia', serif;
+            color: rgba(59, 130, 246, 0.12);
+            pointer-events: none;
+        }
+
+        /* Testimonial scrolling marquee */
+        .testimonial-track {
+            display: flex;
+            gap: 2rem;
+            width: max-content;
+            animation: scrollTestimonials 35s linear infinite;
+        }
+
+        .testimonial-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollTestimonials {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Section label pill */
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 100px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* Dynamic text rotator */
+        .text-rotator {
+            display: inline-block;
+            height: 1.2em;
+            overflow: hidden;
+            vertical-align: bottom;
+        }
+
+        .text-rotator-inner {
+            display: flex;
+            flex-direction: column;
+            animation: textRotate 8s ease-in-out infinite;
+        }
+
+        .text-rotator-inner span {
+            height: 1.2em;
+            line-height: 1.2em;
+            display: flex;
+            align-items: center;
+        }
+
+        /* FAANG logo carousel */
+        .logo-track {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+            width: max-content;
+            animation: logoSlide 20s linear infinite;
+        }
+
+        .logo-track:hover {
+            animation-play-state: paused;
+        }
+
+        .logo-track svg,
+        .logo-track img {
+            height: 28px;
+            opacity: 0.7;
+            transition: opacity 0.4s ease;
+        }
+
+        .logo-track svg:hover,
+        .logo-track img:hover {
+            opacity: 1;
+        }
+
+        /* Section dividers */
+        .section-aurora {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .section-aurora::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.4), rgba(139, 92, 246, 0.5), rgba(16, 185, 129, 0.4), transparent);
+            box-shadow: 0 0 80px 40px rgba(59, 130, 246, 0.08), 0 0 120px 60px rgba(139, 92, 246, 0.05);
+        }
+
+        .section-aurora::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+        }
+
+        /* IDE code left-aligned */
+        .code-stream-left {
+            text-align: left;
+        }
+
+        /* Pipeline thread animation */
+        .pipeline-thread {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pipeline-thread::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(to bottom, transparent, rgba(59, 130, 246, 0.6), transparent);
+            animation: threadPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes threadPulse {
+            0% {
+                top: -40%;
+            }
+
+            100% {
+                top: 100%;
+            }
+        }
+
+        .pipeline-step .relative>div:first-child {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .pipeline-step:hover .relative>div:first-child {
+            transform: scale(1.08);
+            box-shadow: 0 0 50px rgba(59, 130, 246, 0.25);
+        }
+
+        /* Testimonial horizontal marquee */
+        .testimonial-track {
+            display: flex;
+            gap: 1.5rem;
+            width: max-content;
+            animation: logoSlide 40s linear infinite;
+        }
+
+        .testimonial-track .testimonial-card {
+            width: 380px;
+            flex-shrink: 0;
+        }
+
+        /* Blinking cursor for typed text */
+        .animate-blink {
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Role tracks scroll animation */
+        .animate-logo-slide {
+            animation: logoSlide 25s linear infinite;
+        }
+
+        /* Floating hero particles */
+        .hero-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        /* Shimmer border on hover for feature cards */
+        .feature-shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-shimmer::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(130deg, transparent 40%, rgba(59, 130, 246, 0.4) 50%, transparent 60%);
+            background-size: 200% 100%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .feature-shimmer:hover::after {
+            opacity: 1;
+            animation: shimmer 2.5s ease-in-out infinite;
+        }
+
+        /* Gradient underline for nav links */
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 2px;
+            transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Stats counter strip */
+        .stat-item {
+            text-align: center;
+            position: relative;
+        }
+
+        .stat-item::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 20%;
+            height: 60%;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.08), transparent);
+        }
+
+        .stat-item:last-child::after {
+            display: none;
+        }
+
+        /* Glow card lift */
+        .glow-lift {
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+        }
+
+        .glow-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px -15px rgba(59, 130, 246, 0.15), 0 0 0 1px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Staggered reveal delays */
+        .delay-100 {
+            animation-delay: 100ms !important;
+            transition-delay: 100ms !important;
+        }
+
+        .delay-150 {
+            animation-delay: 150ms !important;
+            transition-delay: 150ms !important;
+        }
+
+        .delay-200 {
+            animation-delay: 200ms !important;
+            transition-delay: 200ms !important;
+        }
+
+        .delay-250 {
+            animation-delay: 250ms !important;
+            transition-delay: 250ms !important;
+        }
+
+        .delay-300 {
+            animation-delay: 300ms !important;
+            transition-delay: 300ms !important;
+        }
+
+        .delay-350 {
+            animation-delay: 350ms !important;
+            transition-delay: 350ms !important;
+        }
+
+        .delay-450 {
+            animation-delay: 450ms !important;
+            transition-delay: 450ms !important;
+        }
+
+        /* Light Mode Overrides — Properly Scoped */
+        html.light body {
+            background-color: #fafafa !important;
+            color: #111827 !important;
+        }
+
+        html.light .mesh-bg-container {
+            background: #fafafa !important;
+        }
+
+        html.light .mesh-bg-container .mesh-orb {
+            opacity: 0.15 !important;
+        }
+
+        /* Hero background */
+        html.light #hero-main>.absolute:first-child {
+            background: linear-gradient(to bottom, #f0f4ff, #fafafa) !important;
+        }
+
+        html.light #hero-main>.absolute:first-child>div {
+            opacity: 0.3 !important;
+        }
+
+        /* Section backgrounds */
+        html.light section {
+            background-color: #fafafa !important;
+        }
+
+        html.light section[class*="bg-[#02"],
+        html.light section[class*="bg-[#00"] {
+            background-color: #ffffff !important;
+        }
+
+        /* Text colors */
+        html.light h1,
+        html.light h2,
+        html.light h3 {
+            color: #0f172a !important;
+        }
+
+        html.light .animate-gradient-text {
+            -webkit-text-fill-color: transparent !important;
+        }
+
+        html.light p:not(.keep-dark p),
+        html.light span:not(.keep-dark span):not([class*="text-brand"]):not([class*="text-red-"]):not([class*="text-green-"]) {
+            color: #374151;
+        }
+
+        /* Borders */
+        html.light *:not(.keep-dark):not(.keep-dark *) {
+            --tw-border-opacity: 1;
+        }
+
+        /* Cards & panels */
+        html.light .glass-card,
+        html.light .glass-panel,
+        html.light .testimonial-card,
+        html.light [class*="bg-gradient-to-b"][class*="from-white"] {
+            background: rgba(255, 255, 255, 0.9) !important;
+            border-color: rgba(0, 0, 0, 0.08) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+        }
+
+        /* Nav in light mode */
+        html.light nav {
+            background: rgba(255, 255, 255, 0.85) !important;
+            border-color: rgba(0, 0, 0, 0.08) !important;
+        }
+
+        /* Keep dark elements dark */
+        html.light .keep-dark,
+        html.light .keep-dark * {
+            color: inherit !important;
+            background: inherit !important;
+        }
+
+        /* === UI/UX Pro Max: Accessibility === */
+
+        /* Respect reduced-motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+            }
+
+            .reveal-float {
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+            }
+        }
+
+        /* Focus states for keyboard navigation */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        /* Cursor pointer on all interactive elements */
+        .feature-shimmer,
+        .testimonial-card,
+        .glass-card,
+        .faq-item button,
+        .nav-link,
+        .glow-lift {
+            cursor: pointer;
+        }
+
+        /* === Enhanced 21st.dev-inspired reveal variants === */
+
+        /* Staggered reveal with scale */
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.92) translateY(30px);
+            filter: blur(6px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            filter: blur(0);
+        }
+
+        /* Slide-in from left */
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px) translateY(20px);
+            filter: blur(4px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0) translateY(0);
+            filter: blur(0);
+        }
+
+        /* Slide-in from right */
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px) translateY(20px);
+            filter: blur(4px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0) translateY(0);
+            filter: blur(0);
+        }
+
+        /* Stagger delays for child elements */
+        .stagger-1 {
+            transition-delay: 0.1s !important;
+        }
+
+        .stagger-2 {
+            transition-delay: 0.2s !important;
+        }
+
+        .stagger-3 {
+            transition-delay: 0.3s !important;
+        }
+
+        .stagger-4 {
+            transition-delay: 0.4s !important;
+        }
+
+        .stagger-5 {
+            transition-delay: 0.5s !important;
+        }
+
+        /* Magnetic hover glow for cards */
+        .magnetic-glow {
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+        }
+
+        .magnetic-glow:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 25px 60px -12px rgba(59, 130, 246, 0.18), 0 0 0 1px rgba(59, 130, 246, 0.08);
+        }
+    </style>
+
+<!-- Premium Animations -->
+<style>
+/* Hero entrance sequence */
+@keyframes hero-fade-up{0%{opacity:0;transform:translateY(30px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes hero-blur-in{0%{opacity:0;filter:blur(12px);transform:translateY(20px)}100%{opacity:1;filter:blur(0);transform:translateY(0)}}
+@keyframes hero-scale-in{0%{opacity:0;transform:scale(0.95) translateY(16px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+#hero-main > *:nth-child(1){animation:hero-blur-in 1s cubic-bezier(0.16,1,0.3,1) 0.1s both}
+#hero-main > *:nth-child(2){animation:hero-blur-in 1s cubic-bezier(0.16,1,0.3,1) 0.25s both}
+#hero-main > *:nth-child(3){animation:hero-fade-up 1s cubic-bezier(0.16,1,0.3,1) 0.4s both}
+#hero-main > *:nth-child(4){animation:hero-fade-up 1s cubic-bezier(0.16,1,0.3,1) 0.55s both}
+#hero-main > *:nth-child(5){animation:hero-fade-up 1s cubic-bezier(0.16,1,0.3,1) 0.65s both}
+#hero-main > *:nth-child(6){animation:hero-fade-up 1s cubic-bezier(0.16,1,0.3,1) 0.75s both}
+
+/* Nav entrance */
+#site-nav{animation:hero-fade-up .8s cubic-bezier(0.16,1,0.3,1) .05s both}
+
+/* Section reveals — smooth slide + fade */
+.reveal,.reveal-scale,.reveal-left,.reveal-right{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(0.16,1,0.3,1),transform .8s cubic-bezier(0.16,1,0.3,1)}
+.reveal.active,.reveal-scale.active,.reveal-left.active,.reveal-right.active{opacity:1;transform:translateY(0)}
+.reveal-scale{transform:translateY(24px) scale(0.97)}
+.reveal-scale.active{transform:translateY(0) scale(1)}
+
+/* Testimonial entrance */
+.testimonial-marquee{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(0.16,1,0.3,1),transform .8s cubic-bezier(0.16,1,0.3,1)}
+.testimonial-marquee.active{opacity:1;transform:translateY(0)}
+
+/* Subtle link underline animation */
+nav a{position:relative}
+nav a::after{content:'';position:absolute;bottom:-2px;left:50%;width:0;height:1px;background:#3b82f6;transition:width .3s cubic-bezier(0.16,1,0.3,1),left .3s cubic-bezier(0.16,1,0.3,1)}
+nav a:hover::after{width:100%;left:0}
+</style>
+</head>
+
+<body
+    class="bg-trueBlack text-gray-100 font-sans antialiased min-h-screen flex flex-col relative overflow-x-hidden selection:bg-brandBlue selection:text-white">
+
+
+    <!-- Navigation -->
+    <nav id="site-nav" class="fixed w-full z-50 flex justify-center pt-4 px-4 transition-all duration-500">
+        <div id="nav-pill"
+            class="max-w-5xl w-full bg-transparent border border-transparent rounded-full px-6 py-2.5 transition-all duration-500">
+            <div class="flex items-center justify-between">
+                <!-- Logo + Nav Links together -->
+                <div class="flex items-center gap-6 z-10">
+                    <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer group" onclick="showMain(); window.scrollTo(0,0);">
+                        <div
+                            class="w-7 h-7 flex items-center justify-center transition-transform duration-500 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_rgba(59,130,246,0.6)]">
+                            <svg viewBox="0 0 200 200" class="w-full h-full text-white" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M 70 45 H 135 C 175 45, 175 105, 135 105 L 165 165 H 130 L 100 105 H 95 V 140 H 70 V 45 Z M 95 70 V 85 H 135 C 150 85, 150 70, 135 70 Z" />
+                                <path opacity="0.6"
+                                    d="M 30 70 V 135 C 30 185, 95 185, 115 140 C 125 120, 130 105, 140 105 A 5 5 0 0 1 140 95 C 120 95, 110 110, 95 135 C 80 160, 55 155, 55 135 V 70 Z" />
+                            </svg>
+                        </div>
+                        <span class="text-[15px] font-bold text-white tracking-tight">Interview<span
+                                class="text-brandBlue">Ready</span></span>
+                    </div>
+                    <div class="hidden md:flex items-center gap-5">
+                        <a href="#how-it-works"
+                            class="nav-link text-[13px] font-medium text-gray-400 hover:text-white transition-colors"
+                            onclick="showMain()">Features</a>
+                        <a href="#pricing"
+                            class="nav-link text-[13px] font-medium text-gray-400 hover:text-white transition-colors"
+                            onclick="showMain()">Pricing</a>
+                        <a href="#testimonials"
+                            class="nav-link text-[13px] font-medium text-gray-400 hover:text-white transition-colors"
+                            onclick="showMain()">Reviews</a>
+                        <a href="javascript:void(0)" onclick="showPage('tos')"
+                            class="nav-link text-[13px] font-medium text-gray-400 hover:text-white transition-colors inline-flex items-center gap-1">Terms
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 z-10">
+                    <a href="/auth/login"
+                        class="hidden sm:inline-flex items-center px-4 py-1.5 text-[13px] font-medium rounded-full text-gray-300 hover:text-white transition-all">
+                        Log In
+                    </a>
+                    <a href="/auth/signup"
+                        class="hidden sm:inline-flex items-center px-4 py-1.5 text-[13px] font-semibold rounded-full text-white bg-brandBlue hover:bg-brandBlue/80 transition-all shadow-[0_0_15px_rgba(59,130,246,0.25)]">
+                        Sign Up
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SPA Routing: isolated script so nothing can break it -->
+    <style>
+        body.spa-page #main-content,
+        body.spa-page #cta-section,
+        body.spa-page footer { display: none !important; }
+        body.spa-page .spa-visible { display: block !important; }
+    </style>
+    <script>
+        function showPage(page) {
+            document.body.classList.add('spa-page');
+            document.querySelectorAll('.spa-visible').forEach(function(el) { el.classList.remove('spa-visible'); });
+            var target = document.getElementById(page + '-page');
+            if (target) { target.classList.add('spa-visible'); }
+            window.scrollTo(0, 0);
+        }
+        function showMain() {
+            document.body.classList.remove('spa-page');
+            document.querySelectorAll('.spa-visible').forEach(function(el) { el.classList.remove('spa-visible'); });
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+    <div id="main-content">
+        <!-- Hero Section -->
+        <main id="hero-main"
+            class="relative pt-24 pb-32 lg:pt-28 lg:pb-40 z-10 flex flex-col items-center text-center overflow-hidden">
+
+
+
+
+            <div class="max-w-5xl mx-auto px-6 lg:px-8 relative z-20 text-center">
+
+
+                <h1
+                    class="opacity-0 animate-fade-up text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tighter mb-4 leading-[1.05] font-display">
+                    Ace your next interview with<br>
+                    <span class="animate-gradient-text"><span id="typed-word"></span></span><span
+                        class="animate-blink text-brandBlue">|</span>
+                </h1>
+
+                <p
+                    class="opacity-0 animate-fade-up delay-100 text-base sm:text-lg text-gray-400 max-w-xl mb-6 leading-relaxed font-light tracking-tight mx-auto">
+                    AI-proctored coding sessions, webcam behavioral analysis, and intelligence reports that tell you
+                    exactly who to hire.
+                </p>
+
+                <!-- Call to Action + Social Proof -->
+                <div class="opacity-0 animate-fade-up delay-200 flex flex-col items-center gap-4 mb-6">
+                    <a href="/auth/signup"
+                        class="group inline-flex items-center justify-center px-12 py-4 text-[15px] font-semibold rounded-full text-black bg-white hover:bg-gray-100 transition-all hover:scale-[1.02] shadow-[0_0_40px_rgba(255,255,255,0.1)] gap-3">
+                        Get Started
+                        <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </a>
+                    <div class="flex items-center gap-3">
+                        <div class="flex -space-x-2.5">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face"
+                                class="w-9 h-9 rounded-full border-2 border-black object-cover" alt="">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face"
+                                class="w-9 h-9 rounded-full border-2 border-black object-cover" alt="">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face"
+                                class="w-9 h-9 rounded-full border-2 border-black object-cover" alt="">
+                        </div>
+                        <p class="text-[13px] text-gray-500 font-medium"><span class="text-white font-semibold">+1,000
+                                Expected</span> — launching soon</p>
+                    </div>
+                </div>
+
+                <!-- Stats Bar -->
+                <div
+                    class="opacity-0 animate-fade-up delay-300 flex flex-wrap justify-center gap-10 sm:gap-14 py-3 px-6 max-w-3xl mx-auto">
+                    <div class="text-center">
+                        <p class="text-3xl font-bold text-white font-display">82%</p>
+                        <p class="text-[11px] text-gray-500 font-light mt-1">Enterprises use online<br>assessments</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-3xl font-bold text-white font-display">3.2×</p>
+                        <p class="text-[11px] text-gray-500 font-light mt-1">Faster filtration<br>vs. manual</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-3xl font-bold text-white font-display">67%</p>
+                        <p class="text-[11px] text-gray-500 font-light mt-1">Cost reduction<br>early-stage</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Partner Logos -->
+            <div class="relative z-20 mt-8 w-full max-w-4xl mx-auto px-6 text-center">
+                <p class="text-[11px] uppercase tracking-[0.3em] text-gray-600 mb-5 font-medium">Simulating interviews
+                    at</p>
+                <div class="overflow-hidden relative"
+                    style="mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);">
+                    <div class="logo-track">
+<!-- Google (multicolor inline SVG) -->
+<svg viewBox="0 0 24 24" style="height:26px"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+<img src="https://cdn.simpleicons.org/meta/0668E1" alt="Meta" style="height:26px">
+<svg viewBox="0 0 48 16" width="48" height="16" style="height:18px;width:auto" xmlns="http://www.w3.org/2000/svg"><path d="M29.4 12.2c-5.4 4-13.2 6.1-20 6.1-9.4 0-17.9-3.5-24.3-9.3-.5-.5-.1-1.1.5-.8 6.9 4 15.4 6.5 24.3 6.5 5.9 0 12.5-1.2 18.5-3.8.9-.4 1.7.6.8 1.3z" fill="#FF9900" transform="translate(5,-2)"/><path d="M31.3 10.2c-.7-.9-4.6-.4-6.3-.2-.5.1-.6-.4-.1-.7 3.1-2.2 8.2-1.5 8.8-.8.5.7-.1 6-3.1 8.4-.5.4-.9.2-.7-.3.7-1.7 2.2-5.5 1.5-6.4z" fill="#FF9900" transform="translate(5,-2)"/></svg>
+<img src="https://cdn.simpleicons.org/apple/ffffff" alt="Apple" style="height:26px">
+<!-- Microsoft (multicolor inline SVG) -->
+<svg viewBox="0 0 24 24" width="24" height="24" style="height:24px;width:24px"><rect x="1" y="1" width="10" height="10" fill="#F25022"/><rect x="13" y="1" width="10" height="10" fill="#7FBA00"/><rect x="1" y="13" width="10" height="10" fill="#00A4EF"/><rect x="13" y="13" width="10" height="10" fill="#FFB900"/></svg>
+<img src="https://cdn.simpleicons.org/nvidia/76B900" alt="Nvidia" style="height:26px">
+<img src="https://cdn.simpleicons.org/tesla/CC0000" alt="Tesla" style="height:26px">
+<img src="https://cdn.simpleicons.org/samsung/1428A0" alt="Samsung" style="height:36px;min-width:120px">
+<img src="https://cdn.simpleicons.org/paypal/003087" alt="PayPal" style="height:26px">
+<img src="https://cdn.simpleicons.org/netflix/E50914" alt="Netflix" style="height:26px">
+<img src="https://cdn.simpleicons.org/stripe/635BFF" alt="Stripe" style="height:26px">
+<img src="https://cdn.simpleicons.org/spotify/1DB954" alt="Spotify" style="height:26px">
+<img src="https://cdn.simpleicons.org/airbnb/FF5A5F" alt="Airbnb" style="height:26px">
+<svg viewBox="0 0 100 18" width="100" height="18" style="height:22px;min-width:80px" fill="#C74634" xmlns="http://www.w3.org/2000/svg"><text x="0" y="14" font-size="15" font-weight="700" font-family="Inter,Arial,sans-serif" letter-spacing="1.5">ORACLE</text></svg>
+<!-- Duplicates for seamless loop -->
+<svg viewBox="0 0 24 24" style="height:26px"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+<img src="https://cdn.simpleicons.org/meta/0668E1" alt="Meta" style="height:26px">
+<svg viewBox="0 0 48 16" width="48" height="16" style="height:18px;width:auto" xmlns="http://www.w3.org/2000/svg"><path d="M29.4 12.2c-5.4 4-13.2 6.1-20 6.1-9.4 0-17.9-3.5-24.3-9.3-.5-.5-.1-1.1.5-.8 6.9 4 15.4 6.5 24.3 6.5 5.9 0 12.5-1.2 18.5-3.8.9-.4 1.7.6.8 1.3z" fill="#FF9900" transform="translate(5,-2)"/><path d="M31.3 10.2c-.7-.9-4.6-.4-6.3-.2-.5.1-.6-.4-.1-.7 3.1-2.2 8.2-1.5 8.8-.8.5.7-.1 6-3.1 8.4-.5.4-.9.2-.7-.3.7-1.7 2.2-5.5 1.5-6.4z" fill="#FF9900" transform="translate(5,-2)"/></svg>
+<img src="https://cdn.simpleicons.org/apple/ffffff" alt="Apple" style="height:26px">
+<svg viewBox="0 0 24 24" width="24" height="24" style="height:24px;width:24px"><rect x="1" y="1" width="10" height="10" fill="#F25022"/><rect x="13" y="1" width="10" height="10" fill="#7FBA00"/><rect x="1" y="13" width="10" height="10" fill="#00A4EF"/><rect x="13" y="13" width="10" height="10" fill="#FFB900"/></svg>
+<img src="https://cdn.simpleicons.org/nvidia/76B900" alt="Nvidia" style="height:26px">
+<img src="https://cdn.simpleicons.org/tesla/CC0000" alt="Tesla" style="height:26px">
+<img src="https://cdn.simpleicons.org/samsung/1428A0" alt="Samsung" style="height:36px;min-width:120px">
+<img src="https://cdn.simpleicons.org/paypal/003087" alt="PayPal" style="height:26px">
+<img src="https://cdn.simpleicons.org/netflix/E50914" alt="Netflix" style="height:26px">
+<img src="https://cdn.simpleicons.org/stripe/635BFF" alt="Stripe" style="height:26px">
+<img src="https://cdn.simpleicons.org/spotify/1DB954" alt="Spotify" style="height:26px">
+<img src="https://cdn.simpleicons.org/airbnb/FF5A5F" alt="Airbnb" style="height:26px">
+<svg viewBox="0 0 100 18" width="100" height="18" style="height:22px;min-width:80px" fill="#C74634" xmlns="http://www.w3.org/2000/svg"><text x="0" y="14" font-size="15" font-weight="700" font-family="Inter,Arial,sans-serif" letter-spacing="1.5">ORACLE</text></svg>
+                    </div>             </div>
+                </div>
+
+        </main>
+
+        <!-- How It Works & Mock the Tension — Component CSS from tech_demo.html -->
+        <style>
+            /* Component CSS variables */
+            :root {
+                --accent: #3b82f6;
+                --accent-glow: rgba(59, 130, 246, 0.35);
+                --accent-2: #8b5cf6;
+                --accent-2-glow: rgba(139, 92, 246, 0.3);
+                --surface: rgba(255, 255, 255, 0.025);
+                --border: rgba(255, 255, 255, 0.06);
+                --bg: #000000;
+                --vid-bg: #000000;
+                --fade-bg: #000000;
+                --fg: #f0f0f5;
+                --muted: rgba(255, 255, 255, 0.45);
+                --step-dim: 0.18;
+                --step-done: 0.45;
+                --shadow-card: 0 40px 120px -20px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.04);
+            }
+
+            /* ═══════ HOW IT WORKS ═══════ */
+            .hiw {
+                position: relative;
+                z-index: 1;
+                max-width: 1440px;
+                margin: 0 auto;
+                padding: 60px 40px 80px;
+                background: #000000
+            }
+
+            .hiw-header {
+                text-align: left;
+                margin-bottom: 48px
+            }
+
+            .hiw-header .kicker {
+                font-family: 'General Sans', sans-serif;
+                font-size: 13px;
+                font-weight: 500;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                color: var(--accent);
+                margin-bottom: 24px;
+                display: block
+            }
+
+            .hiw-header h2 {
+                font-family: 'Clash Display', sans-serif;
+                font-size: clamp(40px, 5.5vw, 72px);
+                font-weight: 600;
+                letter-spacing: -2px;
+                line-height: 1.05;
+                margin-bottom: 20px
+            }
+
+            .hiw-header h2 em {
+                font-style: italic;
+                background: linear-gradient(270deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
+                background-size: 300% 300%;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                animation: verdictShift 6s ease infinite
+            }
+
+            @keyframes verdictShift {
+                0% {
+                    background-position: 0% 50%
+                }
+
+                50% {
+                    background-position: 100% 50%
+                }
+
+                100% {
+                    background-position: 0% 50%
+                }
+            }
+
+            .hiw-header p {
+                font-family: 'General Sans', sans-serif;
+                font-size: 18px;
+                color: var(--muted);
+                font-weight: 300;
+                max-width: 560px;
+                line-height: 1.7
+            }
+
+            /* ═══════ GRID: STEPPER LEFT + VIDEO RIGHT ═══════ */
+            .hiw-grid {
+                display: grid;
+                grid-template-columns: 280px 1fr;
+                gap: 80px;
+                align-items: start
+            }
+
+            /* ── STEPPER ── */
+            .stepper {
+                position: sticky;
+                top: 100px;
+                display: flex;
+                flex-direction: column;
+                gap: 0;
+                margin-top: 80px
+            }
+
+            .step {
+                position: relative;
+                padding: 16px 0 16px 24px;
+                border-left: 3px solid var(--border);
+                opacity: var(--step-dim);
+                transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1)
+            }
+
+            .step-num {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 10px;
+                font-weight: 600;
+                color: var(--muted);
+                letter-spacing: 2.5px;
+                text-transform: uppercase;
+                margin-bottom: 8px;
+                transition: color 0.5s ease
+            }
+
+            .step-body h4 {
+                font-family: 'Clash Display', sans-serif;
+                font-size: 18px;
+                font-weight: 600;
+                color: var(--fg);
+                margin-bottom: 4px;
+                letter-spacing: -0.5px;
+                transition: color 0.5s
+            }
+
+            .step-body p {
+                font-family: 'General Sans', sans-serif;
+                font-size: 13px;
+                color: var(--muted);
+                line-height: 1.6;
+                font-weight: 300;
+                max-width: 240px;
+                opacity: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1)
+            }
+
+            /* Active */
+            .step.active {
+                opacity: 1;
+                border-left-color: var(--accent);
+                box-shadow: inset 3px 0 16px -6px var(--accent-glow)
+            }
+
+            .step.active .step-num {
+                color: var(--accent)
+            }
+
+            .step.active .step-body h4 {
+                color: var(--fg)
+            }
+
+            .step.active .step-body p {
+                opacity: 1;
+                max-height: 50px;
+                margin-top: 2px
+            }
+
+            /* Done */
+            .step.done {
+                opacity: var(--step-done);
+                border-left-color: rgba(255, 255, 255, 0.12)
+            }
+
+            .step.done .step-num {
+                color: rgba(255, 255, 255, 0.25)
+            }
+
+            /* ── VIDEO CONTAINER ── */
+            .video-container {
+                position: relative
+            }
+
+            .video-container::before {
+                content: "";
+                position: absolute;
+                inset: -2px;
+                border-radius: 22px;
+                background: linear-gradient(145deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.08), transparent 60%);
+                z-index: -1;
+                opacity: 0;
+                transition: opacity 0.8s ease
+            }
+
+            .video-container:hover::before {
+                opacity: 1
+            }
+
+            .browser-chrome {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 14px 20px;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-bottom: none;
+                border-radius: 20px 20px 0 0;
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px)
+            }
+
+            .chrome-dot {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                transition: box-shadow 0.3s
+            }
+
+            .dot-r {
+                background: #ff5f56
+            }
+
+            .dot-y {
+                background: #ffbd2e
+            }
+
+            .dot-g {
+                background: #27c93f
+            }
+
+            .browser-chrome:hover .dot-r {
+                box-shadow: 0 0 12px rgba(255, 95, 86, 0.6)
+            }
+
+            .browser-chrome:hover .dot-y {
+                box-shadow: 0 0 12px rgba(255, 189, 46, 0.6)
+            }
+
+            .browser-chrome:hover .dot-g {
+                box-shadow: 0 0 12px rgba(39, 201, 63, 0.6)
+            }
+
+            .chrome-url {
+                margin: 0 auto;
+                font-size: 12px;
+                font-weight: 500;
+                color: var(--muted);
+                letter-spacing: 0.5px;
+                font-family: 'JetBrains Mono', monospace;
+                padding: 4px 16px;
+                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.03)
+            }
+
+            .vid-wrap {
+                position: relative;
+                background: var(--vid-bg);
+                line-height: 0;
+                border-radius: 0 0 20px 20px;
+                overflow: hidden;
+                box-shadow: var(--shadow-card);
+                border: 1px solid var(--border);
+                border-top: none
+            }
+
+            #vid {
+                width: 100%;
+                display: block;
+                will-change: transform;
+                transform: scale(1);
+                transform-origin: center;
+                transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1), transform-origin 0.6s ease;
+                clip-path: inset(0 0 5% 0);
+                margin-bottom: -5%;
+                image-rendering: high-quality
+            }
+
+            /* Zoom label */
+            .zlb {
+                position: absolute;
+                bottom: 28px;
+                left: 28px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 8px 16px;
+                border-radius: 10px;
+                background: rgba(0, 0, 0, 0.6);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                color: #fff;
+                font-size: 11px;
+                font-weight: 600;
+                letter-spacing: 3px;
+                z-index: 30;
+                font-family: 'JetBrains Mono', monospace;
+                opacity: 0;
+                transform: translateY(10px);
+                transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1)
+            }
+
+            .zlb .pulse {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: var(--accent);
+                box-shadow: 0 0 10px var(--accent);
+                animation: lblPulse 1.5s infinite
+            }
+
+            @keyframes lblPulse {
+
+                0%,
+                100% {
+                    opacity: 1;
+                    transform: scale(1)
+                }
+
+                50% {
+                    opacity: 0.5;
+                    transform: scale(1.3)
+                }
+            }
+
+            .zlb.on {
+                opacity: 1;
+                transform: translateY(0)
+            }
+
+            /* Overlays */
+            #fx {
+                position: absolute;
+                inset: 0;
+                z-index: 10;
+                pointer-events: none
+            }
+
+            .ftb {
+                position: absolute;
+                inset: 0;
+                z-index: 50;
+                background: var(--fade-bg);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 1.2s ease
+            }
+
+            .ftb.on {
+                opacity: 1
+            }
+
+            /* Outro */
+            #outro {
+                position: absolute;
+                inset: 0;
+                z-index: 55;
+                background: var(--fade-bg);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 1.5s ease
+            }
+
+            #outro.on {
+                opacity: 1;
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px)
+            }
+
+            #outro .logo {
+                font-family: 'Clash Display', sans-serif;
+                font-size: 42px;
+                font-weight: 600;
+                letter-spacing: -1.5px;
+                color: var(--fg)
+            }
+
+            #outro .logo b {
+                background: linear-gradient(135deg, var(--accent), var(--accent-2));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-weight: 600
+            }
+
+            #outro .oline {
+                width: 48px;
+                height: 2px;
+                border-radius: 2px;
+                background: linear-gradient(90deg, var(--accent), var(--accent-2));
+                opacity: 0.7
+            }
+
+            #outro .cta {
+                color: var(--muted);
+                font-size: 11px;
+                letter-spacing: 5px;
+                text-transform: uppercase;
+                font-family: 'JetBrains Mono', monospace
+            }
+
+            /* ═══════ MOCK THE TENSION ═══════ */
+            .mtt {
+                position: relative;
+                z-index: 1;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 140px 40px 100px;
+                background: #000000
+            }
+
+            .mtt-header {
+                text-align: left;
+                margin-bottom: 60px
+            }
+
+            .mtt-header .kicker {
+                display: inline-block;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 11px;
+                font-weight: 500;
+                letter-spacing: 5px;
+                text-transform: uppercase;
+                color: var(--accent);
+                margin-bottom: 16px;
+                padding: 6px 16px;
+                border-radius: 6px;
+                background: rgba(59, 130, 246, 0.08);
+                border: 1px solid rgba(59, 130, 246, 0.15)
+            }
+
+            .mtt-header h2 {
+                font-family: 'Clash Display', sans-serif;
+                font-size: clamp(36px, 5vw, 56px);
+                font-weight: 600;
+                letter-spacing: -2px;
+                line-height: 1.1;
+                margin-bottom: 16px
+            }
+
+            .mtt-header h2 em {
+                font-style: normal;
+                background: linear-gradient(135deg, var(--accent), var(--accent-2));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent
+            }
+
+            .mtt-header p {
+                color: var(--muted);
+                font-size: 17px;
+                max-width: 520px;
+                line-height: 1.6
+            }
+
+            /* Tabs */
+            .mtt-tabs {
+                display: flex;
+                justify-content: center;
+                gap: 16px;
+                margin-bottom: 56px
+            }
+
+            .mtt-tab {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 14px 28px;
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                background: transparent;
+                cursor: pointer;
+                color: var(--muted);
+                transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+                font-family: 'General Sans', sans-serif;
+                position: relative;
+                overflow: hidden
+            }
+
+            .mtt-tab::before {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 2px;
+                background: linear-gradient(90deg, var(--accent), var(--accent-2));
+                transform: scaleX(0);
+                transform-origin: left;
+                transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)
+            }
+
+            .mtt-tab:hover {
+                border-color: rgba(255, 255, 255, 0.12);
+                color: var(--fg)
+            }
+
+            .mtt-tab.active {
+                border-color: rgba(59, 130, 246, 0.25);
+                background: rgba(59, 130, 246, 0.06);
+                color: var(--fg)
+            }
+
+            .mtt-tab.active::before {
+                transform: scaleX(1)
+            }
+
+            .mtt-tab-num {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 11px;
+                font-weight: 500;
+                letter-spacing: 2px;
+                opacity: 0.4
+            }
+
+            .mtt-tab.active .mtt-tab-num {
+                opacity: 0.7;
+                color: var(--accent)
+            }
+
+            .mtt-tab-label {
+                font-size: 14px;
+                font-weight: 600;
+                letter-spacing: -0.2px
+            }
+
+            /* Panels */
+            .mtt-panel {
+                display: none;
+                animation: mttFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1)
+            }
+
+            .mtt-panel.active {
+                display: block
+            }
+
+            @keyframes mttFadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(12px)
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0)
+                }
+            }
+
+            /* Grid — default: copy left, media right */
+            .mtt-grid {
+                display: grid;
+                grid-template-columns: 1fr 1.4fr;
+                gap: 60px;
+                align-items: center
+            }
+
+            .mtt-grid.reversed {
+                grid-template-columns: 1.4fr 1fr
+            }
+
+            /* Copy */
+            .mtt-copy h3 {
+                font-family: 'Clash Display', sans-serif;
+                font-size: 28px;
+                font-weight: 600;
+                letter-spacing: -1px;
+                margin-bottom: 16px;
+                line-height: 1.2
+            }
+
+            .mtt-copy>p {
+                color: var(--muted);
+                font-size: 15px;
+                line-height: 1.7;
+                margin-bottom: 28px
+            }
+
+            /* Feature list */
+            .mtt-features {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 12px
+            }
+
+            .mtt-features li {
+                position: relative;
+                padding-left: 20px;
+                font-size: 14px;
+                color: rgba(255, 255, 255, 0.65);
+                font-weight: 500;
+                letter-spacing: -0.1px;
+                line-height: 1.5
+            }
+
+            .mtt-features li::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 7px;
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--accent);
+                box-shadow: 0 0 8px var(--accent-glow)
+            }
+
+            .light-theme .mtt-features li {
+                color: rgba(0, 0, 0, 0.6)
+            }
+
+            /* Frame wrapper */
+            .mtt-frame-wrap {
+                position: relative;
+                border-radius: 16px;
+                overflow: hidden;
+                border: 1px solid var(--border);
+                box-shadow: var(--shadow-card);
+                background: var(--vid-bg)
+            }
+
+            .mtt-frame-wrap img {
+                width: 100%;
+                display: block
+            }
+
+            .mtt-frame-wrap::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 16px;
+                pointer-events: none;
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04)
+            }
+
+            /* Report video — same as IDE vid-wrap */
+            .report-vid-wrap {
+                position: relative;
+                background: var(--vid-bg);
+                line-height: 0;
+                border-radius: 16px;
+                overflow: hidden;
+                box-shadow: var(--shadow-card);
+                border: 1px solid var(--border)
+            }
+
+            .report-vid-wrap video {
+                width: 100%;
+                display: block;
+                clip-path: inset(0 1% 5% 0);
+                margin-bottom: -5%
+            }
+
+
+            @media(max-width:960px) {
+                .hiw-grid {
+                    grid-template-columns: 1fr;
+                    gap: 40px
+                }
+
+                .stepper {
+                    position: static
+                }
+
+                .mtt-grid,
+                .mtt-grid.reversed {
+                    grid-template-columns: 1fr;
+                    gap: 32px
+                }
+
+                .mtt-tabs {
+                    flex-direction: column;
+                    align-items: stretch
+                }
+            }
+        </style>
+
+        <!-- Spacer: Hero → Engineering Analysis -->
+        <div style="height:80px;background:#000000;"></div>
+        <div style="max-width:500px;margin:0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.07),transparent);"></div>
+        <div style="height:80px;background:#000000;"></div>
+
+        <section class="hiw">
+            <div class="hiw-header">
+
+                <h2>Comprehensive Engineering <em>Analysis.</em></h2>
+                <p>One pipeline. Four stages. A complete intelligence report on every candidate — powered by real-time
+                    AI.</p>
+            </div>
+
+            <div class="hiw-grid">
+                <div class="stepper" id="stepper">
+                    <div class="step" id="st1">
+                        <div class="step-num">01</div>
+                        <div class="step-body">
+                            <h4>Extract Requirements</h4>
+                            <p>Role, seniority, and tech stack — auto-parsed from any JD.</p>
+                        </div>
+                    </div>
+                    <div class="step" id="st2">
+                        <div class="step-num">02</div>
+                        <div class="step-body">
+                            <h4>Real Interview Environment</h4>
+                            <p>Timed session. Webcam locked. Proctored from first click to last.</p>
+                        </div>
+                    </div>
+                    <div class="step" id="st3">
+                        <div class="step-num">03</div>
+                        <div class="step-body">
+                            <h4>AI-Powered Analysis</h4>
+                            <p>Code quality, behavioral patterns, integrity — all scored by AI.</p>
+                        </div>
+                    </div>
+                    <div class="step" id="st4">
+                        <div class="step-num">04</div>
+                        <div class="step-body">
+                            <h4>Personalized Report</h4>
+                            <p>Full intelligence report. Zero guesswork.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-container">
+                    <div class="browser-chrome">
+                        <div class="chrome-dot dot-r"></div>
+                        <div class="chrome-dot dot-y"></div>
+                        <div class="chrome-dot dot-g"></div>
+                        <div class="chrome-url">interviewready.app — live session</div>
+                    </div>
+                    <div class="vid-wrap">
+                        <video id="vid" muted preload="auto" src="assets/vp2_4k.mp4"></video>
+                        <div id="fx">
+                            <div class="zlb" id="zlb"><span class="pulse"></span><span id="zlb-text"></span></div>
+                            <div class="ftb" id="ftb"></div>
+                            <div id="outro">
+                                <div class="logo">Interview<b>Ready</b></div>
+                                <div class="oline"></div>
+                                <div class="cta">Engineer Your Next Offer</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacer: Engineering Analysis → Mock the Tension -->
+        <div style="height:60px;background:#000000;"></div>
+        <div style="max-width:500px;margin:0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.07),transparent);"></div>
+        <div style="height:60px;background:#000000;"></div>
+
+        <!-- Mock the Tension — EXACT from tech_demo.html -->
+        <section class="mtt" id="mock-tension">
+            <div class="mtt-header">
+                <h2>Mock the <em>tension.</em></h2>
+                <p>Real pressure. Real environment. See exactly what your candidates face — and what you receive.</p>
+            </div>
+
+            <!-- Clickable Tabs -->
+            <div class="mtt-tabs">
+                <button class="mtt-tab active" data-tab="coding" id="tab-coding">
+                    <span class="mtt-tab-num">01</span>
+                    <span class="mtt-tab-label">Interview Environment</span>
+                </button>
+                <button class="mtt-tab" data-tab="report" id="tab-report">
+                    <span class="mtt-tab-num">02</span>
+                    <span class="mtt-tab-label">Intelligence Report</span>
+                </button>
+            </div>
+
+            <!-- Panel 1: Coding — text left, image right -->
+            <div class="mtt-panel active" id="panel-coding">
+                <div class="mtt-grid">
+                    <div class="mtt-copy">
+                        <h3>Where shortcuts die.</h3>
+                        <p>Split-pane IDE with real-time proctoring. Timed. Webcam-locked. Every keystroke, every tab
+                            switch, every hesitation — captured and scored.</p>
+                        <ul class="mtt-features">
+                            <li>FAANG-grade coding challenges</li>
+                            <li>MCQs calibrated to the role</li>
+                            <li>Webcam + screen proctoring active</li>
+                            <li>Clipboard activity recorded</li>
+                            <li>Tab switch tracking</li>
+                            <li>Timer enforced — no pausing</li>
+                        </ul>
+                    </div>
+                    <div class="mtt-media">
+                        <div class="mtt-frame-wrap">
+                            <img src="assets/frames/frame_076.jpg" alt="Coding environment" id="coding-frame">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 2: Report — video left, text right (reversed) -->
+            <div class="mtt-panel" id="panel-report">
+                <div class="mtt-grid reversed">
+                    <div class="mtt-media">
+                        <div class="report-vid-wrap">
+                            <video id="report-vid" muted preload="auto" src="assets/vp2_4k.mp4"></video>
+                        </div>
+                    </div>
+                    <div class="mtt-copy">
+                        <h3>Every signal. One report.</h3>
+                        <p>AI synthesizes MCQ accuracy, code quality, behavioral signals, and proctoring data into a
+                            comprehensive intelligence report — delivered instantly.</p>
+                        <ul class="mtt-features">
+                            <li>Overall score with performance tier</li>
+                            <li>Emotional analysis &amp; gaze tracking</li>
+                            <li>Code evaluation with radar chart</li>
+                            <li>Actionable development plan per candidate</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Spacer -->
+        <div style="height:120px;background:#000"></div>
+
+        <!-- ═══════ PRICING ═══════ -->
+        <style>
+.p-section{padding:0 0 140px 0;position:relative;z-index:10}
+.p-head{text-align:center;margin-bottom:60px}
+.p-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.04);border-radius:16px;overflow:hidden;max-width:1020px;margin:0 auto}
+.p-col{background:#000;padding:48px 40px;display:flex;flex-direction:column;transition:background 0.3s}
+.p-col:hover{background:rgba(255,255,255,0.012)}
+.p-col.p-hl{background:rgba(255,255,255,0.018)}
+.p-tier{font-size:13px;font-weight:500;color:rgba(255,255,255,0.35);margin-bottom:16px;letter-spacing:0.01em}
+.p-hl .p-tier{color:var(--brandBlue)}
+.p-amt{font-size:44px;font-weight:700;color:#fff;letter-spacing:-0.03em;line-height:1;margin-bottom:6px}
+.p-amt em{font-style:normal;font-size:14px;font-weight:400;color:rgba(255,255,255,0.2);margin-left:2px}
+.p-note{font-size:12.5px;color:rgba(255,255,255,0.25);margin-bottom:36px;line-height:1.5;font-weight:300}
+.p-rule{height:1px;background:rgba(255,255,255,0.04);margin-bottom:28px}
+.p-hl .p-rule{background:rgba(59,130,246,0.08)}
+.p-ft{list-style:none;padding:0;margin:0 0 40px 0;flex-grow:1}
+.p-ft li{font-size:13px;color:rgba(255,255,255,0.45);padding:7px 0;font-weight:300;line-height:1.5;padding-left:18px;position:relative}
+.p-ft li::before{content:'·';position:absolute;left:2px;top:6px;font-size:18px;line-height:1;color:rgba(255,255,255,0.3)}
+.p-hl .p-ft li{color:rgba(255,255,255,0.6)}
+.p-hl .p-ft li::before{color:var(--brandBlue)}
+.p-cta{display:block;width:100%;padding:11px 0;text-align:center;font-size:13px;font-weight:500;border-radius:10px;text-decoration:none;transition:all 0.2s;margin-top:auto;cursor:pointer}
+.p-cta-ghost{border:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.45);background:transparent}
+.p-cta-ghost:hover{border-color:rgba(255,255,255,0.16);color:#fff}
+.p-cta-fill{border:none;background:#fff;color:#000}
+.p-cta-fill:hover{background:rgba(255,255,255,0.85)}
+.p-tog{display:inline-flex;align-items:center;border-radius:999px;border:1px solid rgba(255,255,255,0.06);overflow:hidden;margin-bottom:48px}
+.p-tog button{padding:9px 22px;font-size:12px;font-weight:500;background:transparent;border:none;color:rgba(255,255,255,0.35);cursor:pointer;transition:all 0.2s}
+.p-tog button.on{background:#fff;color:#000;border-radius:999px}
+.p-tog .p-sv{font-size:10px;font-weight:600;color:#34d399;padding:0 12px;letter-spacing:0.04em}
+@media(max-width:768px){.p-grid{grid-template-columns:1fr}}
+        </style>
+
+        <section id="pricing" class="p-section bg-[#000]">
+            <div class="max-w-6xl mx-auto px-6 lg:px-8">
+                <div class="p-head reveal">
+                    <p style="font-size:11px;text-transform:uppercase;letter-spacing:0.3em;color:var(--brandBlue);font-weight:600;margin-bottom:20px">Pricing</p>
+                    <h2 style="font-size:clamp(2rem,5vw,3.2rem);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.1;margin-bottom:16px">Simple, transparent pricing.</h2>
+                    <p style="font-size:15px;color:rgba(255,255,255,0.3);font-weight:300;max-width:380px;margin:0 auto 40px;line-height:1.6">Start with 2 free interviews. Scale when you're ready.</p>
+                    <div class="p-tog">
+                        <button id="tog-m" class="on" onclick="setPricing('monthly')">Monthly</button>
+                        <button id="tog-y" onclick="setPricing('yearly')">Annual</button>
+                        <span class="p-sv">-17%</span>
+                    </div>
+                </div>
+
+                <div class="p-grid reveal">
+                    <!-- Free -->
+                    <div class="p-col">
+                        <div class="p-tier">Free</div>
+                        <div class="p-amt" id="price-basic">EGP 0</div>
+                        <div class="p-note">2 interviews per month, forever.</div>
+                        <div class="p-rule"></div>
+                        <ul class="p-ft">
+                            <li>2 mock interviews / month</li>
+                            <li>MCQ and coding challenges</li>
+                            <li>Basic AI scorecard</li>
+                            <li>Timed interview sessions</li>
+                            <li>Community support</li>
+                        </ul>
+                        <a href="/auth/signup" class="p-cta p-cta-ghost">Get started</a>
+                    </div>
+
+                    <!-- Pro -->
+                    <div class="p-col p-hl">
+                        <div class="p-tier">Pro</div>
+                        <div class="p-amt" id="price-pro">EGP 499 <em>/mo</em></div>
+                        <div class="p-note">10 interviews per day with full analytics.</div>
+                        <div class="p-rule"></div>
+                        <ul class="p-ft">
+                            <li>10 interviews / day</li>
+                            <li>Full AI intelligence reports</li>
+                            <li>Webcam proctoring & behavioral analysis</li>
+                            <li>Code complexity analysis</li>
+                            <li>Cheating probability detection</li>
+                            <li>Priority support</li>
+                        </ul>
+                        <a href="/auth/signup" class="p-cta p-cta-fill">Subscribe to Pro</a>
+                    </div>
+
+                    <!-- Enterprise -->
+                    <div class="p-col">
+                        <div class="p-tier">Enterprise</div>
+                        <div class="p-amt" id="price-scale">Contact us</div>
+                        <div class="p-note">Tailored for teams hiring at scale.</div>
+                        <div class="p-rule"></div>
+                        <ul class="p-ft">
+                            <li>Everything in Pro</li>
+                            <li>Unlimited interviews per day</li>
+                            <li>Weighted Filtration candidate ranking</li>
+                            <li>Custom question banks</li>
+                            <li>White-label reports</li>
+                            <li>Dedicated account manager</li>
+                        </ul>
+                        <a href="/auth/signup" class="p-cta p-cta-ghost">Contact Sales</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="py-32 z-10 relative bg-[#000000] overflow-hidden">
+<div class="max-w-6xl mx-auto px-6 lg:px-8 relative z-10">
+<div class="text-center mb-20">
+<p class="text-[11px] uppercase tracking-[0.3em] text-brandBlue font-semibold mb-4">Testimonials</p>
+<h2 class="text-4xl md:text-5xl font-bold text-white tracking-tight mb-5 font-display">Trusted by engineers worldwide.</h2>
+<p class="text-lg text-gray-500 font-light max-w-lg mx-auto">Real experiences from people who ship with InterviewReady.</p>
+</div>
+</div>
+
+<!-- Marquee Row 1 -->
+<div class="testimonial-marquee">
+<div class="testimonial-track">
+<!-- Card 1 -->
+<div class="tcard"><div class="tcard-quote"><svg class="w-5 h-5 text-white/10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg></div><p class="tcard-text">The AI scorecard pinpointed that my approach was solid but my explanation lacked structure. After two sessions, I nailed my Amazon interview.</p><div class="tcard-author"><div class="tcard-avatar" style="background:linear-gradient(135deg,#3b82f6,#8b5cf6)">SK</div><div><div class="tcard-name">Sara K.</div><div class="tcard-role">Software Engineer, Cairo</div></div></div></div>
+<!-- Card 2 -->
+<div class="tcard"><div class="tcard-quote"><svg class="w-5 h-5 text-white/10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg></div><p class="tcard-text">We replaced our entire first-round screening. The Weighted Filtration ranking saved our engineering team over 40 hours per hiring cycle.</p><div class="tcard-author"><div class="tcard-avatar" style="background:linear-gradient(135deg,#10b981,#3b82f6)">AH</div><div><div class="tcard-name">Ahmed H.</div><div class="tcard-role">VP of Engineering, Fintech</div></div></div></div>
+<!-- Card 3 -->
+<div class="tcard"><div class="tcard-quote"><svg class="w-5 h-5 text-white/10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg></div><p class="tcard-text">I was skeptical about AI feedback, but this feels like a senior engineer reviewed my code. The complexity analysis is genuinely useful.</p><div class="tcard-author"><div class="tcard-avatar" style="background:linear-gradient(135deg,#f59e0b,#8b5cf6)">YA</div><div><div class="tcard-name">Yara A.</div><div class="tcard-role">CS Graduate, AUC</div></div></div></div>
+<!-- Card 4 -->
+<div class="tcard"><div class="tcard-quote"><svg class="w-5 h-5 text-white/10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg></div><p class="tcard-text">The behavioral proctoring caught things we could never spot manually. Tab switching patterns, gaze deviation it is genuinely next-level for remote hiring.</p><div class="tcard-author"><div class="tcard-avatar" style="background:linear-gradient(135deg,#ec4899,#f43f5e)">LM</div><div><div class="tcard-name">Lina M.</div><div class="tcard-role">Head of Talent, Series B Startup</div></div></div></div>
+<!-- Duplicates for seamless loop -->
+<div class="tcard"><div class="tcard-quote"><svg class="w-5 h-5 text-white/10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg></div><p class="tcard-text">The AI scorecard pinpointed that my approach was solid but my explanation lacked structure. After two sessions, I nailed my Amazon interview.</p><div class="tcard-author"><div class="tcard-avatar" style="background:linear-gradient(135deg,#3b82f6,#8b5cf6)">SK</div><div><div class="tcard-name">Sara K.</div><div class="tcard-role">Software Engineer, Cairo</div></div></div></div>
+<div class="tcard"><div class="tcard-quote"><svg class="w-5 h-5 text-white/10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg></div><p class="tcard-text">We replaced our entire first-round screening. The Weighted Filtration ranking saved our engineering team over 40 hours per hiring cycle.</p><div class="tcard-author"><div class="tcard-avatar" style="background:linear-gradient(135deg,#10b981,#3b82f6)">AH</div><div><div class="tcard-name">Ahmed H.</div><div class="tcard-role">VP of Engineering, Fintech</div></div></div></div>
+<div class="tcard"><div class="tcard-quote"><svg class="w-5 h-5 text-white/10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg></div><p class="tcard-text">I was skeptical about AI feedback, but this feels like a senior engineer reviewed my code. The complexity analysis is genuinely useful.</p><div class="tcard-author"><div class="tcard-avatar" style="background:linear-gradient(135deg,#f59e0b,#8b5cf6)">YA</div><div><div class="tcard-name">Yara A.</div><div class="tcard-role">CS Graduate, AUC</div></div></div></div>
+<div class="tcard"><div class="tcard-quote"><svg class="w-5 h-5 text-white/10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg></div><p class="tcard-text">The behavioral proctoring caught things we could never spot manually. Tab switching patterns, gaze deviation it is genuinely next-level for remote hiring.</p><div class="tcard-author"><div class="tcard-avatar" style="background:linear-gradient(135deg,#ec4899,#f43f5e)">LM</div><div><div class="tcard-name">Lina M.</div><div class="tcard-role">Head of Talent, Series B Startup</div></div></div></div>
+</div>
+</div>
+
+<!-- Marquee Row 2 (reverse) -->
+<div class="testimonial-marquee mt-5">
+<div class="testimonial-track testimonial-track-reverse">
+<!-- Card 5 -->
+<div class="tcard"><div class="tcard-quote"><svg class="w-5 h-5 text-white/10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg></div><p class="tcard-text">Our team went from 3 weeks to screen 200 applicants, down to 4 days. The AI analysis is shockingly accurate on system design questions.</p><div class="tcard-author"><div class="tcard-avatar" style="background:linear-gradient(135deg,#06b6d4,#3b82f6)">OT</div><div><div class="tcard-name">Omar T.</div><div class="tcard-role">CTO, Enterprise SaaS</div></div></div></div>
+<!-- Card 6 -->
+<div class="tcard"><div class="tcard-quote"><svg class="w-5 h-5 text-white/10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg></div><p class="tcard-text">The mock interview pressure is real. Timed coding under webcam surveillance prepared me for exactly what Google throws at you. Landed L5.</p><div class="tcard-author"><div class="tcard-avatar" style="background:linear-gradient(135deg,#a855f7,#ec4899)">ND</div><div><div class="tcard-name">Nour D.</div><div class="tcard-role">Senior SWE, FAANG</div></div></div></div>
+<!-- Card 7 -->
+<div class="tcard"><div class="tcard-quote"><svg class="w-5 h-5 text-white/10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg></div><p class="tcard-text">Finally a platform that treats technical hiring like engineering not guesswork. The cheating probability metric alone justified our enterprise contract.</p><div class="tcard-author"><div class="tcard-avatar" style="background:linear-gradient(135deg,#14b8a6,#10b981)">RB</div><div><div class="tcard-name">Rami B.</div><div class="tcard-role">Director of Engineering</div></div></div></div>
+<!-- Card 8 -->
+<div class="tcard"><div class="tcard-quote"><svg class="w-5 h-5 text-white/10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg></div><p class="tcard-text">I practiced 12 sessions over two weeks. The MCQ analytics showed me exactly which DSA topics I was weak in. Got three offers within a month.</p><div class="tcard-author"><div class="tcard-avatar" style="background:linear-gradient(135deg,#f97316,#eab308)">KE</div><div><div class="tcard-name">Karim E.</div><div class="tcard-role">Backend Dev, Vodafone</div></div></div></div>
+<!-- Duplicates for seamless loop -->
+<div class="tcard"><div class="tcard-quote"><svg class="w-5 h-5 text-white/10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg></div><p class="tcard-text">Our team went from 3 weeks to screen 200 applicants, down to 4 days. The AI analysis is shockingly accurate on system design questions.</p><div class="tcard-author"><div class="tcard-avatar" style="background:linear-gradient(135deg,#06b6d4,#3b82f6)">OT</div><div><div class="tcard-name">Omar T.</div><div class="tcard-role">CTO, Enterprise SaaS</div></div></div></div>
+<div class="tcard"><div class="tcard-quote"><svg class="w-5 h-5 text-white/10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg></div><p class="tcard-text">The mock interview pressure is real. Timed coding under webcam surveillance prepared me for exactly what Google throws at you. Landed L5.</p><div class="tcard-author"><div class="tcard-avatar" style="background:linear-gradient(135deg,#a855f7,#ec4899)">ND</div><div><div class="tcard-name">Nour D.</div><div class="tcard-role">Senior SWE, FAANG</div></div></div></div>
+<div class="tcard"><div class="tcard-quote"><svg class="w-5 h-5 text-white/10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg></div><p class="tcard-text">Finally a platform that treats technical hiring like engineering not guesswork. The cheating probability metric alone justified our enterprise contract.</p><div class="tcard-author"><div class="tcard-avatar" style="background:linear-gradient(135deg,#14b8a6,#10b981)">RB</div><div><div class="tcard-name">Rami B.</div><div class="tcard-role">Director of Engineering</div></div></div></div>
+<div class="tcard"><div class="tcard-quote"><svg class="w-5 h-5 text-white/10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg></div><p class="tcard-text">I practiced 12 sessions over two weeks. The MCQ analytics showed me exactly which DSA topics I was weak in. Got three offers within a month.</p><div class="tcard-author"><div class="tcard-avatar" style="background:linear-gradient(135deg,#f97316,#eab308)">KE</div><div><div class="tcard-name">Karim E.</div><div class="tcard-role">Backend Dev, Vodafone</div></div></div></div>
+</div>
+</div>
+
+<style>
+.testimonial-marquee{width:100%;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.testimonial-track{display:flex;gap:20px;width:max-content;animation:marquee-scroll 40s linear infinite}
+.testimonial-track-reverse{animation:marquee-scroll-rev 45s linear infinite}
+.testimonial-track:hover{animation-play-state:paused}
+@keyframes marquee-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes marquee-scroll-rev{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+.tcard{flex-shrink:0;width:380px;padding:28px;border-radius:16px;border:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.02);display:flex;flex-direction:column;gap:16px;transition:border-color .4s,background .4s}
+.tcard:hover{border-color:rgba(255,255,255,0.12);background:rgba(255,255,255,0.04)}
+.tcard-quote{opacity:.6}
+.tcard-text{font-size:14px;line-height:1.7;color:rgba(255,255,255,0.65);font-weight:300;flex-grow:1}
+.tcard-author{display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.04)}
+.tcard-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:11px;letter-spacing:.02em;flex-shrink:0}
+.tcard-name{color:#fff;font-size:13px;font-weight:600}
+.tcard-role{color:rgba(255,255,255,0.35);font-size:11px;margin-top:1px}
+</style>
+</section>
+        <!-- FAQ SECTION -->
+        <section id="faq" class="py-32 z-10 relative bg-[#000000]">
+            <div class="max-w-4xl mx-auto px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6 font-display">Frequently
+                        Asked
+                        Questions
+                    </h2>
+                </div>
+
+                <div class="space-y-2 reveal delay-100">
+                    <!-- FAQ Item 1 -->
+                    <div class="faq-item group border-b border-white/10 overflow-hidden">
+                        <button
+                            class="w-full text-left py-6 flex justify-between items-center focus:outline-none group-hover:text-white text-gray-300 transition-colors">
+                            <span class="text-xl font-medium tracking-tight">What programming languages are supported in
+                                the
+                                IDE?</span>
+                            <svg class="w-6 h-6 transform transition-transform duration-300 icon-plus text-brandBlue"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer max-h-0 opacity-0 overflow-hidden text-gray-400 font-light text-lg">
+                            <p class="pb-8">We currently support full execution, syntax highlighting, and architectural
+                                analysis for Python (3.10), Java (17), C++ (17), and Node.js (V20). More languages are
+                                being
+                                added quarterly.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="faq-item group border-b border-white/10 overflow-hidden">
+                        <button
+                            class="w-full text-left py-6 flex justify-between items-center focus:outline-none group-hover:text-white text-gray-300 transition-colors">
+                            <span class="text-xl font-medium tracking-tight">How does the Behavioral Proctoring actually
+                                work?</span>
+                            <svg class="w-6 h-6 transform transition-transform duration-300 icon-plus text-brandBlue"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer max-h-0 opacity-0 overflow-hidden text-gray-400 font-light text-lg">
+                            <p class="pb-8">The platform uses client-side WebGL and lightweight neural networks to track
+                                facial landmarks without storing video. We measure gaze vectors (to ensure you are
+                                looking
+                                at the screen), head pose (yaw/pitch), and browser integrity (tab-switching) entirely in
+                                real-time.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="faq-item group border-b border-white/10 overflow-hidden">
+                        <button
+                            class="w-full text-left py-6 flex justify-between items-center focus:outline-none group-hover:text-white text-gray-300 transition-colors">
+                            <span class="text-xl font-medium tracking-tight">What is Weighted Filtration™ for
+                                Enterprise?</span>
+                            <svg class="w-6 h-6 transform transition-transform duration-300 icon-plus text-brandBlue"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer max-h-0 opacity-0 overflow-hidden text-gray-400 font-light text-lg">
+                            <p class="pb-8">Instead of just passing or failing a candidate based on correct test cases,
+                                our
+                                AI analyzes the underlying architecture. Recruiters can "weight" different skills. For
+                                example, for a Core Backend role, you can heavily weight Big-O complexity. For a DevOps
+                                role, you can weight execution speed.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 4 -->
+                    <div class="faq-item group border-b border-white/10 overflow-hidden">
+                        <button
+                            class="w-full text-left py-6 flex justify-between items-center focus:outline-none group-hover:text-white text-gray-300 transition-colors">
+                            <span class="text-xl font-medium tracking-tight">Is the AI feedback generated in
+                                real-time?</span>
+                            <svg class="w-6 h-6 transform transition-transform duration-300 icon-plus text-brandBlue"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer max-h-0 opacity-0 overflow-hidden text-gray-400 font-light text-lg">
+                            <p class="pb-8">Yes. The moment you submit a solution or complete a mock interview, our
+                                inference engine processes your code architecture and behavioral metrics, generating a
+                                comprehensive, senior-level scorecard within seconds.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- end main-content -->
+
+    <!-- ToS Page (hidden) -->
+    <div id="tos-page" class="hidden relative z-10">
+        <div class="max-w-6xl mx-auto px-6 lg:px-8 py-28">
+            <button onclick="showMain()"
+                class="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-all mb-14 group">
+                <svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                Back to Home
+            </button>
+            <div class="text-center mb-16">
+                <h1 class="text-5xl md:text-6xl font-bold text-white tracking-tight mb-5 font-display">Terms of Use</h1>
+                <p class="text-base text-gray-500 font-light">Last updated: May 6, 2026</p>
+            </div>
+            <!-- Intro box -->
+            <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-8 mb-20 max-w-3xl mx-auto">
+                <p class="text-[15px] text-gray-400 font-light leading-relaxed">Welcome to InterviewReady! By accessing
+                    or using our website and services, you agree to comply with and be bound by these terms of use.
+                    Please read them carefully.</p>
+            </div>
+            <!-- Two-column: TOC + Content -->
+            <div class="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-16">
+                <!-- Sticky Table of Contents -->
+                <div class="lg:sticky lg:top-24 self-start">
+                    <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6">
+                        <h3 class="text-base font-semibold text-white mb-5">Table of Contents</h3>
+                        <ul class="space-y-3 text-[13px] text-gray-500 font-light">
+                            <li><a href="#tos-1" class="hover:text-white transition-colors">1. Acceptance of Terms</a>
+                            </li>
+                            <li><a href="#tos-2" class="hover:text-white transition-colors">2. What You Can and Cannot
+                                    Do</a></li>
+                            <li><a href="#tos-3" class="hover:text-white transition-colors">3. You Are Responsible</a>
+                            </li>
+                            <li><a href="#tos-4" class="hover:text-white transition-colors">4. Accounts and Security</a>
+                            </li>
+                            <li><a href="#tos-5" class="hover:text-white transition-colors">5. Content and AI
+                                    Outputs</a></li>
+                            <li><a href="#tos-6" class="hover:text-white transition-colors">6. Tokens and AI Agent</a>
+                            </li>
+                            <li><a href="#tos-7" class="hover:text-white transition-colors">7. Payments and
+                                    Subscriptions</a></li>
+                            <li><a href="#tos-8" class="hover:text-white transition-colors">8. Suspension or Banning</a>
+                            </li>
+                            <li><a href="#tos-9" class="hover:text-white transition-colors">9. AI Isn\'t Perfect</a>
+                            </li>
+                            <li><a href="#tos-10" class="hover:text-white transition-colors">10. Privacy and Data</a>
+                            </li>
+                            <li><a href="#tos-11" class="hover:text-white transition-colors">11. Legal Matters</a></li>
+                            <li><a href="#tos-12" class="hover:text-white transition-colors">12. Changes to These
+                                    Terms</a></li>
+                            <li><a href="#tos-13" class="hover:text-white transition-colors">13. Talk to Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Content -->
+                <div class="space-y-14 text-gray-400 font-light leading-relaxed">
+                    <div id="tos-1">
+                        <h2 class="text-2xl font-bold text-white mb-4">1. Acceptance of Terms</h2>
+                        <p>By using InterviewReady, you agree to these terms. If you don\'t agree, please stop using the
+                            platform.</p>
+                    </div>
+                    <div id="tos-2">
+                        <h2 class="text-2xl font-bold text-white mb-4">2. What You Can and Cannot Do</h2>
+                        <p>You get a limited license to use InterviewReady tools to prepare for and conduct technical
+                            interviews. You may not reverse-engineer the proctoring system, share interview questions
+                            externally, or use automated bots against the platform.</p>
+                    </div>
+                    <div id="tos-3">
+                        <h2 class="text-2xl font-bold text-white mb-4">3. You Are Responsible</h2>
+                        <p>You\'re responsible for everything that happens under your account, including all activity
+                            during interview sessions, proctoring data, and code submissions.</p>
+                    </div>
+                    <div id="tos-4">
+                        <h2 class="text-2xl font-bold text-white mb-4">4. Accounts and Security</h2>
+                        <p>Keep your login credentials safe. We use industry-standard encryption and access controls,
+                            but you\'re responsible for your own account security. Report unauthorized access
+                            immediately.</p>
+                    </div>
+                    <div id="tos-5">
+                        <h2 class="text-2xl font-bold text-white mb-4">5. Content and AI Outputs</h2>
+                        <p>Interview questions, scoring algorithms, and intelligence reports are our intellectual
+                            property. Code you write during sessions remains yours. AI-generated analysis is provided
+                            as-is and should be validated by human reviewers.</p>
+                    </div>
+                    <div id="tos-6">
+                        <h2 class="text-2xl font-bold text-white mb-4">6. Tokens and AI Agent</h2>
+                        <p>The AI agent uses tokens. You\'ll get some free tokens each month, and can buy more. Token
+                            costs vary by action. Cheating or exploiting the system leads to banning.</p>
+                    </div>
+                    <div id="tos-7">
+                        <h2 class="text-2xl font-bold text-white mb-4">7. Payments and Subscriptions</h2>
+                        <p>Some features cost money. Pricing, renewals, and cancellation information are on the pricing
+                            page. All payments are final unless we state otherwise.</p>
+                    </div>
+                    <div id="tos-8">
+                        <h2 class="text-2xl font-bold text-white mb-4">8. Suspension or Banning</h2>
+                        <p>We can suspend or terminate your account if you violate the rules. In serious cases, this can
+                            happen without warning.</p>
+                    </div>
+                    <div id="tos-9">
+                        <h2 class="text-2xl font-bold text-white mb-4">9. AI Isn\'t Perfect</h2>
+                        <p>The AI agent is a tool \u2014 not a guarantee. Check what it gives you. We\'re not
+                            responsible for errors, losses, or chaos from bad outputs.</p>
+                    </div>
+                    <div id="tos-10">
+                        <h2 class="text-2xl font-bold text-white mb-4">10. Privacy and Data</h2>
+                        <p>Check our privacy policy to see how we handle your data. We use encryption and security best
+                            practices, but you\'re also responsible for protecting your data.</p>
+                    </div>
+                    <div id="tos-11">
+                        <h2 class="text-2xl font-bold text-white mb-4">11. Legal Matters</h2>
+                        <p>These terms are governed by the laws of the Arab Republic of Egypt (Cairo). If there\'s a
+                            dispute, it will be handled in Cairo courts.</p>
+                    </div>
+                    <div id="tos-12">
+                        <h2 class="text-2xl font-bold text-white mb-4">12. Changes to These Terms</h2>
+                        <p>We may update the terms. If changes are significant, we\'ll tell you. Using the platform
+                            after changes means you agree to the new terms.</p>
+                    </div>
+                    <div id="tos-13">
+                        <h2 class="text-2xl font-bold text-white mb-4">13. Talk to Us</h2>
+                        <p class="mb-6">Have questions? Email us and we\'ll help you.</p>
+                        <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] px-6 py-4 inline-block">
+                            <span class="text-sm text-gray-500 font-light">Email: </span><span
+                                class="text-sm text-white font-medium">support@interviewready.io</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Page (hidden) -->
+    <div id="privacy-page" class="hidden relative z-10">
+        <div class="max-w-6xl mx-auto px-6 lg:px-8 py-28">
+            <button onclick="showMain()"
+                class="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-all mb-14 group">
+                <svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                Back to Home
+            </button>
+            <div class="text-center mb-16">
+                <h1 class="text-5xl md:text-6xl font-bold text-white tracking-tight mb-5 font-display">Privacy Policy
+                </h1>
+                <p class="text-base text-gray-500 font-light">Last updated: May 6, 2026</p>
+            </div>
+            <!-- Intro box -->
+            <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-8 mb-20 max-w-3xl mx-auto">
+                <p class="text-[15px] text-gray-400 font-light leading-relaxed">At InterviewReady, we take your privacy
+                    seriously. This privacy policy explains how we collect, use, and protect your personal information.
+                    Please read this policy carefully to understand our practices regarding your data.</p>
+            </div>
+            <!-- Two-column: TOC + Content -->
+            <div class="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-16">
+                <!-- Sticky Table of Contents -->
+                <div class="lg:sticky lg:top-24 self-start">
+                    <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6">
+                        <h3 class="text-base font-semibold text-white mb-5">Table of Contents</h3>
+                        <ul class="space-y-3 text-[13px] text-gray-500 font-light">
+                            <li><a href="#priv-1" class="hover:text-white transition-colors">1. Information We
+                                    Collect</a></li>
+                            <li><a href="#priv-2" class="hover:text-white transition-colors">2. How We Use Your
+                                    Information</a></li>
+                            <li><a href="#priv-3" class="hover:text-white transition-colors">3. Information Sharing</a>
+                            </li>
+                            <li><a href="#priv-4" class="hover:text-white transition-colors">4. Data Security</a></li>
+                            <li><a href="#priv-5" class="hover:text-white transition-colors">5. Your Rights</a></li>
+                            <li><a href="#priv-6" class="hover:text-white transition-colors">6. Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Content -->
+                <div class="space-y-14 text-gray-400 font-light leading-relaxed">
+                    <div id="priv-1">
+                        <h2 class="text-2xl font-bold text-white mb-4">1. Information We Collect</h2>
+                        <p class="mb-4">We collect information that you provide to us directly, including:</p>
+                        <ul class="space-y-2 ml-5 list-disc">
+                            <li><span class="text-white font-medium">Account information:</span> Name, email address,
+                                password, and other details you provide during registration</li>
+                            <li><span class="text-white font-medium">Profile information:</span> Work details, profile
+                                picture, and other information you choose to add to your profile</li>
+                            <li><span class="text-white font-medium">Usage data:</span> Information about how you use
+                                our platform, including interview session data and interaction patterns</li>
+                            <li><span class="text-white font-medium">Proctoring data:</span> Webcam feeds processed
+                                client-side, behavioral metrics, gaze tracking, and integrity signals</li>
+                        </ul>
+                    </div>
+                    <div id="priv-2">
+                        <h2 class="text-2xl font-bold text-white mb-4">2. How We Use Your Information</h2>
+                        <p>We use collected information to provide and improve our services, generate intelligence
+                            reports, maintain platform security, and communicate with you about your account and our
+                            services.</p>
+                    </div>
+                    <div id="priv-3">
+                        <h2 class="text-2xl font-bold text-white mb-4">3. Information Sharing</h2>
+                        <p>We do not sell your personal information. We may share data with service providers who help
+                            us operate the platform, or when required by law.</p>
+                    </div>
+                    <div id="priv-4">
+                        <h2 class="text-2xl font-bold text-white mb-4">4. Data Security</h2>
+                        <p>We implement TLS 1.3, AES-256 encryption, and role-based access controls. Webcam feeds are
+                            processed client-side and never stored as raw video. Only aggregated behavioral metrics are
+                            transmitted securely.</p>
+                    </div>
+                    <div id="priv-5">
+                        <h2 class="text-2xl font-bold text-white mb-4">5. Your Rights</h2>
+                        <p>You have the right to access, correct, or delete your personal data. Interview session data
+                            is retained for 12 months. You may request deletion at any time.</p>
+                    </div>
+                    <div id="priv-6">
+                        <h2 class="text-2xl font-bold text-white mb-4">6. Contact Us</h2>
+                        <p class="mb-6">For privacy-related questions or data requests:</p>
+                        <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] px-6 py-4 inline-block">
+                            <span class="text-sm text-gray-500 font-light">Email: </span><span
+                                class="text-sm text-white font-medium">privacy@interviewready.io</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final CTA -->
+    <section id="cta-section" class="relative z-10 overflow-hidden">
+        <div class="relative w-full" style="min-height: 380px;">
+            <!-- Background atmosphere -->
+            <div class="absolute inset-0 z-0 pointer-events-none">
+                <div class="absolute inset-0 bg-gradient-to-br from-[#040414] via-[#030308] to-[#000000] rounded-3xl">
+                </div>
+                <div class="absolute top-[20%] right-[15%] w-[30%] h-[40%] rounded-full bg-brandBlue/8 blur-[80px]">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/90"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-[#020202] via-transparent to-black"></div>
+            </div>
+            <div class="relative z-10 flex flex-col items-center justify-center text-center px-6 py-24">
+                <h2
+                    class="text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-5 font-display reveal">
+                    Ready to ace your next<br><span class="animate-gradient-text relative">interview?<span
+                            class="absolute -bottom-2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"></span></span>
+                </h2>
+                <p class="text-base md:text-lg text-gray-400 font-light max-w-lg mx-auto mb-10 reveal">
+                    Start practicing with real interview simulations — scorecards, behavioral tracking, and a
+                    professional IDE included.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 reveal">
+                    <a href="/auth/signup"
+                        class="group inline-flex items-center justify-center px-10 py-3.5 text-[15px] font-semibold rounded-full text-black bg-white hover:bg-gray-100 transition-all hover:scale-[1.03] shadow-[0_0_30px_rgba(255,255,255,0.15)] gap-2.5">
+                        Get Started Free
+                        <svg class="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </a>
+                    <a href="#pricing"
+                        class="inline-flex items-center justify-center px-10 py-3.5 text-[15px] font-medium rounded-full text-white bg-white/[0.04] border border-white/10 hover:bg-white/[0.08] transition-all hover:scale-[1.03] gap-2.5 backdrop-blur-sm">
+                        View Plans
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-20 border-t border-white/[0.06] z-10 relative bg-[#000000]">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+                <!-- Brand Column — spans 2 cols -->
+                <div class="lg:col-span-2">
+                    <div class="flex items-center gap-2.5 mb-5">
+                        <div class="w-7 h-7 opacity-70">
+                            <svg viewBox="0 0 200 200" class="w-full h-full text-white" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M 70 45 H 135 C 175 45, 175 105, 135 105 L 165 165 H 130 L 100 105 H 95 V 140 H 70 V 45 Z M 95 70 V 85 H 135 C 150 85, 150 70, 135 70 Z" />
+                                <path opacity="0.6"
+                                    d="M 30 70 V 135 C 30 185, 95 185, 115 140 C 125 120, 130 105, 140 105 A 5 5 0 0 1 140 95 C 120 95, 110 110, 95 135 C 80 160, 55 155, 55 135 V 70 Z" />
+                            </svg>
+                        </div>
+                        <span class="text-[15px] font-semibold text-white tracking-tight">Interview<span
+                                class="text-brandBlue">Ready</span></span>
+                    </div>
+                    <p class="text-[13px] text-gray-500 font-light leading-relaxed max-w-xs">InterviewReady is your
+                        intelligent interview platform that transforms hiring complexity into clarity. An AI-powered
+                        operating system built for recruitment at scale.</p>
+                </div>
+                <!-- Company -->
+                <div>
+                    <h4 class="text-[13px] font-semibold text-white tracking-wide mb-5">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-[13px] text-gray-500 hover:text-white transition-colors font-light"
+                                onclick="showPage('tos');return false">Terms of Service</a></li>
+                        <li><a href="#" class="text-[13px] text-gray-500 hover:text-white transition-colors font-light"
+                                onclick="showPage('privacy');return false">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <!-- Product -->
+                <div>
+                    <h4 class="text-[13px] font-semibold text-white tracking-wide mb-5">Product</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#how-it-works"
+                                class="text-[13px] text-gray-500 hover:text-white transition-colors font-light"
+                                onclick="showMain()">Features</a></li>
+                        <li><a href="#pricing"
+                                class="text-[13px] text-gray-500 hover:text-white transition-colors font-light"
+                                onclick="showMain()">Pricing</a></li>
+                    </ul>
+                </div>
+                <!-- Support -->
+                <div>
+                    <h4 class="text-[13px] font-semibold text-white tracking-wide mb-5">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#faq"
+                                class="text-[13px] text-gray-500 hover:text-white transition-colors font-light"
+                                onclick="showMain()">FAQ</a></li>
+                        <li><a href="mailto:support@interviewready.io"
+                                class="text-[13px] text-gray-500 hover:text-white transition-colors font-light">Contact
+                                Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Bottom bar -->
+            <div class="border-t border-white/[0.05] pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-gray-600 font-light">© 2026 InterviewReady Inc. All rights reserved.</p>
+                <div class="flex items-center gap-4">
+                    <!-- X / Twitter -->
+                    <a href="#" class="text-gray-600 hover:text-white transition-colors">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                    <!-- Instagram -->
+                    <a href="#" class="text-gray-600 hover:text-white transition-colors">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+
+        // === NAV SCROLL GLASS ===
+        window.addEventListener('scroll', function () {
+            var pill = document.getElementById('nav-pill');
+            if (!pill) return;
+            if (window.scrollY > 80) {
+                pill.style.background = 'rgba(255,255,255,0.04)';
+                pill.style.backdropFilter = 'blur(24px)';
+                pill.style.webkitBackdropFilter = 'blur(24px)';
+                pill.style.borderColor = 'rgba(255,255,255,0.08)';
+                pill.style.boxShadow = '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)';
+            } else {
+                pill.style.background = 'transparent';
+                pill.style.backdropFilter = 'none';
+                pill.style.webkitBackdropFilter = 'none';
+                pill.style.borderColor = 'transparent';
+                pill.style.boxShadow = 'none';
+            }
+        });
+
+        /* ═══════ MOCK THE TENSION — Tab Switch + Report Video Loop ═══════ */
+        (function () {
+            var tabs = document.querySelectorAll('.mtt-tab');
+            var panels = {
+                coding: document.getElementById('panel-coding'),
+                report: document.getElementById('panel-report')
+            };
+            var RV = document.getElementById('report-vid');
+            var START = 85, END = 93.5;
+            var loopRAF = null;
+
+            RV.muted = true;
+            RV.currentTime = START;
+
+            function loopReport() {
+                if (RV.currentTime >= END) { RV.currentTime = START; }
+                loopRAF = requestAnimationFrame(loopReport);
+            }
+
+            function startReport() {
+                RV.currentTime = START;
+                RV.play();
+                loopRAF = requestAnimationFrame(loopReport);
+            }
+            function stopReport() {
+                RV.pause();
+                if (loopRAF) { cancelAnimationFrame(loopRAF); loopRAF = null; }
+            }
+
+            function switchTab(target) {
+                tabs.forEach(function (t) { t.classList.toggle('active', t.dataset.tab === target); });
+                Object.keys(panels).forEach(function (k) {
+                    panels[k].classList.toggle('active', k === target);
+                });
+                if (target === 'report') { startReport(); }
+                else { stopReport(); }
+            }
+
+            tabs.forEach(function (tab) {
+                tab.addEventListener('click', function () { switchTab(this.dataset.tab); });
+            });
+        })();
+
+
+        // === HOW IT WORKS — EXACT from tech_demo.html ===
+        (function () {
+            var V = document.getElementById('vid');
+            var $ = function (id) { return document.getElementById(id); };
+            var did = {};
+            function once(k, fn) { if (!did[k]) { did[k] = true; fn(); } }
+
+            function resetAll() {
+                did = {};
+                V.playbackRate = 1;
+                V.style.transition = 'none';
+                V.style.transform = 'scale(1)';
+                V.style.transformOrigin = 'center';
+                $('zlb').classList.remove('on'); $('zlb-text').textContent = '';
+                $('ftb').classList.remove('on');
+                $('outro').classList.remove('on');
+                ['st1', 'st2', 'st3', 'st4'].forEach(function (id) { $(id).classList.remove('active', 'done'); });
+                V.currentTime = 0;
+                setTimeout(function () {
+                    V.style.transition = 'transform 2s cubic-bezier(0.4,0,0.2,1), transform-origin 0.6s ease';
+                }, 50);
+            }
+
+            function zoomTo(origin, scale, dur) {
+                V.style.transition = 'transform ' + dur + 's cubic-bezier(0.4,0,0.2,1), transform-origin 0.3s ease';
+                V.style.transformOrigin = origin;
+                V.style.transform = 'scale(' + scale + ')';
+            }
+            function zoomReset(dur) {
+                V.style.transition = 'transform ' + (dur || 1.8) + 's cubic-bezier(0.4,0,0.2,1)';
+                V.style.transformOrigin = 'center';
+                V.style.transform = 'scale(1)';
+            }
+            function label(txt) { $('zlb-text').textContent = txt; $('zlb').classList.add('on'); }
+            function labelOff() { $('zlb').classList.remove('on'); }
+            function stepOn(n) { $('st' + n).classList.add('active'); }
+            function stepDone(n) { $('st' + n).classList.remove('active'); $('st' + n).classList.add('done'); }
+
+            V.currentTime = 0; V.muted = true; V.playbackRate = 1;
+            V.addEventListener('canplay', function h() { V.removeEventListener('canplay', h); V.play(); raf(); }, { once: true });
+
+            function raf() {
+                if (V.ended) return;
+                var t = V.currentTime;
+
+                if (t >= 1) { once('p1_on', function () { stepOn(1); label('JOB DESCRIPTION'); zoomTo('50% 60%', 1.5, 2.5) }) }
+                if (t >= 4.5) { once('p1_out', function () { zoomReset(1.5); labelOff() }) }
+                if (t >= 6) { once('p1_done', function () { stepDone(1) }) }
+                if (t >= 6) { once('p2_on', function () { stepOn(2) }) }
+                if (t >= 8 && t < 20) { once('p2_fast', function () { V.playbackRate = 2.5 }) }
+                if (t >= 20) { once('p2_norm', function () { V.playbackRate = 1 }) }
+                if (t >= 22) { once('cam_zoom', function () { label('PROCTORING'); zoomTo('90% 10%', 2.8, 2) }) }
+                if (t >= 25) { once('cam_out', function () { zoomReset(1.2); labelOff() }) }
+                if (t >= 26) { once('tmr_zoom', function () { label('TIME REMAINING'); zoomTo('72% 3%', 2.2, 1.8) }) }
+                if (t >= 29) { once('tmr_out', function () { zoomReset(1.2); labelOff() }) }
+                if (t >= 30 && t < 46) { once('mcq_fast', function () { V.playbackRate = 3 }) }
+                if (t >= 46) { once('mcq_norm', function () { V.playbackRate = 1 }) }
+                if (t >= 47) { once('code_zoom', function () { label('CODE EDITOR'); zoomTo('82% 50%', 2.0, 2.5) }) }
+                if (t >= 53) { once('code_mid', function () { labelOff(); zoomTo('78% 60%', 1.6, 3) }) }
+                if (t >= 60) { once('code_out', function () { zoomReset(2) }) }
+                if (t >= 62 && t < 71) { once('code_fast', function () { V.playbackRate = 3 }) }
+                if (t >= 71) { once('code_slow', function () { V.playbackRate = 1 }) }
+                if (t >= 72) { once('flags_zoom', function () { label('FLAGS DETECTED'); zoomTo('88% 3%', 2.8, 1.8) }) }
+                if (t >= 75) { once('flags_out', function () { zoomReset(1.2); labelOff(); stepDone(2) }) }
+                if (t >= 76) { once('p4_on', function () { stepOn(3); zoomTo('50% 50%', 1.3, 2) }) }
+                if (t >= 78 && t < 83) { once('proc_fast', function () { V.playbackRate = 2 }) }
+                if (t >= 83) { once('proc_norm', function () { V.playbackRate = 1; zoomReset(1.5); stepDone(3) }) }
+                if (t >= 84) { once('p5_on', function () { stepOn(4) }) }
+                if (t >= 85) { once('rpt_score', function () { label('PERFORMANCE SCORE'); zoomTo('30% 12%', 1.8, 2.5) }) }
+                if (t >= 88) { once('rpt_charts', function () { label('BEHAVIORAL ANALYSIS'); zoomTo('50% 75%', 1.5, 2.5) }) }
+                if (t >= 91) { once('rpt_flags', function () { label('INTEGRITY FLAGS'); zoomTo('65% 85%', 1.6, 2) }) }
+                if (t >= 93.5) {
+                    once('end', function () {
+                        labelOff(); zoomReset(1); $('ftb').classList.add('on'); stepDone(4);
+                        setTimeout(function () {
+                            V.pause(); $('outro').classList.add('on');
+                            setTimeout(function () { resetAll(); V.play(); raf() }, 4000);
+                        }, 1000);
+                    })
+                }
+                requestAnimationFrame(raf);
+            }
+        })();
+
+        // Cursor tracking
+        const heroArea = document.getElementById('hero-main');
+        const glow = document.getElementById('cursor-glow');
+
+        if (heroArea && glow) {
+            heroArea.addEventListener('mousemove', (e) => {
+                const rect = heroArea.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                // Using direct inline styles for buttery smooth transition logic via CSS
+                glow.style.left = `${x}px`;
+                glow.style.top = `${y}px`;
+            });
+        }
+
+        // IntersectionObserver for Scroll Reveals
+        document.addEventListener("DOMContentLoaded", function () {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right').forEach((el) => {
+                observer.observe(el);
+            });
+
+            // Platform showcase reveal
+            document.querySelectorAll('.reveal-float').forEach(el => {
+                const floatObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            floatObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15 });
+                floatObserver.observe(el);
+            });
+
+            // --- BILLING TOGGLE ---
+            let isYearly = false;
+            function toggleBilling() {
+                isYearly = !isYearly;
+                const dot = document.getElementById('toggle-dot');
+                const labelM = document.getElementById('label-monthly');
+                const labelY = document.getElementById('label-yearly');
+                if (isYearly) {
+                    dot.style.left = 'calc(100% - 1.625rem)';
+                    labelM.className = 'text-sm font-medium text-gray-500';
+                    labelY.querySelector('span:first-of-type') || true;
+                    labelY.classList.remove('text-gray-500');
+                    labelY.classList.add('text-white');
+                    labelM.classList.remove('text-white');
+                } else {
+                    dot.style.left = '0.125rem';
+                    labelM.className = 'text-sm font-medium text-white';
+                    labelY.classList.remove('text-white');
+                    labelY.classList.add('text-gray-500');
+                }
+                document.querySelectorAll('.price-amount').forEach(el => {
+                    const val = isYearly ? el.dataset.yearly : el.dataset.monthly;
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(-8px)';
+                    setTimeout(() => {
+                        el.textContent = val;
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, 150);
+                });
+                document.querySelectorAll('.price-period').forEach(el => {
+                    el.textContent = isYearly ? 'EGP/mo (billed yearly)' : 'EGP/mo';
+                });
+            }
+            // Make price amounts transition smooth
+            document.querySelectorAll('.price-amount').forEach(el => {
+                el.style.transition = 'opacity 0.15s ease, transform 0.15s ease';
+            });
+            window.toggleBilling = toggleBilling;
+
+            // --- FAQ ACCORDION LOGIC ---
+            const faqItems = document.querySelectorAll('.faq-item button');
+
+            faqItems.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const answer = btn.nextElementSibling;
+                    const icon = btn.querySelector('.icon-plus');
+                    const isOpen = answer.classList.contains('max-h-[500px]');
+
+                    // Close all others
+                    document.querySelectorAll('.faq-answer').forEach(ans => {
+                        ans.classList.remove('max-h-[500px]', 'opacity-100');
+                        ans.classList.add('max-h-0', 'opacity-0');
+                    });
+                    document.querySelectorAll('.icon-plus').forEach(icn => {
+                        icn.style.transform = 'rotate(0deg)';
+                    });
+
+                    // Open clicked if it was closed
+                    if (!isOpen) {
+                        answer.classList.remove('max-h-0', 'opacity-0');
+                        answer.classList.add('max-h-[500px]', 'opacity-100');
+                        icon.style.transform = 'rotate(45deg)';
+                    }
+                });
+            });
+        });
+
+        // Animated stat counters
+        (function () {
+            const counters = document.querySelectorAll('[data-count]');
+            if (!counters.length) return;
+
+            const fmt = (n) => n >= 1000 ? (n / 1000).toFixed(n % 1000 === 0 ? 0 : 1) + 'k' : n.toString();
+
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    const el = entry.target;
+                    const end = parseInt(el.dataset.count, 10);
+                    const dur = 1800;
+                    const start = performance.now();
+
+                    function tick(now) {
+                        const elapsed = now - start;
+                        const progress = Math.min(elapsed / dur, 1);
+                        const ease = 1 - Math.pow(1 - progress, 3);
+                        const val = Math.round(ease * end);
+                        el.textContent = fmt(val) + (el.dataset.suffix || '');
+                        if (progress < 1) requestAnimationFrame(tick);
+                    }
+                    requestAnimationFrame(tick);
+                    io.unobserve(el);
+                });
+            }, { threshold: 0.5 });
+
+            counters.forEach(c => io.observe(c));
+        })();
+
+
+
+        // === Theme Toggle Logic ===
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('theme-toggle');
+            const iconSun = document.getElementById('icon-sun');
+            const iconMoon = document.getElementById('icon-moon');
+
+            if (!toggleBtn) return;
+
+            // Check saved preference or system preference
+            const isDarkMode = localStorage.getItem('theme') !== 'light';
+
+            function updateTheme(dark) {
+                if (dark) {
+                    document.documentElement.classList.remove('light');
+                    iconSun.classList.remove('hidden');
+                    iconMoon.classList.add('hidden');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.classList.add('light');
+                    iconSun.classList.add('hidden');
+                    iconMoon.classList.remove('hidden');
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+
+            // Initialize state
+            if (!isDarkMode) updateTheme(false);
+
+            toggleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const currentIsDark = !document.documentElement.classList.contains('light');
+                updateTheme(!currentIsDark);
+            });
+        });
+
+        // === PRICING TOGGLE ===
+        function setPricing(mode) {
+            var m = document.getElementById('tog-m');
+            var y = document.getElementById('tog-y');
+            if (mode === 'monthly') {
+                m.className = 'on'; y.className = '';
+                document.getElementById('price-basic').textContent = 'EGP 0';
+                document.getElementById('price-pro').innerHTML = 'EGP 499 <em>/mo</em>';
+            } else {
+                y.className = 'on'; m.className = '';
+                document.getElementById('price-basic').textContent = 'EGP 0';
+                document.getElementById('price-pro').innerHTML = 'EGP 415 <em>/mo</em>';
+            }
+        }
+
+        
+
+        // === TYPED WORD STREAMING ===
+        (function () {
+            var words = ['real-time proctoring.', 'AI scorecards.', 'behavioral analytics.', 'code intelligence.', 'webcam monitoring.'];
+            var el = document.getElementById('typed-word');
+            if (!el) return;
+            var wi = 0, ci = 0, deleting = false;
+            function tick() {
+                var word = words[wi];
+                if (!deleting) {
+                    el.textContent = word.substring(0, ci + 1);
+                    ci++;
+                    if (ci >= word.length) { deleting = true; setTimeout(tick, 1800); return; }
+                    setTimeout(tick, 80);
+                } else {
+                    el.textContent = word.substring(0, ci);
+                    ci--;
+                    if (ci < 0) { deleting = false; ci = 0; wi = (wi + 1) % words.length; setTimeout(tick, 400); return; }
+                    setTimeout(tick, 40);
+                }
+            }
+            tick();
+        })();
+
+
+        // === Pricing cards reveal ===
+        document.querySelectorAll('.pricing-card').forEach(function(card, i) {
+            var obs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) { if (e.isIntersecting) { setTimeout(function(){ e.target.classList.add('active'); }, i * 120); obs.unobserve(e.target); }});
+            }, { threshold: 0.15 });
+            obs.observe(card);
+        });
+
+        // === Testimonial marquee reveal ===
+        document.querySelectorAll('.testimonial-marquee').forEach(function(m, i) {
+            var obs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) { if (e.isIntersecting) { setTimeout(function(){ e.target.classList.add('active'); }, i * 200); obs.unobserve(e.target); }});
+            }, { threshold: 0.1 });
+            obs.observe(m);
+        });
+
+    </script>
+</body>
+
+</html>
