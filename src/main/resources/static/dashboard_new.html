@@ -1,0 +1,2074 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - InterviewReady</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000000;
+            color: #e4e4e7;
+            display: flex;
+            height: 100vh;
+            overflow: hidden
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 10px
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 280px;
+            background: #000000;
+            border-right: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0
+        }
+
+        .logo-area {
+            padding: 20px 20px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px
+        }
+
+        .logo-text {
+            font-size: 17px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.3px
+        }
+
+        .logo-text span {
+            color: #3b82f6
+        }
+
+        .nav-label {
+            padding: 0 20px;
+            margin: 16px 0 8px;
+            font-size: 10px;
+            color: #52525b;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            margin: 1px 8px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #52525b;
+            cursor: pointer;
+            transition: all 0.2s
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.03);
+            color: #a1a1aa
+        }
+
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 9px 15px
+        }
+
+        .nav-item svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0
+        }
+
+        /* PROFILE CARD */
+        .profile-card {
+            margin: auto 12px 12px;
+            padding: 16px;
+            border-radius: 16px;
+            background: #000000;
+            border: 1px solid rgba(255, 255, 255, 0.05)
+        }
+
+        .profile-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #60a5fa
+        }
+
+        .profile-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff
+        }
+
+        .profile-plan {
+            font-size: 11px;
+            font-weight: 700;
+            color: #f59e0b;
+            letter-spacing: 0.5px;
+            margin-top: 2px
+        }
+
+        .quota-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px
+        }
+
+        .quota-label span:first-child {
+            color: #9ca3af
+        }
+
+        .quota-label span:last-child {
+            color: #fff;
+            font-weight: 700
+        }
+
+        .quota-bar {
+            height: 7px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 14px
+        }
+
+        .quota-fill {
+            height: 100%;
+            width: 50%;
+            background: linear-gradient(90deg, #2563eb, #60a5fa);
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+            transition: width 1s ease
+        }
+
+        .quota-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04)
+        }
+
+        .quota-reset {
+            font-size: 12px;
+            color: #9ca3af;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .quota-reset strong {
+            color: #fff;
+            font-family: monospace
+        }
+
+        .upgrade-link {
+            font-size: 12px;
+            color: #3b82f6;
+            font-weight: 700
+        }
+
+        /* MAIN */
+        .main {
+            flex: 1;
+            overflow-y: auto;
+            padding: 32px 40px
+        }
+
+        .main-inner {
+            max-width: 900px;
+            margin: 0 auto
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px
+        }
+
+        .header-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.5px
+        }
+
+        .status-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 14px;
+            border-radius: 20px;
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.15)
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse 2s ease-in-out infinite
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1)
+            }
+
+            50% {
+                opacity: 0.4;
+                transform: scale(1.4)
+            }
+        }
+
+        .status-text {
+            font-size: 10px;
+            color: #10b981;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px
+        }
+
+        .header-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s
+        }
+
+        .header-btn:hover {
+            background: rgba(255, 255, 255, 0.04)
+        }
+
+        .header-btn svg {
+            width: 18px;
+            height: 18px;
+            color: #9ca3af
+        }
+
+        /* TOP ROW: stats + chart side by side */
+        .top-row {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 16px;
+            margin-bottom: 24px
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, #121212, #000000);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 8px 32px rgba(0, 0, 0, 0.5);
+            transition: transform 0.25s, border-color 0.25s
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.15)
+        }
+
+        .stat-value {
+            font-size: 34px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 4px;
+            letter-spacing: -1px
+        }
+
+        .stat-value .unit {
+            font-size: 18px;
+            color: #6b7280;
+            font-weight: 400
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #6b7280
+        }
+
+        .stat-badge {
+            display: inline-flex;
+            align-items: center;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-left: 10px
+        }
+
+        .stat-badge.green {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981
+        }
+
+        .stat-badge.purple {
+            background: rgba(139, 92, 246, 0.1);
+            color: #a78bfa
+        }
+
+        .sparkline-bars {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 55%;
+            height: 50px;
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            padding: 0 12px 8px 0;
+            opacity: 0.7
+        }
+
+        .sparkline-bars .bar {
+            flex: 1;
+            border-radius: 3px 3px 0 0;
+            background: #3b82f6
+        }
+
+        .spark-line {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 55%;
+            height: 50px
+        }
+
+        .mini-trend {
+            width: 100%;
+            height: 24px;
+            margin-top: 8px
+        }
+
+        /* CHART CARD */
+        .chart-card {
+            background: linear-gradient(145deg, #121212, #000000);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 28px;
+            backdrop-filter: blur(20px);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 8px 32px rgba(0, 0, 0, 0.5)
+        }
+
+        .chart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px
+        }
+
+        .chart-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff
+        }
+
+        .chart-toggle {
+            display: flex;
+            gap: 2px;
+            padding: 3px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05)
+        }
+
+        .chart-toggle button {
+            padding: 6px 16px;
+            border-radius: 9px;
+            border: none;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit
+        }
+
+        .chart-toggle .active {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff
+        }
+
+        .chart-toggle .inactive {
+            background: transparent;
+            color: #6b7280
+        }
+
+        .chart-toggle .inactive:hover {
+            color: #a1a1aa
+        }
+
+        .chart-area {
+            width: 100%;
+            height: 180px
+        }
+
+        /* INTERVIEW SECTION */
+        .interview-card {
+            background: linear-gradient(145deg, #121212, #000000);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 24px;
+            backdrop-filter: blur(20px);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 8px 32px rgba(0, 0, 0, 0.5)
+        }
+
+        .interview-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 24px
+        }
+
+        .interview-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px
+        }
+
+        .interview-sub {
+            font-size: 14px;
+            color: #6b7280
+        }
+
+        .mode-toggle {
+            display: flex;
+            gap: 2px;
+            padding: 3px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05)
+        }
+
+        .mode-btn {
+            padding: 8px 20px;
+            border-radius: 9px;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            background: transparent;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit
+        }
+
+        .mode-btn.active {
+            background: rgba(255, 255, 255, 0.07);
+            color: #fff
+        }
+
+        .mode-btn:hover {
+            color: #d4d4d8
+        }
+
+        .jd-label {
+            font-size: 10px;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .jd-label svg {
+            width: 14px;
+            height: 14px
+        }
+
+        .jd-editor {
+            background: rgba(14, 14, 22, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex
+        }
+
+        .jd-lines {
+            padding: 18px 0;
+            width: 36px;
+            text-align: right;
+            color: #3f3f46;
+            font-size: 14px;
+            line-height: 1.7;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            user-select: none;
+            border-right: 1px solid rgba(255, 255, 255, 0.04);
+            flex-shrink: 0
+        }
+
+        .jd-lines span {
+            display: block;
+            padding: 0 10px 0 0
+        }
+
+        .jd-textarea {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 18px;
+            color: #d4d4d8;
+            font-size: 14px;
+            line-height: 1.7;
+            resize: none;
+            font-family: inherit
+        }
+
+        .jd-textarea:focus {
+            outline: none
+        }
+
+        .jd-textarea::placeholder {
+            color: #3f3f46
+        }
+
+        .jd-hint {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .jd-hint .star {
+            color: #3b82f6
+        }
+
+        .interview-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04)
+        }
+
+        .session-est {
+            font-size: 13px;
+            color: #6b7280;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .session-est strong {
+            color: #fff
+        }
+
+        .session-est svg {
+            width: 16px;
+            height: 16px
+        }
+
+        .footer-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .reset-btn {
+            padding: 8px 18px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: transparent;
+            color: #9ca3af;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: inherit;
+            transition: color 0.2s
+        }
+
+        .reset-btn:hover {
+            color: #fff
+        }
+
+        .reset-btn svg {
+            width: 14px;
+            height: 14px
+        }
+
+        .generate-btn {
+            padding: 10px 24px;
+            border-radius: 10px;
+            background: #3b82f6;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+            transition: all 0.2s
+        }
+
+        .generate-btn:hover {
+            background: #2563eb;
+            transform: scale(1.02)
+        }
+
+        .generate-btn svg {
+            width: 16px;
+            height: 16px
+        }
+
+        /* SESSIONS */
+        .sessions-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px
+        }
+
+        .sessions-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff
+        }
+
+        .sessions-viewall {
+            font-size: 13px;
+            color: #6b7280;
+            font-weight: 500;
+            transition: color 0.2s
+        }
+
+        .sessions-viewall:hover {
+            color: #fff
+        }
+
+        .session-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+            cursor: pointer
+        }
+
+        .session-row:hover {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.04)
+        }
+
+        .session-score {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 700;
+            flex-shrink: 0
+        }
+
+        .session-score.excellent {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981
+        }
+
+        .session-score.good {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6
+        }
+
+        .session-score.average {
+            background: rgba(212, 165, 116, 0.1);
+            color: #d4a574
+        }
+
+        .session-score.poor {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444
+        }
+
+        .session-info {
+            flex: 1;
+            min-width: 0
+        }
+
+        .session-role {
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+            transition: color 0.2s
+        }
+
+        .session-row:hover .session-role {
+            color: #3b82f6
+        }
+
+        .session-stack {
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 2px
+        }
+
+        .session-meta {
+            font-size: 12px;
+            color: #4b5563;
+            padding: 2px 8px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.02);
+            flex-shrink: 0
+        }
+
+        .session-dur {
+            font-size: 13px;
+            color: #4b5563;
+            flex-shrink: 0
+        }
+
+        .session-date {
+            font-size: 13px;
+            color: #4b5563;
+            flex-shrink: 0
+        }
+
+        .session-arrow {
+            width: 16px;
+            height: 16px;
+            color: #4b5563;
+            flex-shrink: 0;
+            transition: all 0.2s
+        }
+
+        .session-row:hover .session-arrow {
+            color: #9ca3af;
+            transform: translateX(3px)
+        }
+
+        .footer-text {
+            text-align: center;
+            font-size: 13px;
+            color: #4b5563;
+            padding: 40px 0
+        }
+
+        /* SESSIONS */
+        .sessions-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            margin-top: 16px
+        }
+
+        .sessions-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff
+        }
+
+        /* NO MORE SESSIONS CSS */
+        .footer-text {
+            text-align: center;
+            font-size: 13px;
+            color: #4b5563;
+            padding: 40px 0
+        }
+
+        /* TEMPLATE PILLS */
+        .tpl-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px
+        }
+
+        .tpl-pill {
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.2s
+        }
+
+        .tpl-pill:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            color: #a1a1aa
+        }
+
+        .tpl-pill.active {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #fff
+        }
+
+        .hidden {
+            display: none
+        }
+
+        /* HISTORY VIEW */
+        .history-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 24px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .history-activity {
+            background: linear-gradient(145deg, rgba(24, 24, 27, 0.6) 0%, rgba(9, 9, 11, 0.8) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 8px;
+            backdrop-filter: blur(20px);
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .activity-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .activity-stats {
+            display: flex;
+            gap: 24px;
+        }
+
+        .act-stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .act-val {
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .act-lbl {
+            font-size: 11px;
+            color: #6b7280;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 4px;
+        }
+
+        .activity-chart {
+            width: 100%;
+            height: 120px;
+            position: relative;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .history-row {
+            background: linear-gradient(145deg, rgba(24, 24, 27, 0.6) 0%, rgba(9, 9, 11, 0.8) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 20px 24px;
+            display: grid;
+            grid-template-columns: 2fr 1.5fr 1fr 1fr auto;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .history-row:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .history-row::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #3b82f6;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .history-row:hover::before {
+            opacity: 1;
+            box-shadow: 0 0 15px #3b82f6;
+        }
+
+        .history-col {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .history-label {
+            font-size: 11px;
+            color: #6b7280;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .history-value {
+            font-size: 15px;
+            color: #fff;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .history-value.role {
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .history-value.date {
+            color: #a1a1aa;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+        }
+
+        .skills-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .skill-tag {
+            padding: 4px 8px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 11px;
+            font-weight: 600;
+            color: #d4d4d8;
+        }
+
+        .score-ring-mini {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-ring-mini svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .score-ring-mini circle {
+            fill: none;
+            stroke-width: 3;
+        }
+
+        .score-ring-mini .bg {
+            stroke: rgba(255, 255, 255, 0.1);
+        }
+
+        .score-ring-mini .fg {
+            stroke: #10b981;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 20;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s;
+        }
+
+        .score-text-mini {
+            font-size: 12px;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            color: #fff;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .status-badge.completed {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .status-badge.abandoned {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .view-report-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .view-report-btn:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+            transform: translateX(2px);
+        }
+
+        /* LOADING OVERLAY */
+        #loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        #loading-overlay.hidden {
+            display: none !important;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-modal {
+            background: linear-gradient(145deg, rgba(24, 24, 27, 0.8) 0%, rgba(9, 9, 11, 0.9) 100%);
+            width: 500px;
+            border-radius: 24px;
+            padding: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-top-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading-modal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+        }
+
+        .loading-modal::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 100px;
+            background: radial-gradient(ellipse at bottom, rgba(59, 130, 246, 0.15), transparent 70%);
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 56px;
+            height: 56px;
+            border: 3px solid rgba(59, 130, 246, 0.15);
+            border-top-color: #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            margin-bottom: 32px;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 32px;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .loading-steps {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 48px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .loading-step {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 15px;
+            color: #6b7280;
+            font-weight: 500;
+            transition: all 0.4s ease;
+            opacity: 0.5;
+        }
+
+        .loading-step.active {
+            color: #fff;
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        .loading-step.done {
+            color: #9ca3af;
+            opacity: 0.8;
+        }
+
+        .step-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+            flex-shrink: 0;
+        }
+
+        .loading-step.active .step-icon {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid #3b82f6;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4), inset 0 0 8px rgba(59, 130, 246, 0.4);
+            position: relative;
+        }
+
+        .loading-step.active .step-icon::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #3b82f6;
+            box-shadow: 0 0 10px #3b82f6;
+        }
+
+        .loading-step.done .step-icon {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: #10b981;
+        }
+
+        .loading-step.done .step-icon::after {
+            content: '✓';
+            color: #10b981;
+            font-size: 12px;
+            font-weight: 900;
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
+        }
+
+        .progress-container {
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .progress-bar-fg {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #2563eb, #60a5fa);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+            position: relative;
+        }
+
+        .progress-bar-fg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #9ca3af;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        /* FEEDBACK */
+        .feedback-card {
+            background: linear-gradient(145deg, #121212, #000000);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 32px;
+            backdrop-filter: blur(20px);
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .feedback-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .feedback-desc {
+            font-size: 14px;
+            color: #9ca3af;
+            margin-bottom: 24px;
+        }
+
+        .feedback-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group > label {
+            font-size: 13px;
+            color: #d4d4d8;
+            font-weight: 600;
+        }
+
+        .feedback-input {
+            background: rgba(14, 14, 22, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 12px 16px;
+            color: #fff;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.2s;
+            resize: vertical;
+        }
+
+        .feedback-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        .feedback-input option {
+            background: #18181b;
+            color: #fff;
+        }
+
+        .star-rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+            gap: 4px;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            font-size: 28px;
+            color: #3f3f46;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .star-rating label:hover,
+        .star-rating label:hover ~ label,
+        .star-rating input:checked ~ label {
+            color: #f59e0b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo-area">
+            <img src="IR_logo.svg" class="logo-icon" alt="IR Logo">
+            <div class="logo-text">Interview<span>Ready</span></div>
+        </div>
+        <div class="nav-label">Platform</div>
+        <a href="#" class="nav-item active" id="nav-dashboard" onclick="switchTab('dashboard')"><svg fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+            </svg>Dashboard</a>
+        <a href="#" class="nav-item" id="nav-history" onclick="switchTab('history')"><svg fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>History</a>
+        <a href="#" class="nav-item" id="nav-feedback" onclick="switchTab('feedback')"><svg fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>Feedback</a>
+        <div class="nav-label">Account</div>
+        <a href="#" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+            </svg>Payments<span
+                style="margin-left:auto;font-size:10px;background:rgba(239,68,68,0.1);color:#ef4444;padding:3px 6px;border-radius:4px;font-weight:700;letter-spacing:0.5px;">NO
+                METHODS</span></a>
+        <a href="#" class="nav-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <circle cx="12" cy="12" r="3" stroke-width="1.5" />
+            </svg>Settings</a>
+
+        <!-- PROFILE -->
+        <div class="profile-card">
+            <div class="profile-top">
+                <div class="avatar">AM</div>
+                <div>
+                    <div class="profile-name">Ahmed M.</div>
+                    <div class="profile-plan">FREE PLAN</div>
+                </div>
+            </div>
+            <div class="quota-label"><span>Daily Interview Quota</span><span>1 / 2</span></div>
+            <div class="quota-bar">
+                <div class="quota-fill" id="quota-fill"></div>
+            </div>
+            <div class="quota-footer">
+                <div class="quota-reset"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="14"
+                        height="14">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>Resets in <strong id="reset-timer">14h 22m</strong></div>
+                <a href="#" class="upgrade-link">Upgrade &#8599;</a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+        <div class="main-inner">
+
+            <!-- HEADER -->
+            <div class="header">
+                <div class="header-left">
+                    <h1 class="header-title">Dashboard</h1>
+                    <div class="status-pill"><span class="status-dot"></span><span class="status-text">System
+                            Online</span></div>
+                </div>
+                <div class="header-actions">
+                    <button class="header-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                        </svg></button>
+                    <button class="header-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg></button>
+                </div>
+            </div>
+
+            <!-- TOP ROW: Stats left + Chart right -->
+            <div id="view-dashboard">
+                <div class="top-row">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">14</div>
+                            <div class="stat-label">Total sessions</div>
+                            <div class="sparkline-bars">
+                                <div class="bar" style="height:35%"></div>
+                                <div class="bar" style="height:45%"></div>
+                                <div class="bar" style="height:55%"></div>
+                                <div class="bar" style="height:50%"></div>
+                                <div class="bar" style="height:65%"></div>
+                                <div class="bar" style="height:80%"></div>
+                                <div class="bar" style="height:95%"></div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">78</div>
+                            <div class="stat-label">Avg. score</div>
+                            <svg class="spark-line" viewBox="0 0 100 50" preserveAspectRatio="none">
+                                <defs>
+                                    <linearGradient id="gfill" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#10b981" stop-opacity="0.3" />
+                                        <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+                                    </linearGradient>
+                                </defs>
+                                <path d="M0,40 Q12,38 25,32 T50,22 T75,12 T100,6 L100,50 L0,50Z" fill="url(#gfill)" />
+                                <path d="M0,40 Q12,38 25,32 T50,22 T75,12 T100,6" fill="none" stroke="#10b981"
+                                    stroke-width="2.5" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <div class="stat-card">
+                            <div style="display:flex;align-items:center">
+                                <div class="stat-value">71<span class="unit">%</span></div><span
+                                    class="stat-badge green">+8%</span>
+                            </div>
+                            <div class="stat-label">Pass rate</div>
+                            <svg class="mini-trend" viewBox="0 0 120 20">
+                                <path d="M0,18 Q15,16 30,14 T60,9 T90,4 T120,1" fill="none" stroke="#f59e0b"
+                                    stroke-width="2.5" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <div class="stat-card">
+                            <div style="display:flex;align-items:center">
+                                <div class="stat-value">91</div><span class="stat-badge purple">Top</span>
+                            </div>
+                            <div class="stat-label">Best score</div>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div class="chart-title">Performance across recent sessions</div>
+                            <div class="chart-toggle">
+                                <button class="active">30 Days</button>
+                                <button class="inactive">90 Days</button>
+                            </div>
+                        </div>
+                        <svg class="chart-area" viewBox="0 0 800 180" preserveAspectRatio="none" id="chart-svg">
+                            <defs>
+                                <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.15" />
+                                    <stop offset="100%" stop-color="#3b82f6" stop-opacity="0" />
+                                </linearGradient>
+                            </defs>
+                            <line x1="60" y1="30" x2="780" y2="30" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
+                            <line x1="60" y1="70" x2="780" y2="70" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
+                            <line x1="60" y1="110" x2="780" y2="110" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
+                            <line x1="60" y1="150" x2="780" y2="150" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
+                            <text x="10" y="34" fill="#4b5563" font-size="11" font-family="Inter">100</text>
+                            <text x="20" y="74" fill="#4b5563" font-size="11" font-family="Inter">75</text>
+                            <text x="20" y="114" fill="#4b5563" font-size="11" font-family="Inter">50</text>
+                            <text x="20" y="154" fill="#4b5563" font-size="11" font-family="Inter">25</text>
+                            <text x="10" y="174" fill="#4b5563" font-size="11" font-family="Inter">0</text>
+                            <path id="chart-fill" fill="url(#cg)" />
+                            <path id="chart-line" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <g id="chart-dots"></g>
+                            <g id="chart-labels"></g>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- INTERVIEW -->
+                <div class="interview-card">
+                    <div class="interview-header">
+                        <div>
+                            <div class="interview-title">Start New Interview</div>
+                            <div class="interview-sub">Paste a job description or pick a template to initialize
+                                parameters.</div>
+                        </div>
+                        <div class="mode-toggle">
+                            <button class="mode-btn active" id="btn-jd" onclick="setMode('jd')">Custom JD</button>
+                            <button class="mode-btn" id="btn-tpl" onclick="setMode('tpl')">Template</button>
+                        </div>
+                    </div>
+                    <div id="pane-jd">
+                        <div class="jd-label"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>Job Description Input</div>
+                        <div class="jd-editor">
+                            <div class="jd-lines"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                            </div><textarea class="jd-textarea" rows="5"
+                                placeholder="Paste the full job description here - we'll extract the tech stack, seniority, and domain to generate a bespoke technical interview environment..."></textarea>
+                        </div>
+                        <div class="jd-hint"><span class="star">*</span> Supports any engineering role - we parse the
+                            stack, seniority, and domain automatically via LLM.</div>
+                    </div>
+                    <div id="pane-tpl" class="hidden">
+                        <div class="tpl-grid">
+                            <span class="tpl-pill active" onclick="pickRole(this)">Backend Engineer</span>
+                            <span class="tpl-pill" onclick="pickRole(this)">Frontend Engineer</span>
+                            <span class="tpl-pill" onclick="pickRole(this)">Full Stack</span>
+                            <span class="tpl-pill" onclick="pickRole(this)">Machine Learning</span>
+                            <span class="tpl-pill" onclick="pickRole(this)">DevOps / SRE</span>
+                            <span class="tpl-pill" onclick="pickRole(this)">Data Engineer</span>
+                            <span class="tpl-pill" onclick="pickRole(this)">Mobile</span>
+                            <span class="tpl-pill" onclick="pickRole(this)">System Design</span>
+                            <span class="tpl-pill" onclick="pickRole(this)">Security</span>
+                            <span class="tpl-pill" onclick="pickRole(this)">Cloud Architect</span>
+                        </div>
+                    </div>
+                    <div class="interview-footer">
+                        <div class="session-est"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>Est. session context: <strong>~45 min</strong></div>
+                        <div class="footer-actions">
+                            <button class="reset-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>Reset</button>
+                            <button onclick="startLoading()" class="generate-btn">Generate Interview <svg fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                </svg></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-history" class="hidden">
+                <div class="history-container">
+
+                    <div class="history-activity">
+                        <div class="activity-header">
+                            <div class="activity-title">Interview Activity</div>
+                            <div class="activity-stats">
+                                <div class="act-stat"><span class="act-val">12</span><span class="act-lbl">This
+                                        Month</span></div>
+                                <div class="act-stat"><span class="act-val" style="color: #10b981;">84%</span><span
+                                        class="act-lbl">Avg Pass Rate</span></div>
+                            </div>
+                        </div>
+                        <div class="activity-chart">
+                            <svg viewBox="0 0 800 120" preserveAspectRatio="none" style="width:100%;height:100%;">
+                                <defs>
+                                    <linearGradient id="act-grad" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3" />
+                                        <stop offset="100%" stop-color="#3b82f6" stop-opacity="0" />
+                                    </linearGradient>
+                                </defs>
+                                <line x1="0" y1="20" x2="800" y2="20" stroke="rgba(255,255,255,0.05)"
+                                    stroke-width="1" />
+                                <line x1="0" y1="60" x2="800" y2="60" stroke="rgba(255,255,255,0.05)"
+                                    stroke-width="1" />
+                                <line x1="0" y1="100" x2="800" y2="100" stroke="rgba(255,255,255,0.05)"
+                                    stroke-width="1" />
+                                <path
+                                    d="M0,80 C100,70 150,110 250,50 C350,-10 400,90 500,40 C600,-10 700,80 800,20 L800,120 L0,120 Z"
+                                    fill="url(#act-grad)" />
+                                <path d="M0,80 C100,70 150,110 250,50 C350,-10 400,90 500,40 C600,-10 700,80 800,20"
+                                    fill="none" stroke="#3b82f6" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <circle cx="250" cy="50" r="4" fill="#3b82f6" stroke="#000" stroke-width="2" />
+                                <circle cx="500" cy="40" r="4" fill="#3b82f6" stroke="#000" stroke-width="2" />
+                                <circle cx="800" cy="20" r="4" fill="#3b82f6" stroke="#000" stroke-width="2" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="history-row">
+                        <div class="history-col">
+                            <span class="history-label">Role / Domain</span>
+                            <span class="history-value role">Backend Engineer <span
+                                    class="status-badge completed">Completed</span></span>
+                            <div class="skills-tags">
+                                <span class="skill-tag">System Design</span>
+                                <span class="skill-tag">PostgreSQL</span>
+                                <span class="skill-tag">Node.js</span>
+                            </div>
+                        </div>
+                        <div class="history-col">
+                            <span class="history-label">Date</span>
+                            <span class="history-value date">Apr 9, 2026</span>
+                        </div>
+                        <div class="history-col">
+                            <span class="history-label">Duration</span>
+                            <span class="history-value date">42m 15s</span>
+                        </div>
+                        <div class="history-col" style="align-items: center;">
+                            <span class="history-label" style="margin-bottom: 6px;">Score</span>
+                            <div class="score-ring-mini">
+                                <svg>
+                                    <circle class="bg" cx="20" cy="20" r="16"></circle>
+                                    <circle class="fg" cx="20" cy="20" r="16"
+                                        style="stroke-dashoffset: 13; stroke: #10b981;"></circle>
+                                </svg>
+                                <span class="score-text-mini">87</span>
+                            </div>
+                        </div>
+                        <div class="history-col">
+                            <a href="report.html" class="view-report-btn">View Report <svg fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24" width="14" height="14">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg></a>
+                        </div>
+                    </div>
+
+                    <div class="history-row">
+                        <div class="history-col">
+                            <span class="history-label">Role / Domain</span>
+                            <span class="history-value role">Frontend Engineer <span
+                                    class="status-badge completed">Completed</span></span>
+                            <div class="skills-tags">
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">Performance</span>
+                                <span class="skill-tag">State Mgmt</span>
+                            </div>
+                        </div>
+                        <div class="history-col">
+                            <span class="history-label">Date</span>
+                            <span class="history-value date">Apr 7, 2026</span>
+                        </div>
+                        <div class="history-col">
+                            <span class="history-label">Duration</span>
+                            <span class="history-value date">38m 40s</span>
+                        </div>
+                        <div class="history-col" style="align-items: center;">
+                            <span class="history-label" style="margin-bottom: 6px;">Score</span>
+                            <div class="score-ring-mini">
+                                <svg>
+                                    <circle class="bg" cx="20" cy="20" r="16"></circle>
+                                    <circle class="fg" cx="20" cy="20" r="16"
+                                        style="stroke-dashoffset: 18; stroke: #3b82f6;"></circle>
+                                </svg>
+                                <span class="score-text-mini">82</span>
+                            </div>
+                        </div>
+                        <div class="history-col">
+                            <a href="report1.html" class="view-report-btn">View Report <svg fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24" width="14" height="14">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg></a>
+                        </div>
+                    </div>
+
+                    <div class="history-row">
+                        <div class="history-col">
+                            <span class="history-label">Role / Domain</span>
+                            <span class="history-value role">Data Engineer <span
+                                    class="status-badge completed">Completed</span></span>
+                            <div class="skills-tags">
+                                <span class="skill-tag">Spark</span>
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">AWS</span>
+                            </div>
+                        </div>
+                        <div class="history-col">
+                            <span class="history-label">Date</span>
+                            <span class="history-value date">Apr 5, 2026</span>
+                        </div>
+                        <div class="history-col">
+                            <span class="history-label">Duration</span>
+                            <span class="history-value date">51m 10s</span>
+                        </div>
+                        <div class="history-col" style="align-items: center;">
+                            <span class="history-label" style="margin-bottom: 6px;">Score</span>
+                            <div class="score-ring-mini">
+                                <svg>
+                                    <circle class="bg" cx="20" cy="20" r="16"></circle>
+                                    <circle class="fg" cx="20" cy="20" r="16"
+                                        style="stroke-dashoffset: 22; stroke: #f59e0b;"></circle>
+                                </svg>
+                                <span class="score-text-mini">78</span>
+                            </div>
+                        </div>
+                        <div class="history-col">
+                            <a href="report.html" class="view-report-btn">View Report <svg fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24" width="14" height="14">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg></a>
+                        </div>
+                    </div>
+
+                    <div class="history-row">
+                        <div class="history-col">
+                            <span class="history-label">Role / Domain</span>
+                            <span class="history-value role">Cloud Architect <span
+                                    class="status-badge completed">Completed</span></span>
+                            <div class="skills-tags">
+                                <span class="skill-tag">Kubernetes</span>
+                                <span class="skill-tag">Terraform</span>
+                                <span class="skill-tag">Security</span>
+                            </div>
+                        </div>
+                        <div class="history-col">
+                            <span class="history-label">Date</span>
+                            <span class="history-value date">Mar 28, 2026</span>
+                        </div>
+                        <div class="history-col">
+                            <span class="history-label">Duration</span>
+                            <span class="history-value date">64m 20s</span>
+                        </div>
+                        <div class="history-col" style="align-items: center;">
+                            <span class="history-label" style="margin-bottom: 6px;">Score</span>
+                            <div class="score-ring-mini">
+                                <svg>
+                                    <circle class="bg" cx="20" cy="20" r="16"></circle>
+                                    <circle class="fg" cx="20" cy="20" r="16"
+                                        style="stroke-dashoffset: 8; stroke: #10b981;"></circle>
+                                </svg>
+                                <span class="score-text-mini">92</span>
+                            </div>
+                        </div>
+                        <div class="history-col">
+                            <a href="report1.html" class="view-report-btn">View Report <svg fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24" width="14" height="14">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="view-feedback" class="hidden">
+                <div class="feedback-card">
+                    <h2 class="feedback-title">We value your feedback</h2>
+                    <p class="feedback-desc">Help us improve your interview experience. Let us know what we're doing well and where we can do better.</p>
+                    <form class="feedback-form" onsubmit="event.preventDefault(); alert('Feedback submitted successfully!'); this.reset();">
+                        <div class="form-group">
+                            <label>Rate your experience</label>
+                            <div class="star-rating">
+                                <input type="radio" id="star5" name="rating" value="5" required /><label for="star5" title="5 stars">★</label>
+                                <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 stars">★</label>
+                                <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 stars">★</label>
+                                <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 stars">★</label>
+                                <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star">★</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="feedback-category">Category</label>
+                            <select id="feedback-category" class="feedback-input" required>
+                                <option value="" disabled selected>Select a category</option>
+                                <option value="general">General Feedback</option>
+                                <option value="bug">Bug Report</option>
+                                <option value="feature">Feature Request</option>
+                                <option value="technical">Technical Issue</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="feedback-message">Message</label>
+                            <textarea id="feedback-message" class="feedback-input" rows="5" placeholder="Tell us more about your experience..." required></textarea>
+                        </div>
+                        <button type="submit" class="generate-btn" style="width:100%; justify-content:center;">Submit Feedback</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-text">&copy; 2026 InterviewReady. All rights reserved.</div>
+        </div>
+    </div>
+    <script>
+        function switchTab(tabId) {
+            const dashNav = document.getElementById('nav-dashboard');
+            const histNav = document.getElementById('nav-history');
+            const feedNav = document.getElementById('nav-feedback');
+            const dashView = document.getElementById('view-dashboard');
+            const histView = document.getElementById('view-history');
+            const feedView = document.getElementById('view-feedback');
+            const title = document.querySelector('.header-title');
+
+            dashNav.classList.remove('active');
+            histNav.classList.remove('active');
+            if (feedNav) feedNav.classList.remove('active');
+            
+            dashView.classList.add('hidden');
+            histView.classList.add('hidden');
+            if (feedView) feedView.classList.add('hidden');
+
+            if (tabId === 'dashboard') {
+                dashNav.classList.add('active');
+                dashView.classList.remove('hidden');
+                title.innerText = 'Dashboard';
+            } else if (tabId === 'history') {
+                histNav.classList.add('active');
+                histView.classList.remove('hidden');
+                title.innerText = 'Interview History';
+            } else if (tabId === 'feedback') {
+                if (feedNav) feedNav.classList.add('active');
+                if (feedView) feedView.classList.remove('hidden');
+                title.innerText = 'Feedback';
+            }
+        }
+
+        const scores = [54, 24, 65, 72, 78, 91, 87, 82];
+        const labels = ['MAR 12', 'MAR 18', 'MAR 28', 'APR 3', 'APR 5', 'APR 7', 'APR 7', 'APR 9'];
+        const W = 800, H = 180, pL = 60, pR = 20, pT = 15, pB = 30;
+        const pW = W - pL - pR, pH = H - pT - pB;
+        function sY(s) { return pT + pH - ((s - 0) / (100 - 0)) * pH }
+        function iX(i) { return pL + (i / (scores.length - 1)) * pW }
+        const pts = scores.map((s, i) => ({ x: iX(i), y: sY(s) }));
+        let ld = '', ad = '';
+        pts.forEach((p, i) => {
+            if (i === 0) { ld += 'M' + p.x + ',' + p.y; ad += 'M' + p.x + ',' + (H - pB) + ' L' + p.x + ',' + p.y }
+            else { var prev = pts[i - 1]; var cx = (prev.x + p.x) / 2; ld += ' C' + cx + ',' + prev.y + ' ' + cx + ',' + p.y + ' ' + p.x + ',' + p.y; ad += ' C' + cx + ',' + pts[i - 1].y + ' ' + cx + ',' + p.y + ' ' + p.x + ',' + p.y }
+        });
+        ad += ' L' + pts[pts.length - 1].x + ',' + (H - pB) + ' Z';
+        document.getElementById('chart-line').setAttribute('d', ld);
+        document.getElementById('chart-fill').setAttribute('d', ad);
+        var dg = document.getElementById('chart-dots');
+        var lg = document.getElementById('chart-labels');
+        pts.forEach(function (p, i) {
+            var gl = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            gl.setAttribute('cx', p.x); gl.setAttribute('cy', p.y); gl.setAttribute('r', '8'); gl.setAttribute('fill', 'rgba(59,130,246,0.2)'); dg.appendChild(gl);
+            var d = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            d.setAttribute('cx', p.x); d.setAttribute('cy', p.y); d.setAttribute('r', '4'); d.setAttribute('fill', '#3b82f6'); d.style.cursor = 'pointer'; dg.appendChild(d);
+            var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            t.setAttribute('x', p.x); t.setAttribute('y', H - 8); t.setAttribute('text-anchor', 'middle'); t.setAttribute('fill', '#4b5563'); t.setAttribute('font-size', '10'); t.setAttribute('font-family', 'Inter'); t.textContent = labels[i]; lg.appendChild(t);
+        });
+        function tick() {
+            var n = new Date(), t = new Date(n); t.setDate(t.getDate() + 1); t.setHours(0, 0, 0, 0);
+            var d = t - n, h = Math.floor(d / 3600000), m = Math.floor((d % 3600000) / 60000);
+            document.getElementById('reset-timer').textContent = h + 'h ' + String(m).padStart(2, '0') + 'm';
+        }
+        tick(); setInterval(tick, 60000);
+        function setMode(m) {
+            document.getElementById('btn-jd').className = 'mode-btn' + (m === 'jd' ? ' active' : '');
+            document.getElementById('btn-tpl').className = 'mode-btn' + (m === 'tpl' ? ' active' : '');
+            document.getElementById('pane-jd').className = m === 'jd' ? '' : 'hidden';
+            document.getElementById('pane-tpl').className = m === 'tpl' ? '' : 'hidden';
+        }
+        function pickRole(el) {
+            document.querySelectorAll('.tpl-pill').forEach(function (p) { p.classList.remove('active') });
+            el.classList.add('active');
+        }
+
+        function startLoading() {
+            document.getElementById('loading-overlay').classList.remove('hidden');
+            const steps = 6;
+            let currentStep = 1;
+            const pctEl = document.getElementById('progress-pct');
+            const stepTextEl = document.getElementById('progress-step-text');
+            const barEl = document.getElementById('progress-bar-fg');
+
+            function processStep() {
+                if (currentStep > steps) {
+                    window.location.href = 'interview.html';
+                    return;
+                }
+
+                for (let i = 1; i < currentStep; i++) {
+                    let el = document.getElementById('step-' + i);
+                    if (el) { el.classList.remove('active'); el.classList.add('done'); }
+                }
+
+                let el = document.getElementById('step-' + currentStep);
+                if (el) { el.classList.add('active'); }
+
+                let basePct = Math.floor(((currentStep - 1) / steps) * 100);
+                let targetPct = Math.floor((currentStep / steps) * 100);
+                if (currentStep === steps) targetPct = 100;
+
+                let currentPct = basePct;
+                let intv = setInterval(() => {
+                    currentPct += 2;
+                    if (currentPct >= targetPct) {
+                        currentPct = targetPct;
+                        clearInterval(intv);
+
+                        let displayPct = currentStep === steps ? 99 : currentPct;
+                        pctEl.innerText = displayPct + '% Complete';
+                        stepTextEl.innerText = 'Step ' + currentStep + ' of ' + steps;
+                        barEl.style.width = displayPct + '%';
+
+                        currentStep++;
+                        setTimeout(processStep, 400 + Math.random() * 800);
+                    } else {
+                        pctEl.innerText = currentPct + '% Complete';
+                        stepTextEl.innerText = 'Step ' + currentStep + ' of ' + steps;
+                        barEl.style.width = currentPct + '%';
+                    }
+                }, 50);
+            }
+
+            processStep();
+        }
+    </script>
+
+    <div id="loading-overlay" class="hidden">
+        <div class="loading-modal">
+            <div class="spinner"></div>
+            <h2 class="loading-title">Initializing Environment</h2>
+            <div class="loading-steps">
+              <div class="loading-step" id="step-1"><div class="step-icon"></div> Parsing Job Description</div>
+              <div class="loading-step" id="step-2"><div class="step-icon"></div> Extracting Technical Competencies</div>
+              <div class="loading-step" id="step-3"><div class="step-icon"></div> Curating Multiple-Choice Questions</div>
+              <div class="loading-step" id="step-4"><div class="step-icon"></div> Structuring Technical Scenarios</div>
+              <div class="loading-step" id="step-5"><div class="step-icon"></div> Synthesizing Coding Challenges</div>
+              <div class="loading-step" id="step-6"><div class="step-icon"></div> Booting Proctoring Environment...</div>
+            </div>            <div class="progress-container">
+              <div class="progress-bar-bg"><div class="progress-bar-fg" id="progress-bar-fg"></div></div>
+              <div class="progress-text">
+                <span id="progress-pct">0% Complete</span>
+                <span id="progress-step-text">Step 1 of 6</span>
+              </div>
+            </div>
+            <p style="font-size: 11px; color: #4b5563; margin-top: 24px;">Allocating resources and configuring session constraints.</p>        </div>
+    </div>
+
+</body>
+
+</html>
