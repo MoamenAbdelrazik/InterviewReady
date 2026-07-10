@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>InterviewReady — My Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif; min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: #e2e8f0; padding: 2rem;
+        }
+        .profile-card {
+            width: 100%; max-width: 480px;
+            background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 20px; padding: 2.5rem;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+        }
+        .profile-header { text-align: center; margin-bottom: 2rem; }
+        .avatar {
+            width: 96px; height: 96px; border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: rgba(56, 189, 248, 0.1);
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+            border: 3px solid rgba(56, 189, 248, 0.3);
+        }
+        .avatar img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .avatar-placeholder {
+            font-size: 2rem; font-weight: 700;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .profile-name {
+            font-size: 1.4rem; font-weight: 700; color: #f1f5f9;
+        }
+        .profile-email {
+            font-size: 0.85rem; color: #94a3b8; margin-top: 0.25rem;
+        }
+        /* Plan badge */
+        .plan-badge {
+            display: inline-block; margin-top: 0.75rem;
+            padding: 0.3rem 0.9rem; border-radius: 20px;
+            font-size: 0.75rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.08em;
+        }
+        .plan-free { background: rgba(148, 163, 184, 0.15); color: #94a3b8; }
+        .plan-basic { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+        .plan-premium { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
+        /* Info rows */
+        .info-section {
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+            padding-top: 1.5rem;
+        }
+        .info-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0.65rem 0;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.06);
+        }
+        .info-row:last-child { border-bottom: none; }
+        .info-label { font-size: 0.8rem; color: #94a3b8; font-weight: 500; }
+        .info-value { font-size: 0.9rem; color: #e2e8f0; font-weight: 600; }
+        .info-value.highlight { color: #38bdf8; }
+        .info-value.warning { color: #f59e0b; }
+        /* Quota bar */
+        .quota-bar-bg {
+            width: 120px; height: 6px; border-radius: 3px;
+            background: rgba(148, 163, 184, 0.15); overflow: hidden;
+        }
+        .quota-bar-fill {
+            height: 100%; border-radius: 3px;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            transition: width 0.4s ease;
+        }
+        .quota-row { display: flex; align-items: center; gap: 0.75rem; }
+        /* Token box */
+        .token-section {
+            margin-top: 1.5rem;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 12px; padding: 1rem;
+        }
+        .token-label {
+            font-size: 0.75rem; color: #94a3b8; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.06em;
+            margin-bottom: 0.5rem;
+        }
+        .token-value {
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem; color: #38bdf8;
+            word-break: break-all; line-height: 1.5;
+            max-height: 60px; overflow: hidden;
+        }
+        .btn-copy {
+            margin-top: 0.5rem; padding: 0.4rem 0.8rem;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 6px; color: #38bdf8;
+            font-size: 0.75rem; font-weight: 600;
+            font-family: 'Inter', sans-serif; cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-copy:hover { background: rgba(56, 189, 248, 0.2); }
+        /* Actions */
+        .actions {
+            margin-top: 1.5rem; display: flex; gap: 0.75rem;
+        }
+        .btn-outline {
+            flex: 1; padding: 0.6rem; border-radius: 10px;
+            background: transparent;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            color: #94a3b8; font-size: 0.85rem; font-weight: 500;
+            font-family: 'Inter', sans-serif; cursor: pointer;
+            text-decoration: none; text-align: center;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .btn-outline:hover { border-color: #38bdf8; color: #38bdf8; }
+        .msg-success {
+            background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #4ade80; padding: 0.6rem; border-radius: 8px;
+            font-size: 0.85rem; margin-bottom: 1rem; text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="profile-card">
+    <div th:if="${success}" class="msg-success" th:text="${success}"></div>
+
+    <div class="profile-header">
+        <div class="avatar">
+            <img th:if="${candidate.profileImageUrl != null}" th:src="${candidate.profileImageUrl}" alt="Avatar"/>
+            <span th:if="${candidate.profileImageUrl == null}" class="avatar-placeholder"
+                  th:text="${candidate.firstName.substring(0,1) + candidate.lastName.substring(0,1)}">JD</span>
+        </div>
+        <div class="profile-name"
+             th:text="${candidate.firstName + ' ' + candidate.lastName}">John Doe</div>
+        <div class="profile-email" th:text="${candidate.email}">john@example.com</div>
+
+        <span class="plan-badge"
+              th:classappend="${candidate.planName == 'Free' ? 'plan-free' : (candidate.planName == 'Basic' ? 'plan-basic' : 'plan-premium')}"
+              th:text="${candidate.planName}">Free</span>
+    </div>
+
+    <div class="info-section">
+        <div class="info-row">
+            <span class="info-label">Candidate ID</span>
+            <span class="info-value" th:text="${candidate.id}">#1</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Quota Remaining</span>
+            <div class="quota-row">
+                <span class="info-value highlight"
+                      th:text="${candidate.remainingQuota + ' / ' + candidate.totalCredits}">2 / 2</span>
+                <div class="quota-bar-bg">
+                    <div class="quota-bar-fill"
+                         th:style="'width:' + ${(candidate.remainingQuota * 100) / candidate.totalCredits} + '%'"></div>
+                </div>
+            </div>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Resets At</span>
+            <span class="info-value"
+                  th:classappend="${candidate.resetsAt != null ? 'warning' : ''}"
+                  th:text="${candidate.resetsAt != null ? candidate.resetsAt : '—'}">—</span>
+        </div>
+    </div>
+
+    <!-- JWT Token -->
+    <div class="token-section" th:if="${token}">
+        <div class="token-label">Your JWT Token</div>
+        <div class="token-value" id="tokenText" th:text="${token}"></div>
+        <button class="btn-copy" onclick="copyToken()">Copy Token</button>
+    </div>
+
+    <div class="actions">
+        <button class="btn-outline" onclick="doLogout()">Sign Out</button>
+        <a href="/login-page" class="btn-outline">Switch Account</a>
+    </div>
+</div>
+
+<script>
+    function copyToken() {
+        const text = document.getElementById('tokenText').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = event.target;
+            btn.textContent = 'Copied!';
+            setTimeout(() => btn.textContent = 'Copy Token', 2000);
+        });
+    }
+
+    function doLogout() {
+        // Grab the token shown on the page (if any)
+        const tokenEl = document.getElementById('tokenText');
+        const token = tokenEl ? tokenEl.innerText : null;
+
+        fetch('/logout', {
+            method: 'POST',
+            headers: token
+                ? { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' }
+                : { 'Content-Type': 'application/json' }
+        })
+        .finally(() => {
+            // Clear any stored token from the browser
+            localStorage.removeItem('token');
+            sessionStorage.removeItem('token');
+            // Redirect to signup / login
+            window.location.href = '/signup';
+        });
+    }
+</script>
+</body>
+</html>
