@@ -1,0 +1,361 @@
+<!-- ═══ LOADING ═══ -->
+@if (isLoading()) {
+<div class="report-loading">
+  <div class="report-spinner"></div>
+</div>
+}
+
+<!-- ═══ ERROR ═══ -->
+@if (error()) {
+<div class="report-error">
+  <div class="error-card">
+    <div class="error-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+        <line x1="12" y1="9" x2="12" y2="13"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+    </div>
+    <h2 class="error-title">Report Not Available</h2>
+    <p class="error-desc">{{ error() }}</p>
+    <div class="error-actions">
+      <button class="error-retry-btn" (click)="reload()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        Retry
+      </button>
+      <button class="error-home-btn" (click)="goToDashboard()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg>
+        Back to Dashboard
+      </button>
+    </div>
+  </div>
+</div>
+}
+
+<!-- ═══ REPORT CONTENT ═══ -->
+@if (report(); as r) {
+
+<!-- ══════════ SIDEBAR ══════════ -->
+<aside class="sidebar">
+  <!-- Brand -->
+  <div class="sidebar-brand">
+    <svg viewBox="0 0 200 200" style="width:28px;height:28px" fill="#fff"><path d="M 70 45 H 135 C 175 45, 175 105, 135 105 L 165 165 H 130 L 100 105 H 95 V 140 H 70 V 45 Z M 95 70 V 85 H 135 C 150 85, 150 70, 135 70 Z"/><path opacity="0.5" d="M 30 70 V 135 C 30 185, 95 185, 115 140 C 125 120, 130 105, 140 105 A 5 5 0 0 1 140 95 C 120 95, 110 110, 95 135 C 80 160, 55 155, 55 135 V 70 Z"/></svg>
+    <div style="font-size:16px;font-weight:700;color:#fff;letter-spacing:-0.3px">Interview<span style="color:#3b82f6">Ready</span></div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-label">ASSESSMENT REPORT</div>
+    <div class="sidebar-title">{{ roleTitle() }}</div>
+    <div class="sidebar-meta">
+      <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> {{ formatDuration(r.timeTaken) }}</span>
+      <span>{{ formatDate() }}</span>
+    </div>
+  </div>
+
+  <div class="nav-section-label">INTELLIGENCE</div>
+  <div class="nav-link active" (click)="scrollTo('overview')"><svg viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg> Interview Overview</div>
+  <div class="nav-link" (click)="scrollTo('emotional')"><svg viewBox="0 0 24 24"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0 1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg> Emotional Analysis</div>
+  <div class="nav-link" (click)="scrollTo('analytics')"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg> Performance Metrics</div>
+
+  <div class="nav-section-label">TECHNICAL EVALUATION</div>
+  <div class="nav-link" (click)="scrollTo('coding')"><svg viewBox="0 0 24 24"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg> Code Evaluation</div>
+  <div class="nav-link" (click)="scrollTo('domain')"><svg viewBox="0 0 24 24"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg> Domain Expertise</div>
+  <div class="nav-link" (click)="scrollTo('behavior')"><svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> Behavioral Profile</div>
+
+  <div class="sidebar-footer">
+    <button class="export-btn" (click)="exportReport()">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Export Full Report
+    </button>
+    <a class="back-btn" routerLink="/dashboard">
+      <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" stroke-linecap="round" d="M15 19l-7-7 7-7"/></svg>
+      Back to Dashboard
+    </a>
+  </div>
+</aside>
+
+<!-- ══════════ MAIN CONTENT ══════════ -->
+<div class="main">
+
+  <!-- ── TOP ROW: Score + Stats ── -->
+  <section class="top-row" id="overview">
+    <!-- Score Ring -->
+    <div class="score-ring-card">
+      <div class="score-badge" [class.good]="scorePct() >= 70" [class.avg]="scorePct() >= 40 && scorePct() < 70" [class.low]="scorePct() < 40">{{ scoreLabel() }}</div>
+      <div class="score-ring-wrapper">
+        <svg class="score-ring-svg" viewBox="0 0 140 140">
+          <circle class="score-ring-bg" cx="70" cy="70" r="65"/>
+          <circle class="score-ring-fill" cx="70" cy="70" r="65" [style.stroke-dashoffset]="scoreOffset()" [style.stroke]="scorePct() >= 70 ? 'var(--green)' : scorePct() >= 40 ? 'var(--amber)' : 'var(--red)'" [style.filter]="scorePct() >= 70 ? 'drop-shadow(0 0 8px rgba(52,211,153,0.4))' : scorePct() >= 40 ? 'drop-shadow(0 0 8px rgba(251,191,36,0.4))' : 'drop-shadow(0 0 8px rgba(248,113,113,0.4))'"/>
+        </svg>
+        <div class="score-value">
+          <span class="score-num">{{ scorePct() }}</span>
+          <span class="score-of">OUT OF 100</span>
+        </div>
+      </div>
+      <div class="score-subtitle">{{ scoreSubtitle() }}</div>
+    </div>
+
+    <!-- Stat: Correct Answers -->
+    <div class="stat-card">
+      <div class="stat-icon green"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+      <div class="stat-val">{{ correctCount() }}<small>/{{ totalQuestionCount() }}</small></div>
+      <div class="stat-label">CORRECT ANSWERS</div>
+    </div>
+
+    <!-- Stat: Tab Switches -->
+    <div class="stat-card">
+      <div class="stat-icon red"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+      <div class="stat-val">{{ r.securityFlags?.tabSwitches || 0 }}</div>
+      <div class="stat-label">TAB SWITCHES</div>
+      @if ((r.securityFlags?.tabSwitches || 0) > 0) { <div class="stat-sub">Flagged</div> }
+    </div>
+
+    <!-- Stat: Gaze Deviation -->
+    <div class="stat-card">
+      <div class="stat-icon amber"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+      <div class="stat-val">{{ gazeDeviation() }}<small>%</small></div>
+      <div class="stat-label">GAZE DEVIATION</div>
+    </div>
+
+    <!-- Stat: Copy Events -->
+    <div class="stat-card">
+      <div class="stat-icon blue"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+      <div class="stat-val">{{ copyEvents() }}</div>
+      <div class="stat-label">COPY EVENTS</div>
+    </div>
+
+    <!-- Stat: Cheating Risk -->
+    <div class="stat-card">
+      <div class="stat-icon orange"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div class="stat-val">{{ cheatingRisk() }}<small>%</small></div>
+      <div class="stat-label">CHEATING RISK</div>
+      <div class="stat-sub" [style.color]="(r.cheatingProbability?.level || 'LOW') === 'LOW' ? 'var(--green)' : (r.cheatingProbability?.level || 'LOW') === 'MODERATE' ? 'var(--amber)' : 'var(--red)'">{{ r.cheatingProbability?.level || 'LOW' }}</div>
+    </div>
+  </section>
+
+  <!-- ── INTERVIEW SUMMARY ── -->
+  <section id="summary">
+    <div class="section-heading">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      INTERVIEW SUMMARY
+    </div>
+    <div class="ai-summary-card" style="position:relative;overflow:hidden;padding:24px 30px">
+      <svg style="position:absolute;top:-30px;left:-10px;width:140px;height:140px;color:var(--gold);opacity:0.05;pointer-events:none" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 18L14.017 21L16.026 21C18.232 21 19.805 19.869 20.478 17.859C20.672 17.279 20.781 16.634 20.781 15.938L20.781 15.531L17.75 15.531L17.75 10L21.75 10L21.75 15.531C21.75 18.094 20.89 20 19.171 21.266C18.297 21.906 17.156 22.25 15.75 22.25L14.017 22.25L14.017 18ZM4.017 18L4.017 21L6.026 21C8.232 21 9.805 19.869 10.478 17.859C10.672 17.279 10.781 16.634 10.781 15.938L10.781 15.531L7.75 15.531L7.75 10L11.75 10L11.75 15.531C11.75 18.094 10.89 20 9.171 21.266C8.297 21.906 7.156 22.25 5.75 22.25L4.017 22.25L4.017 18Z"/></svg>
+      <div style="position:relative;z-index:1">{{ r.interviewSummary }}</div>
+    </div>
+  </section>
+
+  <!-- ── EMOTIONAL ANALYSIS & TIME ── -->
+  <section class="two-col" id="emotional">
+    <div class="card">
+      <div class="card-title" style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;color:var(--gold)"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0 1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+        Emotional Analysis
+      </div>
+      <div class="card-subtitle" style="margin-bottom:20px">Facial expression tracking throughout session</div>
+      <div class="emo-grid">
+        @if (emotionData().length > 0) {
+        <div #donutChart class="chart-host" style="min-height:200px"></div>
+        <div>
+          @for (emo of emotionData(); track emo.name) {
+          <div class="emotion-row" [style.margin-bottom]="$last ? '0' : '16px'">
+            <span class="emotion-dot" [style.background]="emo.color"></span>
+            <span class="emotion-name">{{ emo.name }}</span>
+            @if (emo.tag) { <span class="emotion-tag" [class.tag-ideal]="emo.tag==='Ideal'" [class.tag-good]="emo.tag==='Good'" [class.tag-watch]="emo.tag==='Watch'">{{ emo.tag }}</span> }
+            <div class="emotion-bar-wrap"><div class="emotion-bar" [style.width.%]="emo.pct" [style.background]="emo.color"></div></div>
+            <span class="emotion-pct">{{ emo.pct }}%</span>
+          </div>
+          }
+        </div>
+        } @else {
+        <div style="grid-column:1/-1;display:flex;align-items:center;justify-content:center;min-height:200px;color:var(--tx3);font-size:14px;">No webcam data available for this session</div>
+        }
+      </div>
+    </div>
+    <div class="card" id="performance">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div class="card-title" style="display:flex;align-items:center;gap:6px">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            Time Per Question
+          </div>
+          <div class="card-subtitle">CANDIDATE VS AVERAGE (SECONDS)</div>
+        </div>
+        <div class="chart-legend">
+          <div class="legend-item"><span class="legend-dot you"></span> You</div>
+          <div class="legend-item"><span class="legend-dot avg"></span> Avg</div>
+        </div>
+      </div>
+      <div #timePerQChart class="chart-host" style="flex:1;min-height:200px"></div>
+    </div>
+  </section>
+
+  <!-- ── SEPARATOR ── -->
+  <div class="sep"></div>
+
+  <!-- ── PERFORMANCE ANALYTICS ── -->
+  <section id="analytics">
+    <div class="card" style="padding:0;overflow:hidden;margin-bottom:28px">
+      <div class="analytics-header">
+        <div class="analytics-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+        </div>
+        <div>
+          <h2 class="analytics-title">Performance Analytics</h2>
+          <p class="analytics-sub">Detailed visualizations of every metric</p>
+        </div>
+      </div>
+      <div class="cg">
+        <!-- 1. Behavior Timeline -->
+        <div class="cc"><p class="cl" style="color:var(--blue)">Behavior Timeline</p><p class="cs">All emotion classes tracked over session</p><div #behaviorTimelineChart class="chart-host"></div><div class="insight">Sustained <em>neutral above 60%</em> signals composure. Fear or anger spikes during specific question windows often correlate with topic unfamiliarity.</div></div>
+        <!-- 2. Attention Profile -->
+        <div class="cc"><p class="cl" style="color:var(--tx)">Attention Profile</p><p class="cs">Gaze, eye closure &amp; face presence</p><div #attentionChart class="chart-host"></div><div class="insight">Gaze on screen below <em>80%</em> or face presence dips indicate the candidate looked away or left the frame.</div></div>
+        <!-- 3. Correctness Scatter -->
+        <div class="cc"><p class="cl" style="color:var(--green)">Correctness Heatmap</p><p class="cs">Each cell = 1 question · hover for details</p><div #correctnessChart class="chart-host"></div><div class="insight"><em>Green</em> = correct, <em>Red</em> = wrong, <em>Gray</em> = skipped. Clusters of red suggest a weak knowledge area.</div></div>
+        <!-- 4. Code Quality Radar -->
+        <div class="cc"><p class="cl" style="color:var(--amber)">Code Quality Radar</p><p class="cs">Seven axes — outer edge = 100</p><div #radarChart class="chart-host"></div><div class="insight">A symmetrical shape indicates balanced skill. Pronounced dips reveal specific blind spots in the candidate's coding approach.</div></div>
+        <!-- 5. Category Breakdown -->
+        <div class="cc"><p class="cl" style="color:var(--purple)">Category Breakdown</p><p class="cs">Score distribution by assessment area</p><div #categoryChart class="chart-host"></div><div class="insight">Compare ring sizes. A large MCQ ring paired with a small Coding ring typically means <em>strong theory, weak implementation</em>.</div></div>
+        <!-- 6. Confidence Distribution -->
+        <div class="cc"><p class="cl" style="color:var(--teal)">Confidence Distribution</p><p class="cs">Response confidence across question types</p><div #confChart class="chart-host"></div><div class="insight">A large <em>Guessing</em> or <em>No Answer</em> segment indicates gaps in preparation. Dominant <em>High Confidence</em> means the candidate answered quickly and correctly.</div></div>
+        <!-- 7. Suspicious Events -->
+        <div class="cc"><p class="cl" style="color:var(--red)">Suspicious Events</p><p class="cs">Look-away, face loss &amp; prolonged eye closure</p><div #suspiciousChart class="chart-host"></div><div class="insight">Elevated counts here should be cross-referenced with <em>Tab Switches</em> and the <em>Proctoring Timeline</em> below.</div></div>
+        <!-- 8. Head Stability -->
+        <div class="cc"><p class="cl" style="color:var(--teal)">Head Stability</p><p class="cs">Yaw, pitch &amp; roll variance throughout session</p><div #headStabilityChart class="chart-host"></div><div class="insight">A tight, small triangle = stable posture. An expanded <em>Yaw</em> axis suggests frequent sideways head turns.</div></div>
+        <!-- 9. Topic Performance -->
+        @if (r.domainAnalysis.topicPerformance.length > 0) {
+        <div class="cc"><p class="cl" style="color:var(--gold)">Topic Performance</p><p class="cs">Score by knowledge domain vs benchmark</p><div #topicChart class="chart-host"></div><div class="insight">Gold bars extending past gray = above the platform average. Short Gold bars pinpoint <em>specific knowledge gaps</em>.</div></div>
+        }
+        <!-- 10. Difficulty Analysis -->
+        <div class="cc"><p class="cl" style="color:var(--orange)">Difficulty Analysis</p><p class="cs">Accuracy &amp; avg time across difficulty tiers</p><div #diffChart2 class="chart-host"></div><div class="insight">Low accuracy on <em>Easy</em> questions is a red flag. Very high time on Easy suggests overthinking.</div></div>
+        <!-- 11. Response Time Distribution -->
+        <div class="cc"><p class="cl" style="color:var(--blue)">Response Time Distribution</p><p class="cs">Answer-time frequency histogram</p><div #responseHistChart class="chart-host"></div><div class="insight">Most answers landing in <em>0–60s</em> = prepared and decisive. A heavy right tail (120s+) means the candidate stalled.</div></div>
+        <!-- 12. Emotion-Accuracy Link -->
+        <div class="cc"><p class="cl" style="color:#db2777">Emotion–Accuracy Link</p><p class="cs">Stress index vs correctness over session</p><div #emotionAccuracyChart class="chart-host"></div><div class="insight">When the red stress area climbs and the accuracy line drops, <em>stress directly impacted performance</em>.</div></div>
+        <!-- 13. Proctoring Timeline -->
+        <div class="cc"><p class="cl" style="color:var(--red)">Proctoring Timeline</p><p class="cs">Tab switches, gaze breaks, clipboard &amp; alerts per question</p><div #proctoringChart class="chart-host"></div><div class="insight">Dots clustered around the same questions suggest <em>targeted help-seeking</em>. Clipboard events are high-confidence cheating signals.</div></div>
+        <!-- 14. Navigation Pattern -->
+        <div class="cc"><p class="cl" style="color:var(--gold)">Navigation Pattern</p><p class="cs">Question attempt order &amp; revisit frequency</p><div #navigationChart class="chart-host"></div><div class="insight">Gold cells on Visit 2 or 3 show the candidate revisited those questions — a sign of <em>strategic time management</em>.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SEPARATOR ── -->
+  <div class="sep"></div>
+
+  <!-- ══ CODE EVALUATION ══ -->
+  <section id="coding">
+    <div class="tech-header">
+      <h2 class="tech-title">Code Evaluation</h2>
+    </div>
+    <div class="tech-grid">
+      <!-- Column 1: Summary -->
+      <div class="tech-card">
+        <div class="tech-card-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:17px;height:17px"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+          <span class="tech-card-title">Live Coding Summary</span>
+        </div>
+        <div class="tech-badge" [attr.data-tag]="getShortTag(r.codingAnalysis.tag)" [class.passed]="getShortTag(r.codingAnalysis.tag) === 'Exceptional' || getShortTag(r.codingAnalysis.tag) === 'Strong'" [class.review]="getShortTag(r.codingAnalysis.tag) !== 'Exceptional' && getShortTag(r.codingAnalysis.tag) !== 'Strong'">{{ getShortTag(r.codingAnalysis.tag) }}</div>
+        <div class="tech-text">{{ r.codingAnalysis.summary }}</div>
+      </div>
+      <!-- Column 2: Dev Areas -->
+      <div class="tech-card">
+        <div class="tech-col-label"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> DEVELOPMENT AREAS</div>
+        @for (area of r.codingAnalysis.areasOfDevelopment; track area.topic) {
+        <div class="dev-area">
+          <div class="dev-area-header"><span class="dev-area-name">{{ area.topic }}</span><span class="dev-tag needs-work">Needs Work</span></div>
+          <div class="dev-area-text">{{ area.description }}</div>
+        </div>
+        }
+      </div>
+      <!-- Column 3: Action Plan -->
+      <div class="tech-card">
+        <div class="tech-col-label"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> ACTION PLAN</div>
+        @for (item of r.codingAnalysis.actionPlan; track item.title; let i = $index) {
+        <div class="action-item">
+          <div class="action-icon" [class.p1]="i === 0" [class.p2]="i === 1" [class.p3]="i >= 2">P{{ i + 1 }}</div>
+          <div class="action-content"><div class="action-title">{{ item.title }}</div><div class="action-desc">{{ item.description }}</div></div>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SEPARATOR ── -->
+  <div class="sep"></div>
+
+  <!-- ══ DOMAIN EXPERTISE ══ -->
+  <section id="domain">
+    <div class="tech-header">
+      <h2 class="tech-title">Domain Expertise</h2>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="tech-card-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:17px;height:17px"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>
+          <span class="tech-card-title">Knowledge Summary</span>
+        </div>
+        <div class="tech-badge" [attr.data-tag]="getShortTag(r.domainAnalysis.tag)" [class.passed]="getShortTag(r.domainAnalysis.tag) === 'Expert' || getShortTag(r.domainAnalysis.tag) === 'Proficient'" [class.review]="getShortTag(r.domainAnalysis.tag) !== 'Expert' && getShortTag(r.domainAnalysis.tag) !== 'Proficient'">{{ getShortTag(r.domainAnalysis.tag) }}</div>
+        <div class="tech-text">{{ r.domainAnalysis.summary }}</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-col-label"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> DEVELOPMENT AREAS</div>
+        @for (area of r.domainAnalysis.areasOfDevelopment; track area.topic) {
+        <div class="dev-area">
+          <div class="dev-area-header"><span class="dev-area-name">{{ area.topic }}</span><span class="dev-tag mechanical">Develop</span></div>
+          <div class="dev-area-text">{{ area.description }}</div>
+        </div>
+        }
+      </div>
+      <div class="tech-card">
+        <div class="tech-col-label"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> ACTION PLAN</div>
+        @for (item of r.domainAnalysis.actionPlan; track item.title; let i = $index) {
+        <div class="action-item">
+          <div class="action-icon" [class.p1]="i === 0" [class.p2]="i === 1" [class.p3]="i >= 2">P{{ i + 1 }}</div>
+          <div class="action-content"><div class="action-title">{{ item.title }}</div><div class="action-desc">{{ item.description }}</div></div>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SEPARATOR ── -->
+  <div class="sep"></div>
+
+  <!-- ══ BEHAVIORAL PROFILE ══ -->
+  <section id="behavior">
+    <div class="tech-header">
+      <h2 class="tech-title">Behavioral Profile</h2>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="tech-card-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:17px;height:17px"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+          <span class="tech-card-title">Behavioral Summary</span>
+        </div>
+        <div class="tech-badge" [attr.data-tag]="getShortTag(r.behaviorAnalysis.tag)" [class.passed]="getShortTag(r.behaviorAnalysis.tag) === 'Focused' || getShortTag(r.behaviorAnalysis.tag) === 'Composed'" [class.review]="getShortTag(r.behaviorAnalysis.tag) !== 'Focused' && getShortTag(r.behaviorAnalysis.tag) !== 'Composed'">{{ getShortTag(r.behaviorAnalysis.tag) }}</div>
+        <div class="tech-text">{{ r.behaviorAnalysis.summary }}</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-col-label"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> DEVELOPMENT AREAS</div>
+        @for (area of r.behaviorAnalysis.areasOfDevelopment; track area.topic) {
+        <div class="dev-area">
+          <div class="dev-area-header"><span class="dev-area-name">{{ area.topic }}</span><span class="dev-tag weak">Review</span></div>
+          <div class="dev-area-text">{{ area.description }}</div>
+        </div>
+        }
+      </div>
+      <div class="tech-card">
+        <div class="tech-col-label"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> ACTION PLAN</div>
+        @for (item of r.behaviorAnalysis.actionPlan; track item.title; let i = $index) {
+        <div class="action-item">
+          <div class="action-icon" [class.p1]="i === 0" [class.p2]="i === 1" [class.p3]="i >= 2">P{{ i + 1 }}</div>
+          <div class="action-content"><div class="action-title">{{ item.title }}</div><div class="action-desc">{{ item.description }}</div></div>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+</div>
+}
