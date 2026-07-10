@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>InterviewReady — Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css"/>
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: #e2e8f0; padding: 2rem;
+        }
+        .signup-container {
+            width: 100%; max-width: 480px;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 20px; padding: 2.5rem;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+        }
+        .logo { text-align: center; margin-bottom: 2rem; }
+        .logo h1 {
+            font-size: 1.75rem; font-weight: 700;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .logo p { color: #94a3b8; font-size: 0.875rem; margin-top: 0.25rem; }
+        .form-row { display: flex; gap: 0.75rem; }
+        .form-group { margin-bottom: 1rem; flex: 1; }
+        .form-group label {
+            display: block; font-size: 0.8rem; font-weight: 500;
+            color: #94a3b8; margin-bottom: 0.35rem;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: 100%; padding: 0.7rem 0.9rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            border-radius: 10px; color: #e2e8f0;
+            font-size: 0.9rem; font-family: 'Inter', sans-serif;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus {
+            outline: none; border-color: #38bdf8;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+        }
+        /* Upload area */
+        .upload-area {
+            display: flex; align-items: center; gap: 1rem; padding: 0.75rem;
+            background: rgba(15, 23, 42, 0.4);
+            border: 1.5px dashed rgba(148, 163, 184, 0.2);
+            border-radius: 12px; cursor: pointer; transition: border-color 0.2s;
+        }
+        .upload-area:hover { border-color: #38bdf8; }
+        .upload-preview {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: rgba(56, 189, 248, 0.1);
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; flex-shrink: 0;
+        }
+        .upload-preview img {
+            width: 100%; height: 100%; object-fit: cover; display: none;
+        }
+        .upload-preview svg { width: 24px; height: 24px; color: #38bdf8; }
+        .upload-text { font-size: 0.8rem; color: #94a3b8; }
+        .upload-text strong { color: #38bdf8; font-weight: 600; }
+        /* Buttons */
+        .btn-primary {
+            width: 100%; padding: 0.8rem;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            border: none; border-radius: 10px; color: #fff;
+            font-size: 0.95rem; font-weight: 600;
+            font-family: 'Inter', sans-serif; cursor: pointer;
+            transition: opacity 0.2s, transform 0.15s; margin-top: 0.5rem;
+        }
+        .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .divider {
+            display: flex; align-items: center; gap: 0.75rem;
+            margin: 1.25rem 0; color: #475569; font-size: 0.75rem;
+            text-transform: uppercase; letter-spacing: 0.08em;
+        }
+        .divider::before, .divider::after {
+            content: ''; flex: 1; height: 1px;
+            background: rgba(148, 163, 184, 0.12);
+        }
+        .btn-google {
+            width: 100%; padding: 0.75rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            border-radius: 10px; color: #e2e8f0;
+            font-size: 0.9rem; font-weight: 500;
+            font-family: 'Inter', sans-serif; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            gap: 0.6rem; transition: border-color 0.2s;
+            text-decoration: none;
+        }
+        .btn-google:hover { border-color: #38bdf8; background: rgba(56, 189, 248, 0.05); }
+        .btn-google svg { width: 20px; height: 20px; }
+        .login-link {
+            text-align: center; margin-top: 1.5rem;
+            font-size: 0.85rem; color: #94a3b8;
+        }
+        .login-link a { color: #38bdf8; text-decoration: none; font-weight: 500; }
+        .login-link a:hover { text-decoration: underline; }
+        .msg-success {
+            background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #4ade80; padding: 0.6rem 0.9rem; border-radius: 8px;
+            font-size: 0.85rem; margin-bottom: 1rem;
+        }
+        .msg-error {
+            background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171; padding: 0.6rem 0.9rem; border-radius: 8px;
+            font-size: 0.85rem; margin-bottom: 1rem;
+        }
+        .spinner {
+            display: inline-block; width: 16px; height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: #fff; border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin-right: 0.4rem; vertical-align: middle;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        /* Crop Modal */
+        .crop-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.85); z-index: 1000;
+            align-items: center; justify-content: center;
+        }
+        .crop-overlay.active { display: flex; }
+        .crop-modal {
+            background: #1e293b; border-radius: 16px; padding: 1.5rem;
+            max-width: 420px; width: 90%;
+            border: 1px solid rgba(148, 163, 184, 0.15);
+        }
+        .crop-modal h3 {
+            color: #e2e8f0; font-size: 1rem; margin-bottom: 1rem; text-align: center;
+        }
+        .crop-container { max-height: 300px; overflow: hidden; border-radius: 8px; }
+        .crop-container img { display: block; max-width: 100%; }
+        .crop-actions {
+            display: flex; gap: 0.75rem; margin-top: 1rem;
+        }
+        .crop-actions button {
+            flex: 1; padding: 0.6rem; border-radius: 8px;
+            font-family: 'Inter', sans-serif; font-size: 0.85rem;
+            font-weight: 600; cursor: pointer; border: none;
+        }
+        .btn-crop-cancel {
+            background: rgba(148, 163, 184, 0.15); color: #94a3b8;
+        }
+        .btn-crop-confirm {
+            background: linear-gradient(135deg, #38bdf8, #818cf8); color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="signup-container">
+    <div class="logo">
+        <h1>InterviewReady</h1>
+        <p>Create your account</p>
+    </div>
+
+    <div th:if="${success}" class="msg-success" th:text="${success}"></div>
+    <div th:if="${error}" class="msg-error" th:text="${error}"></div>
+
+    <form id="signupForm" th:action="@{/signup}" method="post" enctype="multipart/form-data">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" required placeholder="John"/>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" required placeholder="Doe"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required placeholder="john_doe"/>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="john@example.com"/>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required placeholder="••••••••" minlength="6"/>
+        </div>
+
+        <!-- Profile Image Upload -->
+        <div class="form-group">
+            <label>Profile Photo <span style="color:#475569">(optional)</span></label>
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-preview" id="previewContainer">
+                    <img id="imagePreview" alt="Preview"/>
+                    <svg id="uploadIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                </div>
+                <div class="upload-text">
+                    <strong>Click to upload</strong><br/>JPG, PNG — max 2 MB
+                </div>
+                <input type="file" id="fileInput" accept="image/jpeg,image/png"/>
+                <!-- This hidden input carries the cropped blob to the server -->
+                <input type="file" id="profileImage" name="profileImage" style="display:none"/>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-primary" id="submitBtn">Create Account</button>
+    </form>
+
+    <div class="divider">or</div>
+
+    <a href="/oauth2/authorization/google" class="btn-google">
+        <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        Sign up with Google
+    </a>
+
+    <div class="login-link">
+        Already have an account? <a href="/login-page">Log in</a>
+    </div>
+</div>
+
+<!-- Crop Modal -->
+<div class="crop-overlay" id="cropOverlay">
+    <div class="crop-modal">
+        <h3>Crop your photo</h3>
+        <div class="crop-container">
+            <img id="cropImage" alt="Crop"/>
+        </div>
+        <div class="crop-actions">
+            <button type="button" class="btn-crop-cancel" id="cropCancel">Cancel</button>
+            <button type="button" class="btn-crop-confirm" id="cropConfirm">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
+<script>
+    let cropper = null;
+
+    // Click upload area → open file picker
+    document.getElementById('uploadArea').addEventListener('click', function() {
+        document.getElementById('fileInput').click();
+    });
+
+    // File selected → open crop modal
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        if (file.size > 2 * 1024 * 1024) {
+            alert('Image must be under 2 MB');
+            this.value = '';
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            const img = document.getElementById('cropImage');
+            img.src = ev.target.result;
+            document.getElementById('cropOverlay').classList.add('active');
+
+            // Destroy previous cropper if any
+            if (cropper) cropper.destroy();
+
+            cropper = new Cropper(img, {
+                aspectRatio: 1,
+                viewMode: 1,
+                dragMode: 'move',
+                autoCropArea: 0.8,
+                cropBoxResizable: true,
+                background: false,
+            });
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // Cancel crop
+    document.getElementById('cropCancel').addEventListener('click', function() {
+        document.getElementById('cropOverlay').classList.remove('active');
+        if (cropper) { cropper.destroy(); cropper = null; }
+        document.getElementById('fileInput').value = '';
+    });
+
+    // Confirm crop → set preview + create file for upload
+    document.getElementById('cropConfirm').addEventListener('click', function() {
+        if (!cropper) return;
+
+        const canvas = cropper.getCroppedCanvas({
+            width: 400, height: 400, imageSmoothingQuality: 'high'
+        });
+
+        // Show preview
+        const preview = document.getElementById('imagePreview');
+        preview.src = canvas.toDataURL();
+        preview.style.display = 'block';
+        document.getElementById('uploadIcon').style.display = 'none';
+
+        // Convert canvas to File and attach to hidden input
+        canvas.toBlob(function(blob) {
+            const file = new File([blob], 'profile.png', { type: 'image/png' });
+            const dt = new DataTransfer();
+            dt.items.add(file);
+            document.getElementById('profileImage').files = dt.files;
+        }, 'image/png');
+
+        // Close modal
+        document.getElementById('cropOverlay').classList.remove('active');
+        cropper.destroy();
+        cropper = null;
+    });
+
+    // Submit loading
+    document.getElementById('signupForm').addEventListener('submit', function() {
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner"></span>Creating account...';
+    });
+</script>
+</body>
+</html>
