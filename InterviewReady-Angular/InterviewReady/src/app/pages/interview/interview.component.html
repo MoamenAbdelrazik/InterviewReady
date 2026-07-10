@@ -1,0 +1,385 @@
+<!-- Grid Background -->
+<div class="grid-bg"></div>
+<div class="ambient-glow"></div>
+
+<!-- ═══ LOADING OVERLAY (Generating Interview — from generating_demo.html) ═══ -->
+@if (isLoading()) {
+<div class="loading-overlay">
+  <div class="loading-modal-wrapper">
+    <div class="loading-modal">
+      <div class="ring-wrapper">
+        <svg class="ring-svg" viewBox="0 0 104 104">
+          <g transform="rotate(-90 52 52)">
+            <circle class="ring-track" cx="52" cy="52" r="45"/>
+            <circle class="ring-fill" cx="52" cy="52" r="45" [style.stroke-dashoffset]="282.74 - (282.74 * loadingProgress() / 100)"/>
+          </g>
+        </svg>
+        <span class="counter-value">{{ loadingProgress() }}%</span>
+      </div>
+
+      <div class="loading-steps">
+        @for (step of loadingSteps; track $index; let i = $index) {
+        <div class="loading-step" [class.active]="loadingStep() === i" [class.done]="loadingStep() > i">
+          <!-- Step 0: Search/Profile -->
+          @if (i === 0) {
+          <svg class="step-svg" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          }
+          <!-- Step 1: Document Checklist -->
+          @if (i === 1) {
+          <svg class="step-svg" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.375m0-10.5h1.125a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-9a2.25 2.25 0 01-2.25-2.25V6.75a2.25 2.25 0 012.25-2.25H6.75m0 0V3c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v1.5m-6 0h6"/></svg>
+          }
+          <!-- Step 2: Code Compiler -->
+          @if (i === 2) {
+          <svg class="step-svg" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>
+          }
+          <!-- Step 3: Calibration -->
+          @if (i === 3) {
+          <svg class="step-svg" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"/></svg>
+          }
+          <span>{{ step.label }}</span>
+        </div>
+        }
+      </div>
+
+      <div class="progress-section">
+        <div class="progress-bar-bg"><div class="progress-bar-fg" [style.width.%]="loadingProgress()"></div></div>
+        <span class="progress-status">{{ loadingSteps[loadingStep()]?.label || 'Finalizing...' }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+}
+
+<!-- ═══ SUBMIT OVERLAY (Processing Interview — from loading_demo.html) ═══ -->
+@if (isSubmitting() || interviewError()) {
+<div class="submit-overlay">
+  <div class="loading-modal-wrapper">
+    <div class="loading-modal">
+      @if (interviewError()) {
+        <div class="error-icon-shell">
+          <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+        </div>
+        <h2 class="loading-title" style="color: #ef4444; font-size: 20px;">Submission Failed</h2>
+        <p style="color: #71717a; text-align: center; margin-bottom: 24px; font-size: 13px; max-width: 260px; line-height: 1.5;">{{ interviewError() }}</p>
+        <div style="display: flex; gap: 12px; width: 100%;">
+          <button class="cancel-modal-btn" style="flex: 1;" routerLink="/dashboard">Return to Dashboard</button>
+          <button class="confirm-delete-btn" style="flex: 1;" (click)="retrySubmit()">Retry Submission</button>
+        </div>
+      } @else {
+        <div class="ring-wrapper">
+          <svg class="ring-svg" viewBox="0 0 104 104">
+            <g transform="rotate(-90 52 52)">
+              <circle class="ring-track" cx="52" cy="52" r="45"/>
+              <circle class="ring-fill" cx="52" cy="52" r="45" [style.stroke-dashoffset]="282.74 - (282.74 * submitProgress() / 100)"/>
+            </g>
+          </svg>
+          <span class="counter-value">{{ submitProgress() }}%</span>
+        </div>
+
+        <div class="loading-steps">
+          <div class="loading-step" [class.active]="submitStep() === 0" [class.done]="submitStep() > 0">
+            <svg class="step-svg" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25"/></svg>
+            <span>Compiling Code & Analyzing Patterns</span>
+          </div>
+          <div class="loading-step" [class.active]="submitStep() === 1" [class.done]="submitStep() > 1">
+            <svg class="step-svg" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+            <span>Evaluating System Design & Architecture</span>
+          </div>
+          <div class="loading-step" [class.active]="submitStep() === 2" [class.done]="submitStep() > 2">
+            <svg class="step-svg" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z"/></svg>
+            <span>Analyzing Focus Telemetry & Session Integrity</span>
+          </div>
+          <div class="loading-step" [class.active]="submitStep() === 3">
+            <svg class="step-svg" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v5.625c0 .621-.504 1.125-1.125 1.125h-2.25A1.125 1.125 0 013 18.75v-5.625zM13.5 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v10.125c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM8.25 14.25a.75.75 0 01.75-.75h2.25a.75.75 0 01.75.75v4.5a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v-4.5z"/></svg>
+            <span>Synthesizing Competency Rubrics & Insights</span>
+          </div>
+        </div>
+
+        <div class="progress-section">
+          <div class="progress-bar-bg"><div class="progress-bar-fg" [style.width.%]="submitProgress()"></div></div>
+          <span class="progress-status">{{ submitProgress() }}% Complete · Step {{ submitStep() + 1 }} of 4</span>
+        </div>
+        <p class="do-not-close">Processing session data. Please do not close this tab.</p>
+      }
+    </div>
+  </div>
+</div>
+}
+
+<!-- ═══════ HEADER ═══════ -->
+<header class="iv-header">
+  <div class="iv-header-left">
+    <button (click)="toggleSidebar()" class="sidebar-toggle" >
+      <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <a class="logo-link" routerLink="/dashboard">
+      <svg viewBox="0 0 200 200" width="24" height="24" fill="currentColor" style="color:#fff">
+        <path d="M 70 45 H 135 C 175 45, 175 105, 135 105 L 165 165 H 130 L 100 105 H 95 V 140 H 70 V 45 Z M 95 70 V 85 H 135 C 150 85, 150 70, 135 70 Z"/>
+        <path opacity="0.5" d="M 30 70 V 135 C 30 185, 95 185, 115 140 C 125 120, 130 105, 140 105 A 5 5 0 0 1 140 95 C 120 95, 110 110, 95 135 C 80 160, 55 155, 55 135 V 70 Z"/>
+      </svg>
+    </a>
+    <div class="divider"></div>
+    <h1 class="role-title">{{ roleTitle() }}</h1>
+  </div>
+  <div class="iv-header-right">
+    <!-- Timer -->
+    <div class="timer-pill" [class.timer-amber]="timerService.timerState() === 'amber'" [class.timer-red]="timerService.timerState() === 'red'">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="1.5"/><path stroke-linecap="round" stroke-width="1.5" d="M12 6v6l4 2"/></svg>
+      <span class="timer-value">{{ timerService.display() }}</span>
+    </div>
+    <!-- Solved -->
+    <div class="solved-badge">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      <span>{{ solvedCount() }}/{{ totalQuestions() }} Solved</span>
+    </div>
+    <!-- Flags -->
+    @if (securityService.flags().totalFlags > 0) {
+    <div class="flag-badge">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"/></svg>
+      <span>{{ securityService.flags().totalFlags }} Flags</span>
+    </div>
+    }
+
+    <!-- ═══ Voice AI Widget (BETA) ═══ -->
+    <div class="voice-widget-wrap">
+      @if (isListening() && currentTranscript()) {
+        <div class="voice-transcript-bubble">
+          <div class="pulse-dot"></div>
+          <span class="transcript-text">{{ currentTranscript() }}</span>
+        </div>
+      }
+      @if (voiceError()) {
+        <div class="voice-error-tooltip">
+          {{ voiceError() }}
+        </div>
+      }
+      <input type="text" 
+             #voiceInput
+             class="voice-text-input" 
+             placeholder="Ask AI..." 
+             (keydown.enter)="handleTextInput(voiceInput.value); voiceInput.value = ''"
+             [disabled]="voiceLoading()">
+      <button class="voice-btn" 
+              [class.speaking]="voiceAssistantActive() && voiceSpeaking()"
+              [class.thinking]="voiceAssistantActive() && voiceLoading()"
+              [class.user-speaking]="voiceAssistantActive() && userSpeaking()"
+              [class.listening]="voiceAssistantActive() && !voiceSpeaking() && !voiceLoading() && !userSpeaking()"
+              (click)="handleVoiceClick()" 
+              [title]="voiceAssistantActive() ? 'Voice AI — Active' : 'Voice AI — Muted'">
+        <div class="voice-glow" [style.opacity]="voiceAssistantActive() ? '1' : '0'"></div>
+        <div class="vbar vbar-1" [class.active]="voiceAssistantActive()" [class.idle]="!voiceAssistantActive()"></div>
+        <div class="vbar vbar-2" [class.active]="voiceAssistantActive()" [class.idle]="!voiceAssistantActive()"></div>
+        <div class="vbar vbar-3" [class.active]="voiceAssistantActive()" [class.idle]="!voiceAssistantActive()"></div>
+        <div class="vbar vbar-4" [class.active]="voiceAssistantActive()" [class.idle]="!voiceAssistantActive()"></div>
+        <div class="vbar vbar-5" [class.active]="voiceAssistantActive()" [class.idle]="!voiceAssistantActive()"></div>
+      </button>
+    </div>
+
+    <!-- Cancel -->
+    <button class="cancel-btn" (click)="showCancelConfirm.set(true)">
+      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      Cancel
+    </button>
+  </div>
+</header>
+
+@if (showCancelConfirm()) {
+<div class="confirm-modal-overlay">
+  <div class="confirm-modal">
+    <h3>End Assessment Early?</h3>
+    <p>Your answers will be submitted and graded up to this point. A full report will be generated for this session.</p>
+    <div class="confirm-actions">
+      <button class="btn-secondary" (click)="showCancelConfirm.set(false)">Resume Interview</button>
+      <button class="btn-danger" (click)="cancelInterview()">Yes, End & Submit</button>
+    </div>
+  </div>
+</div>
+}
+
+<!-- ═══════ MAIN ═══════ -->
+<div class="iv-main">
+  <!-- Sidebar -->
+  <aside class="iv-sidebar" [class.collapsed]="sidebarCollapsed()">
+    <div class="iv-sidebar-header">
+      <h2>All Questions</h2>
+      <div class="counts">
+        <span class="count-total">Total: {{ totalQuestions() }}</span>
+        <span class="count-answered">Answered: {{ solvedCount() }}</span>
+      </div>
+    </div>
+    <div class="iv-sidebar-list">
+      @for (q of allQuestions(); track q.index; let i = $index) {
+      <div class="q-item" [class.active]="currentQ() === i" [class.answered]="q.answered" [class.coding]="q.isCoding" (click)="goToQuestion(i)">
+        <span class="q-dot"></span>
+        <span class="q-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <div class="q-info">
+          <p class="q-label">{{ q.label }}</p>
+          <p class="q-type" [class.coding-type]="q.isCoding">{{ q.type }}</p>
+        </div>
+        <span class="q-pts" [class.coding-pts]="q.isCoding">{{ q.pts }}p</span>
+      </div>
+      }
+    </div>
+  </aside>
+
+  <!-- Content Area -->
+  <div class="iv-content">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <span class="bc-type">{{ currentQType() }}</span>
+      <span class="bc-sep">·</span>
+      <span class="bc-num">Question {{ currentQ() + 1 }} of {{ totalQuestions() }}</span>
+    </div>
+
+    <!-- MCQ View -->
+    @if (isCurrentMCQ()) {
+    <div class="mcq-view">
+      <div class="mcq-container">
+        <!-- Question Header -->
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="height: 32px; width: 4px; background-color: #3b82f6; border-radius: 9999px;"></div>
+                <h3 style="font-size: 14px; font-weight: 600; letter-spacing: 0.05em; color: rgba(255,255,255,0.5); text-transform: uppercase;">Question {{ currentQ() + 1 }} of {{ totalQuestions() }}</h3>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <span style="padding: 4px 12px; font-size: 12px; font-weight: 600; border-radius: 9999px; background-color: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);">{{ currentMCQ()!.score }} pts</span>
+            </div>
+        </div>
+
+        <!-- Question Content -->
+        <div style="margin-bottom: 40px;">
+            <h2 style="font-size: 20px; color: #fff; font-weight: 600; line-height: 1.625;">{{ currentMCQ()!.question }}</h2>
+        </div>
+
+        <div class="mcq-options">
+          @for (choice of currentMCQ()!.choices; track $index; let ci = $index) {
+          <div class="opt" [class.picked]="mcqSelection() === ci" (click)="pickMCQ(ci)">
+            <div class="letter">{{ ['A','B','C','D'][ci] }}</div>
+            <span class="opt-text">{{ choice }}</span>
+            <svg class="check-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+    }
+
+    <!-- Code View -->
+    @if (!isCurrentMCQ()) {
+    <div class="code-view">
+      <div class="code-panels" id="code-panels">
+        <!-- Problem Panel - LeetCode Style -->
+        <div class="problem-panel" id="problem-panel" style="flex:0 0 50%;">
+          <div class="problem-scroll">
+            <!-- Problem Title & Score -->
+            <div class="problem-header">
+              <div>
+                <p style="font-size: 13px; color: #6b7280; font-weight: 400; margin: 0 0 6px 0;">{{ currentCoding()!.score }} pts</p>
+                <h2 class="problem-title">{{ currentCodingTitle() }}</h2>
+              </div>
+            </div>
+
+            <!-- Problem Statement Section -->
+            <div class="problem-section desc">
+              <div class="section-content" [innerHTML]="currentCodingProblemStatement()"></div>
+              
+              @if (currentCodingInputOutput()) {
+                <div [innerHTML]="currentCodingInputOutput()"></div>
+              }
+
+              @if (currentCodingConstraints()) {
+                <div class="section-content" style="margin-top: 16px;" [innerHTML]="currentCodingConstraints()"></div>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Resizer -->
+        <div class="resizer" id="panel-resizer"></div>
+
+        <!-- Editor Panel -->
+        <div class="editor-panel" id="editor-panel" style="flex:1;">
+          <!-- Editor Toolbar with Language Dropdown -->
+          <div class="editor-header">
+            <div class="file-info">
+              <svg width="16" height="16" fill="none" stroke="#6b7280" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+              <span>solution.{{ langExtension() }}</span>
+            </div>
+            
+            <div class="lang-selector-wrap">
+              <select class="lang-dropdown" (change)="changeLang($any($event.target).value)" [value]="selectedLang()">
+                @for (lang of availableLanguages(); track $index) {
+                  <option [value]="lang">
+                    {{ lang === 'cpp' ? 'C++' : (lang === 'python' ? 'Python' : (lang === 'javascript' ? 'JavaScript' : 'Java')) }}
+                  </option>
+                }
+              </select>
+            </div>
+
+            <button class="swap-btn" (click)="swapPanels()" title="Swap panels">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+            </button>
+          </div>
+
+          <!-- Monaco Editor -->
+          <div class="editor-shell">
+            @if (!editorReady()) {
+            <div class="editor-loading-overlay">
+              <div class="editor-loading-card">
+                <div class="spinner"></div>
+                <p>Loading starter code...</p>
+              </div>
+            </div>
+            }
+            <div class="monaco-host" #monacoHost></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="iv-footer">
+  <button class="nav-btn" (click)="nav(-1)" [disabled]="currentQ() === 0">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    Previous
+  </button>
+  <div class="footer-center">
+    <span class="q-counter">{{ currentQ() + 1 }} / {{ totalQuestions() }}</span>
+    <div class="progress-track"><div class="progress-fill" [style.width.%]="progressPct()"></div></div>
+    <span class="prog-pct">{{ progressPct() }}%</span>
+  </div>
+  <div class="footer-right">
+    @if (currentQ() < totalQuestions() - 1) {
+    <button class="nav-btn" (click)="nav(1)">
+      Next <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    </button>
+    }
+    @if (currentQ() === totalQuestions() - 1) {
+    <button class="submit-btn" (click)="submitExam()">
+      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+      Submit Exam
+    </button>
+    }
+  </div>
+</footer>
+
+<!-- ═══════ CAMERA (Draggable + proctoring) ═══════ -->
+@if (proctorService.cameraActive()) {
+<div class="cam-float" [class.cam-expanded]="camExpanded()" id="cam-widget">
+  <div class="live-indicator">
+    <div class="live-dot"></div><span class="live-label">Live</span>
+  </div>
+  <video #camVideo autoplay muted playsinline [style.transform]="'scaleX(-1) scale(' + camZoom() + ')'"></video>
+  
+  <div class="cam-controls">
+    <button (click)="zoomCam(-1)" >−</button>
+    <button (click)="zoomCam(1)" >+</button>
+  </div>
+  <div class="cam-fullscreen" (click)="toggleCamSize()" >
+    <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+  </div>
+</div>
+}
