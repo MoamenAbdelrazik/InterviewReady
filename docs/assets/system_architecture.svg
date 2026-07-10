@@ -1,0 +1,271 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="100%" height="100%">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="blue-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#60a5fa" />
+    </linearGradient>
+    <linearGradient id="purple-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+    <linearGradient id="amber-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#fbbf24" />
+    </linearGradient>
+    <linearGradient id="green-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+    <linearGradient id="pink-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899" />
+      <stop offset="100%" stop-color="#f472b6" />
+    </linearGradient>
+
+    <!-- Filters -->
+    <filter id="glow-blue" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glow-purple" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    
+    <!-- Background Grid -->
+    <pattern id="grid-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap');
+    
+    svg {
+      background-color: #0b0f19;
+      font-family: 'Outfit', sans-serif;
+    }
+    
+    .title-text {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      fill: #ffffff;
+    }
+    
+    .label-text {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      fill: #e2e8f0;
+    }
+    
+    .sub-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 400;
+      fill: #94a3b8;
+    }
+    
+    .desc-text {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 400;
+      fill: #64748b;
+    }
+    
+    /* Flow animation */
+    @keyframes flowLine {
+      to {
+        stroke-dashoffset: -40;
+      }
+    }
+    
+    .flow-path {
+      stroke-dasharray: 8, 12;
+      animation: flowLine 2s linear infinite;
+    }
+  </style>
+
+  <!-- Background Grid -->
+  <rect width="100%" height="100%" fill="url(#grid-pattern)" />
+
+  <!-- Global Flow Connections -->
+  <!-- Client to Security Gateway -->
+  <path d="M 230,300 H 330" stroke="#3b82f6" stroke-width="2" class="flow-path" fill="none" />
+  
+  <!-- Security Gateway to REST Services -->
+  <path d="M 450,230 H 530" stroke="#8b5cf6" stroke-width="2" class="flow-path" fill="none" />
+  <!-- Security Gateway to WebSocket -->
+  <path d="M 450,370 H 530" stroke="#8b5cf6" stroke-width="2" class="flow-path" fill="none" />
+
+  <!-- REST Services to Persistence Components -->
+  <path d="M 730,230 Q 770,230 790,130" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="4,6" fill="none" />
+  <path d="M 730,230 Q 770,230 790,230" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="4,6" fill="none" />
+  <path d="M 730,230 Q 770,230 790,330" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="4,6" fill="none" />
+  <path d="M 730,230 Q 770,230 790,430" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="4,6" fill="none" />
+
+  <!-- WebSocket to Redis WS Channels -->
+  <path d="M 710,370 H 790" stroke="#10b981" stroke-width="2" class="flow-path" fill="none" />
+
+  <!-- ================= CLIENT TIER (Angular 17) ================= -->
+  <g transform="translate(30, 80)">
+    <!-- Container Panel -->
+    <rect width="200" height="440" rx="16" fill="rgba(30, 41, 59, 0.4)" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" />
+    <rect width="200" height="440" rx="16" fill="none" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.1" filter="url(#glow-blue)" />
+    
+    <!-- Title -->
+    <text x="100" y="32" class="title-text" font-size="13" text-anchor="middle" letter-spacing="1.5">CLIENT TIER</text>
+    <text x="100" y="48" class="sub-text" font-size="9" text-anchor="middle">Angular 17 SPA</text>
+    <line x1="20" y1="60" x2="180" y2="60" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+
+    <!-- Sub-component 1: UI Views -->
+    <g transform="translate(15, 80)">
+      <rect width="170" height="65" rx="8" fill="rgba(15, 23, 42, 0.6)" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.3" />
+      <text x="15" y="24" class="label-text" font-size="10">UI Views &amp; Controls</text>
+      <text x="15" y="38" class="desc-text" font-size="9">Reactive Dashboard</text>
+      <text x="15" y="50" class="desc-text" font-size="9">Split-Pane Monaco IDE</text>
+    </g>
+
+    <!-- Sub-component 2: NgRx Store -->
+    <g transform="translate(15, 165)">
+      <rect width="170" height="65" rx="8" fill="rgba(15, 23, 42, 0.6)" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.3" />
+      <text x="15" y="24" class="label-text" font-size="10">NgRx State Store</text>
+      <text x="15" y="38" class="desc-text" font-size="9">State synchronization</text>
+      <text x="15" y="50" class="desc-text" font-size="9">Stochastic session recovery</text>
+    </g>
+
+    <!-- Sub-component 3: TensorFlow.js (Edge AI) -->
+    <g transform="translate(15, 250)">
+      <rect width="170" height="85" rx="8" fill="rgba(16, 185, 129, 0.05)" stroke="#10b981" stroke-width="1" stroke-opacity="0.4" />
+      <text x="15" y="22" class="label-text" font-size="11" fill="#10b981">TensorFlow.js (Edge)</text>
+      <text x="15" y="38" class="desc-text" font-size="9">Gaze Tracking &amp; EAR</text>
+      <text x="15" y="50" class="desc-text" font-size="9">68 Face Landmarks</text>
+      <text x="15" y="62" class="desc-text" font-size="9">Expression Detection</text>
+      <circle cx="155" cy="20" r="4" fill="#10b981" filter="url(#glow-blue)" />
+    </g>
+
+    <!-- Sub-component 4: WebSockets client -->
+    <g transform="translate(15, 355)">
+      <rect width="170" height="65" rx="8" fill="rgba(15, 23, 42, 0.6)" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.3" />
+      <text x="15" y="24" class="label-text" font-size="10">WebSocket Clients</text>
+      <text x="15" y="38" class="desc-text" font-size="9">Voice assistance streams</text>
+      <text x="15" y="50" class="desc-text" font-size="9">Bi-directional telemetry</text>
+    </g>
+  </g>
+
+  <!-- ================= SECURITY & ROUTING GATEWAY ================= -->
+  <g transform="translate(250, 160)">
+    <!-- Container Panel -->
+    <rect width="200" height="280" rx="16" fill="rgba(30, 41, 59, 0.4)" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" />
+    <rect width="200" height="280" rx="16" fill="none" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.1" />
+    
+    <!-- Title -->
+    <text x="100" y="32" class="title-text" font-size="12" fill="#f59e0b" text-anchor="middle" letter-spacing="1">SECURITY GATEWAY</text>
+    <text x="100" y="48" class="sub-text" font-size="8" text-anchor="middle">Spring Security Middleware</text>
+    <line x1="20" y1="60" x2="180" y2="60" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+
+    <!-- Modules -->
+    <g transform="translate(15, 80)">
+      <rect width="170" height="40" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.3" />
+      <text x="15" y="24" class="label-text" font-size="10">JWT Authenticator</text>
+    </g>
+    <g transform="translate(15, 135)">
+      <rect width="170" height="40" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.3" />
+      <text x="15" y="24" class="label-text" font-size="10">Google OAuth2 Filter</text>
+    </g>
+    <g transform="translate(15, 190)">
+      <rect width="170" height="40" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.3" />
+      <text x="15" y="24" class="label-text" font-size="10">Redis Sliding-Window</text>
+      <text x="15" y="34" class="desc-text" font-size="7">Rate-limit endpoint guards</text>
+    </g>
+  </g>
+
+  <!-- ================= SPRING BOOT 3 SERVICES ================= -->
+  <!-- Spring Boot REST Services -->
+  <g transform="translate(470, 80)">
+    <!-- Container Panel -->
+    <rect width="260" height="200" rx="16" fill="rgba(30, 41, 59, 0.4)" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" />
+    <rect width="260" height="200" rx="16" fill="none" stroke="#8b5cf6" stroke-width="1" stroke-opacity="0.1" filter="url(#glow-purple)" />
+    
+    <!-- Title -->
+    <text x="130" y="32" class="title-text" font-size="13" fill="#8b5cf6" text-anchor="middle" letter-spacing="1">REST BACKEND SERVICES</text>
+    <text x="130" y="48" class="sub-text" font-size="9" text-anchor="middle">REST Controllers &amp; Async Tasks</text>
+    <line x1="20" y1="60" x2="240" y2="60" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+
+    <!-- Service Node -->
+    <g transform="translate(15, 75)">
+      <rect width="230" height="100" rx="8" fill="rgba(15, 23, 42, 0.6)" stroke="#8b5cf6" stroke-width="1" stroke-opacity="0.3" />
+      <text x="15" y="24" class="label-text" font-size="10">Java CompletableFuture Exec</text>
+      <text x="15" y="42" class="desc-text" font-size="9">Concurrently spawns evaluations:</text>
+      <text x="25" y="58" class="sub-text" font-size="8" fill="#c084fc">▶ Domain Assessment Thread</text>
+      <text x="25" y="70" class="sub-text" font-size="8" fill="#c084fc">▶ Behavioral Analysis Thread</text>
+      <text x="25" y="82" class="sub-text" font-size="8" fill="#c084fc">▶ QLoRA Coding Evaluation Thread</text>
+    </g>
+  </g>
+
+  <!-- Spring Boot WebSockets Service -->
+  <g transform="translate(470, 310)">
+    <!-- Container Panel -->
+    <rect width="260" height="210" rx="16" fill="rgba(30, 41, 59, 0.4)" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" />
+    <rect width="260" height="210" rx="16" fill="none" stroke="#8b5cf6" stroke-width="1" stroke-opacity="0.1" />
+    
+    <!-- Title -->
+    <text x="130" y="32" class="title-text" font-size="13" fill="#8b5cf6" text-anchor="middle" letter-spacing="1">WEBSOCKET SERVICES</text>
+    <line x1="20" y1="45" x2="240" y2="45" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+
+    <!-- Modules -->
+    <g transform="translate(15, 60)">
+      <rect width="230" height="55" rx="8" fill="rgba(15, 23, 42, 0.6)" stroke="#8b5cf6" stroke-width="1" stroke-opacity="0.3" />
+      <text x="15" y="22" class="label-text" font-size="10">VoiceWebSocketHandler</text>
+      <text x="15" y="36" class="desc-text" font-size="9">Manages real-time voice assistance</text>
+      <text x="15" y="46" class="desc-text" font-size="9">streaming sessions and metrics</text>
+    </g>
+    <g transform="translate(15, 130)">
+      <rect width="230" height="55" rx="8" fill="rgba(15, 23, 42, 0.6)" stroke="#8b5cf6" stroke-width="1" stroke-opacity="0.3" />
+      <text x="15" y="22" class="label-text" font-size="10">WebSocketConfig</text>
+      <text x="15" y="36" class="desc-text" font-size="9">Sets up message broker protocols</text>
+      <text x="15" y="46" class="desc-text" font-size="9">and endpoint URL routes</text>
+    </g>
+  </g>
+
+  <!-- ================= DATA, CACHE & AI TIER ================= -->
+  <!-- PostgreSQL -->
+  <g transform="translate(800, 50)">
+    <rect width="170" height="90" rx="12" fill="rgba(236, 72, 153, 0.03)" stroke="#ec4899" stroke-width="1.5" />
+    <text x="85" y="28" class="title-text" font-size="12" fill="#ec4899" text-anchor="middle">Amazon RDS PostgreSQL</text>
+    <text x="85" y="46" class="sub-text" font-size="8" text-anchor="middle">Schemas: Users, Interviews</text>
+    <text x="85" y="60" class="sub-text" font-size="8" text-anchor="middle">JobProfiles, MCQ questions</text>
+    <text x="85" y="74" class="desc-text" font-size="8" fill="#f472b6" font-weight="700" text-anchor="middle">JSONB + GIN INDEXES</text>
+  </g>
+
+  <!-- AWS S3 -->
+  <g transform="translate(800, 160)">
+    <rect width="170" height="70" rx="12" fill="rgba(236, 72, 153, 0.03)" stroke="#ec4899" stroke-width="1.5" />
+    <text x="85" y="28" class="title-text" font-size="12" fill="#ec4899" text-anchor="middle">AWS S3 Cloud Bucket</text>
+    <text x="85" y="46" class="sub-text" font-size="8" text-anchor="middle">Pre-signed S3 upload links</text>
+    <text x="85" y="58" class="sub-text" font-size="8" text-anchor="middle">Profile avatars &amp; candidate resumes</text>
+  </g>
+
+  <!-- Redis -->
+  <g transform="translate(800, 250)">
+    <rect width="170" height="90" rx="12" fill="rgba(16, 185, 129, 0.03)" stroke="#10b981" stroke-width="1.5" />
+    <text x="85" y="28" class="title-text" font-size="12" fill="#10b981" text-anchor="middle">Redis In-Memory Node</text>
+    <text x="85" y="46" class="sub-text" font-size="8" text-anchor="middle">Blacklisted JWT keys</text>
+    <text x="85" y="58" class="sub-text" font-size="8" text-anchor="middle">Sliding rate-limiting states</text>
+    <text x="85" y="74" class="desc-text" font-size="8" fill="#34d399" font-weight="700" text-anchor="middle">5-MIN DASHBOARD CACHE</text>
+  </g>
+
+  <!-- Redis WebSocket Channels -->
+  <g transform="translate(800, 360)">
+    <rect width="170" height="70" rx="12" fill="rgba(16, 185, 129, 0.03)" stroke="#10b981" stroke-width="1.5" />
+    <text x="85" y="28" class="title-text" font-size="12" fill="#10b981" text-anchor="middle">Redis PubSub Channels</text>
+    <text x="85" y="46" class="sub-text" font-size="8" text-anchor="middle">Spans WS message broadcasts</text>
+    <text x="85" y="58" class="sub-text" font-size="8" text-anchor="middle">cross server nodes</text>
+  </g>
+
+  <!-- LLM QLoRA Engine -->
+  <g transform="translate(800, 450)">
+    <rect width="170" height="90" rx="12" fill="rgba(139, 92, 246, 0.03)" stroke="#8b5cf6" stroke-width="1.5" />
+    <text x="85" y="28" class="title-text" font-size="12" fill="#8b5cf6" text-anchor="middle">Sovereign LLM Engine</text>
+    <text x="85" y="46" class="sub-text" font-size="8" text-anchor="middle">Llama 3.1 8B Instruct</text>
+    <text x="85" y="58" class="sub-text" font-size="8" text-anchor="middle">QLoRA NF4 4-Bit Model</text>
+    <text x="85" y="74" class="desc-text" font-size="8" fill="#c084fc" font-weight="700" text-anchor="middle">SPRING AI CHATCLIENT</text>
+  </g>
+</svg>
